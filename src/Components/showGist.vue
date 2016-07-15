@@ -3,9 +3,10 @@
     <div id="gist-content">
         {{{ gist.marked }}}
         <div v-for="tag in gist.tags">
-            <a v-on:click="showTags(tag.id)">{{ tag.name }}</a>
+            <a v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a>
         </div>
     </div>
+    <show-related-gists></show-related-gists>
 </template>
 <style>
 </style>
@@ -13,11 +14,23 @@
     import _ from 'lodash'
     import marked from 'marked'
     import store from './store'
+    import showRelatedGists from './showRelatedGists.vue'
     export default{
-        data: function() {
+        data () {
             return store;
         },
-        beforeCompile: function() {
+        watch: {
+          'gist': function(oldVal, newVal) {
+              let self = this;
+              if(!_.isUndefined(newVal.id)) {
+                self.$broadcast('clearRelatedGistData');
+              }
+          }
+        },
+        components: {
+            'show-related-gists': showRelatedGists
+        },
+        beforeCompile () {
             var self = this;
             var lastGistViewed = JSON.parse(localStorage.getItem('gistViewed'));
             if(lastGistViewed) {
@@ -38,18 +51,22 @@
                     self.$set('gist.marked', marked(gist.body));
                 }
             },
-            'showTags': function(tagId) {
+            'showRelatedGists': function(tagId) {
                 var self = this;
                 var gists = self.$get('gists');
+                var currentGist = JSON.parse(localStorage.getItem('gistViewed'));
                 var relatedGist = [];
                 _.find(gists, function(o) {
                     _.find(o.gist.tags, function(t) {
                         if(t.id == tagId) {
-                            relatedGist.push(o.gist);
+                            // Don't show the current gist.
+                            if(o.gist.id !== currentGist.id) {
+                                relatedGist.push(o.gist);
+                            }
                         }
                     });
                 });
-                console.log(relatedGist);
+                self.$broadcast('showRelatedGists', relatedGist);
             }
         }
     }

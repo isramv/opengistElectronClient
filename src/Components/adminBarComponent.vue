@@ -8,8 +8,24 @@
         </div>
     </div>
 </template>
-<style>
-
+<style lang="sass">
+    .admin-bar {
+        padding: 20px 0;
+        background: #292c61;
+        a {
+            color: #33b5ff;
+        }
+        strong {
+            color: #fbfbfb;
+        }
+        div:nth-child(2) {
+            text-align: right;
+        }
+    }
+    .salute {
+        margin: 0;
+        color: #f1f1f1;
+    }
 </style>
 <script>
     import store from './store'

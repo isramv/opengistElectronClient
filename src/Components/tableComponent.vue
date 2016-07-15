@@ -14,8 +14,35 @@
         </div>
     </div>
 </template>
-<style>
-
+<style lang="sass">
+    .table-container {
+        background-color: #eaeaea;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border-right: 1px solid #d2d2d2;
+        border-bottom: 1px solid #d2d2d2;
+    }
+    .table-filter {
+        margin-bottom: 12px;
+    }
+    table {
+        border: 0;
+        tr:nth-child(odd) {
+            background: #f1f1f1;
+        }tr:nth-child(even) {
+             background: #fafafa;
+         }
+        tbody {
+            > tr {
+                > td {
+                    border-top: 0!important;
+                    a {
+                        color: #464646;
+                    }
+                }
+            }
+        }
+    }
 </style>
 <script>
     import store from './store'
