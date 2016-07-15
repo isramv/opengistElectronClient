@@ -27028,10 +27028,15 @@
 
 	var _editGist2 = _interopRequireDefault(_editGist);
 
+	var _tableGist = __webpack_require__(160);
+
+	var _tableGist2 = _interopRequireDefault(_tableGist);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
 	    components: {
+	        'table-gist': _tableGist2.default,
 	        'show-gist': _showGist2.default,
 	        'edit-gist': _editGist2.default
 	    },
@@ -27051,6 +27056,9 @@
 	            var self = this;
 	            self.$set('gists', null);
 	            _router2.default.go('login');
+	        },
+	        'view-gist': function viewGist(gist) {
+	            this.showGist(gist);
 	        },
 	        'edit-gist': function editGist(gistId) {
 	            this.editGist(gistId);
@@ -27169,7 +27177,7 @@
 
 
 	// module
-	exports.push([module.id, ".show-gist-container {\n  background-color: #ffffff;\n  padding: 34px;\n  padding-top: 12px; }\n  .show-gist-container h1 {\n    margin-top: 0; }\n\n.gist-title {\n  border-bottom: 1px solid #d2d2d2;\n  margin-bottom: 20px;\n  padding-bottom: 12px; }\n", ""]);
+	exports.push([module.id, ".show-gist-container {\n  background-color: #ffffff;\n  padding: 34px;\n  padding-top: 12px; }\n  .show-gist-container h1 {\n    margin-top: 0; }\n\n.gist-title {\n  border-bottom: 1px solid #d2d2d2;\n  margin-bottom: 0;\n  padding-bottom: 12px; }\n\n.actions {\n  margin: 5px 0; }\n", ""]);
 
 	// exports
 
@@ -44990,7 +44998,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(148)
+	__webpack_require__(165)
 	__vue_script__ = __webpack_require__(150)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
@@ -45015,46 +45023,8 @@
 	})()}
 
 /***/ },
-/* 148 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(149);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(123)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showRelatedGists.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showRelatedGists.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 149 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(89)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\na {\n    cursor: pointer;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
+/* 148 */,
+/* 149 */,
 /* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -45109,13 +45079,13 @@
 /* 151 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div v-if=\"message\">\n    {{ message }}\n</div>\n<div v-if=\"showRelatedGists\">\n    <h3>Related Gists:</h3>\n    <ul v-for=\"gist in relatedGists\">\n        <li><a v-on:click=\"viewGist(gist)\">{{ gist.title }}</a></li>\n    </ul>\n</div>\n";
+	module.exports = "\n<div v-if=\"message\">\n    {{ message }}\n</div>\n<div v-if=\"showRelatedGists\">\n    <h3>Related Gists:</h3>\n    <ul class=\"list-unstyled-rc\">\n        <li v-for=\"gist in relatedGists\"><a class=\"btn btn-default btn-xs\" v-on:click=\"viewGist(gist)\">{{ gist.title }}</a></li>\n    </ul>\n</div>\n";
 
 /***/ },
 /* 152 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<h1 class=\"gist-title\" v-if=\"editing == false\">{{ gist.title }}</h1>\n<div class=\"row\" v-if=\"editing == false\">\n    <div class=\"col-xs-4 col-xs-offset-8\">\n        <button class=\"btn btn-default\" v-on:click=\"editGist(gist.id)\">Edit</button>\n    </div>\n</div>\n<div id=\"gist-content\" v-if=\"editing == false\">\n    {{{ gist.marked }}}\n    <div v-for=\"tag in gist.tags\">\n        <a v-on:click=\"showRelatedGists(tag.id)\">{{ tag.name }}</a>\n    </div>\n</div>\n<show-related-gists></show-related-gists>\n";
+	module.exports = "\n<h1 class=\"gist-title\" v-if=\"editing == false\">{{ gist.title }}</h1>\n<div class=\"row actions\" v-if=\"editing == false\">\n    <div class=\"col-xs-4 col-xs-offset-8\">\n        <button class=\"btn btn-default btn-sm\" v-on:click=\"editGist(gist.id)\">Edit</button>\n    </div>\n</div>\n<div id=\"gist-content\" v-if=\"editing == false\">\n    {{{ gist.marked }}}\n    <ul class=\"list-inline\">\n        <li v-for=\"tag in gist.tags\"><a class=\"btn btn-default btn-xs btn-info\" v-on:click=\"showRelatedGists(tag.id)\">{{ tag.name }}</a></li>\n    </ul>\n</div>\n<show-related-gists></show-related-gists>\n";
 
 /***/ },
 /* 153 */
@@ -45226,19 +45196,162 @@
 /* 157 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div v-if=\"editing\">\n    <h1>Edit Gist.</h1>\n    <div class=\"col-xs-4 col-xs-offset-8\">\n        <button class=\"btn btn-default\" v-on:click=\"finishEditing\">Done</button>\n    </div>\n</div>\n";
+	module.exports = "\n<div v-if=\"editing\">\n    <h1>Edit Gist.</h1>\n    <div class=\"col-xs-4 col-xs-offset-8\">\n        <button class=\"btn btn-default btn-sm\" v-on:click=\"finishEditing\">Done</button>\n    </div>\n</div>\n";
 
 /***/ },
 /* 158 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <input class=\"form-control table-filter\" type=\"text\" v-model=\"searchTitle\" placeholder=\"Filter table\">\n        {{ title }}\n        <table class=\"table table-condensed\">\n            <tr v-for=\"gist in gists | filterBy searchTitle\">\n                <td><a class=\"table-component_link\" v-on:click=\"showGist(gist.gist)\">{{ gist.gist.title }}</a></td>\n            </tr>\n        </table>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <show-gist></show-gist>\n        <edit-gist></edit-gist>\n    </div>\n</div>\nEditing: {{ editing }}\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <show-gist></show-gist>\n        <edit-gist></edit-gist>\n    </div>\n</div>\nEditing: {{ editing }}\n";
 
 /***/ },
 /* 159 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"row admin-bar\" v-if=\"username\">\n    <div class=\"col-xs-8\">\n        <p class=\"salute\">Welcome: {{ username }}</p>\n    </div>\n    <div class=\"col-xs-4\">\n        <a href=\"#\" v-on:click=\"logoutAction\">Logout</a>\n    </div>\n</div>\n";
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(161)
+	__vue_script__ = __webpack_require__(163)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src/Components/Gists/tableGist.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(164)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-4d418e98/tableGist.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(162);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(123)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./tableGist.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./tableGist.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(89)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _store = __webpack_require__(125);
+
+	var _store2 = _interopRequireDefault(_store);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    data: function data() {
+	        return _store2.default;
+	    },
+
+	    methods: {
+	        showGist: function showGist(gist) {
+	            this.$dispatch('view-gist', gist);
+	        }
+	    }
+	};
+
+/***/ },
+/* 164 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<input class=\"form-control table-filter\" type=\"text\" v-model=\"searchTitle\" placeholder=\"Filter table\">\n{{ title }}\n<table class=\"table table-condensed\">\n    <tr v-for=\"gist in gists | filterBy searchTitle\">\n        <td><a class=\"table-component_link\" v-on:click=\"showGist(gist.gist)\">{{ gist.gist.title }}</a></td>\n    </tr>\n</table>\n";
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(166);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(123)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showRelatedGists.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showRelatedGists.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(89)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".list-unstyled-rc {\n  padding-left: 16px; }\n  .list-unstyled-rc li {\n    margin-bottom: 5px; }\n\na {\n  cursor: pointer; }\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

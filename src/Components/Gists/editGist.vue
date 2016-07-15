@@ -2,7 +2,7 @@
     <div v-if="editing">
         <h1>Edit Gist.</h1>
         <div class="col-xs-4 col-xs-offset-8">
-            <button class="btn btn-default" v-on:click="finishEditing">Done</button>
+            <button class="btn btn-default btn-sm" v-on:click="finishEditing">Done</button>
         </div>
     </div>
 </template>

@@ -1,15 +1,15 @@
 <template>
     <h1 class="gist-title" v-if="editing == false">{{ gist.title }}</h1>
-    <div class="row" v-if="editing == false">
+    <div class="row actions" v-if="editing == false">
         <div class="col-xs-4 col-xs-offset-8">
-            <button class="btn btn-default" v-on:click="editGist(gist.id)">Edit</button>
+            <button class="btn btn-default btn-sm" v-on:click="editGist(gist.id)">Edit</button>
         </div>
     </div>
     <div id="gist-content" v-if="editing == false">
         {{{ gist.marked }}}
-        <div v-for="tag in gist.tags">
-            <a v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a>
-        </div>
+        <ul class="list-inline">
+            <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a></li>
+        </ul>
     </div>
     <show-related-gists></show-related-gists>
 </template>
@@ -24,8 +24,11 @@
     }
     .gist-title {
         border-bottom: 1px solid #d2d2d2;
-        margin-bottom: 20px;
+        margin-bottom: 0;
         padding-bottom: 12px;
+    }
+    .actions {
+        margin: 5px 0;
     }
 </style>
 <script>

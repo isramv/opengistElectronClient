@@ -4,12 +4,18 @@
     </div>
     <div v-if="showRelatedGists">
         <h3>Related Gists:</h3>
-        <ul v-for="gist in relatedGists">
-            <li><a v-on:click="viewGist(gist)">{{ gist.title }}</a></li>
+        <ul class="list-unstyled-rc">
+            <li v-for="gist in relatedGists"><a class="btn btn-default btn-xs" v-on:click="viewGist(gist)">{{ gist.title }}</a></li>
         </ul>
     </div>
 </template>
-<style>
+<style lang="sass" xml:lang="scss">
+    .list-unstyled-rc {
+        padding-left: 16px;
+        li {
+            margin-bottom: 5px;
+        }
+    }
     a {
         cursor: pointer;
     }

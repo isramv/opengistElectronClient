@@ -1,21 +1,3 @@
-<template>
-    <div class="row">
-        <div class="col-xs-4 col-sm-4 col-md-3 table-container">
-            <input class="form-control table-filter" type="text" v-model="searchTitle" placeholder="Filter table">
-            {{ title }}
-            <table class="table table-condensed">
-                <tr v-for="gist in gists | filterBy searchTitle">
-                    <td><a class="table-component_link" v-on:click="showGist(gist.gist)">{{ gist.gist.title }}</a></td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
-            <show-gist></show-gist>
-            <edit-gist></edit-gist>
-        </div>
-    </div>
-    Editing: {{ editing }}
-</template>
 <style lang="sass" xml:lang="scss">
     .table-container {
         background-color: #eaeaea;
@@ -46,13 +28,27 @@
         }
     }
 </style>
+<template>
+    <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-3 table-container">
+            <table-gist></table-gist>
+        </div>
+        <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
+            <show-gist></show-gist>
+            <edit-gist></edit-gist>
+        </div>
+    </div>
+    Editing: {{ editing }}
+</template>
 <script>
     import store from '../store'
     import router from '../router'
     import showGistComponent from './showGist.vue'
     import editGistComponent from './editGist.vue'
+    import tableGistComponent from './tableGist.vue'
     export default{
         components: {
+            'table-gist': tableGistComponent,
             'show-gist': showGistComponent,
             'edit-gist': editGistComponent
         },
@@ -72,6 +68,9 @@
                 var self = this;
                 self.$set('gists', null);
                 router.go('login');
+            },
+            'view-gist': function(gist) {
+                this.showGist(gist);
             },
             'edit-gist': function(gistId) {
                 this.editGist(gistId);
