@@ -8,7 +8,20 @@
     </div>
     <show-related-gists></show-related-gists>
 </template>
-<style>
+<style lang="sass" xml:lang="scss">
+    .show-gist-container {
+        background-color: #ffffff;
+        padding:34px;
+        padding-top: 12px;
+        h1 {
+        margin-top: 0;
+        }
+    }
+    .gist-title {
+        border-bottom: 1px solid #d2d2d2;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+    }
 </style>
 <script>
     import _ from 'lodash'

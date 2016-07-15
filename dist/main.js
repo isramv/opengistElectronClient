@@ -26743,7 +26743,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(117)
+	__webpack_require__(131)
 	__vue_script__ = __webpack_require__(119)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
@@ -26768,46 +26768,8 @@
 	})()}
 
 /***/ },
-/* 117 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(118);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(99)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showGist.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showGist.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 118 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(76)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-	// exports
-
-
-/***/ },
+/* 117 */,
+/* 118 */,
 /* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -44739,7 +44701,7 @@
 /* 127 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div v-if=\"message\">\n    {{ message }}\n</div>\n<div v-if=\"showRelatedGists\">\n    <h2>Related Gists:</h2>\n    <ul v-for=\"gist in relatedGists\">\n        <li><a v-on:click=\"viewGist(gist)\">{{ gist.title }}</a></li>\n    </ul>\n</div>\n";
+	module.exports = "\n<div v-if=\"message\">\n    {{ message }}\n</div>\n<div v-if=\"showRelatedGists\">\n    <h3>Related Gists:</h3>\n    <ul v-for=\"gist in relatedGists\">\n        <li><a v-on:click=\"viewGist(gist)\">{{ gist.title }}</a></li>\n    </ul>\n</div>\n";
 
 /***/ },
 /* 128 */
@@ -44758,6 +44720,46 @@
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"row admin-bar\" v-if=\"username\">\n    <div class=\"col-xs-8\">\n        <p class=\"salute\">Welcome: {{ username }}</p>\n    </div>\n    <div class=\"col-xs-4\">\n        <a href=\"#\" v-on:click=\"logoutAction\">Logout</a>\n    </div>\n</div>\n";
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(132);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(99)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showGist.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showGist.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 132 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(76)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".show-gist-container {\n  background-color: #ffffff;\n  padding: 34px;\n  padding-top: 12px; }\n  .show-gist-container h1 {\n    margin-top: 0; }\n\n.gist-title {\n  border-bottom: 1px solid #d2d2d2;\n  margin-bottom: 20px;\n  padding-bottom: 12px; }\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

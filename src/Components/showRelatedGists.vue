@@ -3,7 +3,7 @@
         {{ message }}
     </div>
     <div v-if="showRelatedGists">
-        <h2>Related Gists:</h2>
+        <h3>Related Gists:</h3>
         <ul v-for="gist in relatedGists">
             <li><a v-on:click="viewGist(gist)">{{ gist.title }}</a></li>
         </ul>
