@@ -23656,7 +23656,7 @@
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/Components/adminBarComponent.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(154)
+	__vue_template__ = __webpack_require__(133)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -24015,9 +24015,9 @@
 
 	var _loginComponent2 = _interopRequireDefault(_loginComponent);
 
-	var _tableComponent = __webpack_require__(133);
+	var _gistMainComponent = __webpack_require__(134);
 
-	var _tableComponent2 = _interopRequireDefault(_tableComponent);
+	var _gistMainComponent2 = _interopRequireDefault(_gistMainComponent);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24032,7 +24032,7 @@
 	    },
 	    '/app': {
 	        name: 'app',
-	        component: _tableComponent2.default
+	        component: _gistMainComponent2.default
 	    }
 	});
 
@@ -26929,16 +26929,22 @@
 
 /***/ },
 /* 133 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row admin-bar\" v-if=\"username\">\n    <div class=\"col-xs-8\">\n        <p class=\"salute\">Welcome: {{ username }}</p>\n    </div>\n    <div class=\"col-xs-4\">\n        <a href=\"#\" v-on:click=\"logoutAction\">Logout</a>\n    </div>\n</div>\n";
+
+/***/ },
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(134)
-	__vue_script__ = __webpack_require__(136)
+	__webpack_require__(135)
+	__vue_script__ = __webpack_require__(137)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/Components/tableComponent.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(153)
+	  console.warn("[vue-loader] src/Components/gistMainComponent.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(154)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -26948,7 +26954,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-5515f5dd/tableComponent.vue"
+	  var id = "_v-047fb5a3/gistMainComponent.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -26957,13 +26963,13 @@
 	})()}
 
 /***/ },
-/* 134 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(135);
+	var content = __webpack_require__(136);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(123)(content, {});
@@ -26972,8 +26978,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./tableComponent.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./tableComponent.vue");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./gistMainComponent.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./gistMainComponent.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -26983,7 +26989,7 @@
 	}
 
 /***/ },
-/* 135 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(89)();
@@ -26997,7 +27003,7 @@
 
 
 /***/ },
-/* 136 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -27006,7 +27012,7 @@
 	    value: true
 	});
 
-	var _stringify = __webpack_require__(137);
+	var _stringify = __webpack_require__(138);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -27018,7 +27024,7 @@
 
 	var _router2 = _interopRequireDefault(_router);
 
-	var _showGist = __webpack_require__(140);
+	var _showGist = __webpack_require__(141);
 
 	var _showGist2 = _interopRequireDefault(_showGist);
 
@@ -27073,40 +27079,40 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)))
 
 /***/ },
-/* 137 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(138), __esModule: true };
-
-/***/ },
 /* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var core  = __webpack_require__(139)
+	module.exports = { "default": __webpack_require__(139), __esModule: true };
+
+/***/ },
+/* 139 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(140)
 	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
 	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
 	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
 /***/ },
-/* 139 */
+/* 140 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 140 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(141)
-	__vue_script__ = __webpack_require__(143)
+	__webpack_require__(142)
+	__vue_script__ = __webpack_require__(144)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/Components/showGist.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(152)
+	__vue_template__ = __webpack_require__(153)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -27125,13 +27131,13 @@
 	})()}
 
 /***/ },
-/* 141 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(142);
+	var content = __webpack_require__(143);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(123)(content, {});
@@ -27151,7 +27157,7 @@
 	}
 
 /***/ },
-/* 142 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(89)();
@@ -27165,7 +27171,7 @@
 
 
 /***/ },
-/* 143 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27174,15 +27180,15 @@
 	    value: true
 	});
 
-	var _stringify = __webpack_require__(137);
+	var _stringify = __webpack_require__(138);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _lodash = __webpack_require__(144);
+	var _lodash = __webpack_require__(145);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
-	var _marked = __webpack_require__(146);
+	var _marked = __webpack_require__(147);
 
 	var _marked2 = _interopRequireDefault(_marked);
 
@@ -27190,7 +27196,7 @@
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _showRelatedGists = __webpack_require__(147);
+	var _showRelatedGists = __webpack_require__(148);
 
 	var _showRelatedGists2 = _interopRequireDefault(_showRelatedGists);
 
@@ -27254,7 +27260,7 @@
 	};
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -43662,10 +43668,10 @@
 	  }
 	}.call(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(145)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(146)(module), (function() { return this; }())))
 
 /***/ },
-/* 145 */
+/* 146 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -43681,7 +43687,7 @@
 
 
 /***/ },
-/* 146 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -44973,17 +44979,17 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 147 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(148)
-	__vue_script__ = __webpack_require__(150)
+	__webpack_require__(149)
+	__vue_script__ = __webpack_require__(151)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/Components/showRelatedGists.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(151)
+	__vue_template__ = __webpack_require__(152)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -45002,13 +45008,13 @@
 	})()}
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(149);
+	var content = __webpack_require__(150);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(123)(content, {});
@@ -45028,7 +45034,7 @@
 	}
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(89)();
@@ -45042,7 +45048,7 @@
 
 
 /***/ },
-/* 150 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45051,7 +45057,7 @@
 	    value: true
 	});
 
-	var _lodash = __webpack_require__(144);
+	var _lodash = __webpack_require__(145);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -45093,28 +45099,22 @@
 	};
 
 /***/ },
-/* 151 */
+/* 152 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div v-if=\"message\">\n    {{ message }}\n</div>\n<div v-if=\"showRelatedGists\">\n    <h3>Related Gists:</h3>\n    <ul v-for=\"gist in relatedGists\">\n        <li><a v-on:click=\"viewGist(gist)\">{{ gist.title }}</a></li>\n    </ul>\n</div>\n";
 
 /***/ },
-/* 152 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<h1 class=\"gist-title\">{{ gist.title }}</h1>\n<div id=\"gist-content\">\n    {{{ gist.marked }}}\n    <div v-for=\"tag in gist.tags\">\n        <a v-on:click=\"showRelatedGists(tag.id)\">{{ tag.name }}</a>\n    </div>\n</div>\n<show-related-gists></show-related-gists>\n";
-
-/***/ },
 /* 153 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <input class=\"form-control table-filter\" type=\"text\" v-model=\"searchTitle\" placeholder=\"Filter table\">\n        {{ title }}\n        <table class=\"table table-condensed\">\n            <tr v-for=\"gist in gists | filterBy searchTitle\">\n                <td><a class=\"table-component_link\" v-on:click=\"showGist(gist.gist)\">{{ gist.gist.title }}</a></td>\n            </tr>\n        </table>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <show-gist></show-gist>\n    </div>\n</div>\n";
+	module.exports = "\n<h1 class=\"gist-title\">{{ gist.title }}</h1>\n<div class=\"row\">\n    <div class=\"col-xs-4 col-xs-offset-8\">\n        <button class=\"btn btn-default\" v-on:click=\"editGist(gist.id)\">Edit</button>\n    </div>\n</div>\n<div id=\"gist-content\">\n    {{{ gist.marked }}}\n    <div v-for=\"tag in gist.tags\">\n        <a v-on:click=\"showRelatedGists(tag.id)\">{{ tag.name }}</a>\n    </div>\n</div>\n<show-related-gists></show-related-gists>\n";
 
 /***/ },
 /* 154 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row admin-bar\" v-if=\"username\">\n    <div class=\"col-xs-8\">\n        <p class=\"salute\">Welcome: {{ username }}</p>\n    </div>\n    <div class=\"col-xs-4\">\n        <a href=\"#\" v-on:click=\"logoutAction\">Logout</a>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <input class=\"form-control table-filter\" type=\"text\" v-model=\"searchTitle\" placeholder=\"Filter table\">\n        {{ title }}\n        <table class=\"table table-condensed\">\n            <tr v-for=\"gist in gists | filterBy searchTitle\">\n                <td><a class=\"table-component_link\" v-on:click=\"showGist(gist.gist)\">{{ gist.gist.title }}</a></td>\n            </tr>\n        </table>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <show-gist></show-gist>\n        <edit-gist></edit-gist>\n    </div>\n</div>\n";
 
 /***/ }
 /******/ ]);

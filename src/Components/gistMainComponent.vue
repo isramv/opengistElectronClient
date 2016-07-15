@@ -11,6 +11,7 @@
         </div>
         <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
             <show-gist></show-gist>
+            <edit-gist></edit-gist>
         </div>
     </div>
 </template>

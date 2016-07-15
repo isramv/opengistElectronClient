@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import loginComponent from './loginComponent.vue'
-import tableComponent from './tableComponent.vue'
+import gistMainComponent from './gistMainComponent.vue'
 
 Vue.use(Router);
 
@@ -14,7 +14,7 @@ router.map({
     },
     '/app': {
         name: 'app',
-        component: tableComponent
+        component: gistMainComponent
     }
 });
 

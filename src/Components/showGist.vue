@@ -1,5 +1,10 @@
 <template>
     <h1 class="gist-title">{{ gist.title }}</h1>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-8">
+            <button class="btn btn-default" v-on:click="editGist(gist.id)">Edit</button>
+        </div>
+    </div>
     <div id="gist-content">
         {{{ gist.marked }}}
         <div v-for="tag in gist.tags">
