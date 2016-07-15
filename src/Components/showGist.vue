@@ -61,7 +61,7 @@
             }
         },
         methods: {
-            'viewGist': function(gist) {
+            viewGist(gist) {
                 var self = this;
                 localStorage.setItem('gistViewed', JSON.stringify(gist));
                 self.$set('gist', gist);
@@ -69,7 +69,7 @@
                     self.$set('gist.marked', marked(gist.body));
                 }
             },
-            'showRelatedGists': function(tagId) {
+            showRelatedGists(tagId) {
                 var self = this;
                 var gists = self.$get('gists');
                 var currentGist = JSON.parse(localStorage.getItem('gistViewed'));
@@ -85,6 +85,9 @@
                     });
                 });
                 self.$broadcast('showRelatedGists', relatedGist);
+            },
+            editGist(gistId) {
+                this.$dispatch('edit-gist', gistId);
             }
         }
     }

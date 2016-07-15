@@ -72,6 +72,9 @@
                 var self = this;
                 self.$set('gists', null);
                 router.go('login');
+            },
+            'edit-gist': function(gistId) {
+                this.editGist(gistId);
             }
         },
         methods: {
@@ -92,6 +95,10 @@
             showGist: function(gist) {
                 var self = this;
                 self.$broadcast('view-gist', gist);
+            },
+            editGist(gistId) {
+                // this one is different that show, we need to fetch an updated version of the gist from the server.
+                this.$broadcast('edit-gist', gistId);
             }
         }
     }
