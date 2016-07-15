@@ -31,7 +31,7 @@
 <script>
     import _ from 'lodash'
     import marked from 'marked'
-    import store from './store'
+    import store from '../store'
     import showRelatedGists from './showRelatedGists.vue'
     export default{
         data () {

@@ -47,8 +47,8 @@
     }
 </style>
 <script>
-    import store from './store'
-    import router from './router'
+    import store from '../store'
+    import router from '../router'
     import showGistComponent from './showGist.vue'
     import editGistComponent from './editGist.vue'
     export default{
