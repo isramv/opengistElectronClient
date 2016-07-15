@@ -3,6 +3,8 @@ var store =  {
     gists: '',
     auth: '',
     username: '',
-    gist: ''
+    gist: '',
+    editing: false,
+    gistToEdit: {}
 };
 export default store

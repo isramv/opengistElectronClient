@@ -23656,7 +23656,7 @@
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/Components/adminBarComponent.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(154)
+	__vue_template__ = __webpack_require__(159)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -23989,7 +23989,9 @@
 	    gists: '',
 	    auth: '',
 	    username: '',
-	    gist: ''
+	    gist: '',
+	    editing: false,
+	    gistToEdit: {}
 	};
 	exports.default = store;
 
@@ -26938,7 +26940,7 @@
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/Components/gistMainComponent.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(153)
+	__vue_template__ = __webpack_require__(158)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -27022,14 +27024,16 @@
 
 	var _showGist2 = _interopRequireDefault(_showGist);
 
+	var _editGist = __webpack_require__(153);
+
+	var _editGist2 = _interopRequireDefault(_editGist);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
 	    components: {
-	        'show-gist': _showGist2.default
-	    },
-	    props: {
-	        searchTitle: ''
+	        'show-gist': _showGist2.default,
+	        'edit-gist': _editGist2.default
 	    },
 	    data: function data() {
 	        return _store2.default;
@@ -45111,16 +45115,127 @@
 /* 152 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<h1 class=\"gist-title\">{{ gist.title }}</h1>\n<div class=\"row\">\n    <div class=\"col-xs-4 col-xs-offset-8\">\n        <button class=\"btn btn-default\" v-on:click=\"editGist(gist.id)\">Edit</button>\n    </div>\n</div>\n<div id=\"gist-content\">\n    {{{ gist.marked }}}\n    <div v-for=\"tag in gist.tags\">\n        <a v-on:click=\"showRelatedGists(tag.id)\">{{ tag.name }}</a>\n    </div>\n</div>\n<show-related-gists></show-related-gists>\n";
+	module.exports = "\n<h1 class=\"gist-title\" v-if=\"editing == false\">{{ gist.title }}</h1>\n<div class=\"row\" v-if=\"editing == false\">\n    <div class=\"col-xs-4 col-xs-offset-8\">\n        <button class=\"btn btn-default\" v-on:click=\"editGist(gist.id)\">Edit</button>\n    </div>\n</div>\n<div id=\"gist-content\" v-if=\"editing == false\">\n    {{{ gist.marked }}}\n    <div v-for=\"tag in gist.tags\">\n        <a v-on:click=\"showRelatedGists(tag.id)\">{{ tag.name }}</a>\n    </div>\n</div>\n<show-related-gists></show-related-gists>\n";
 
 /***/ },
 /* 153 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <input class=\"form-control table-filter\" type=\"text\" v-model=\"searchTitle\" placeholder=\"Filter table\">\n        {{ title }}\n        <table class=\"table table-condensed\">\n            <tr v-for=\"gist in gists | filterBy searchTitle\">\n                <td><a class=\"table-component_link\" v-on:click=\"showGist(gist.gist)\">{{ gist.gist.title }}</a></td>\n            </tr>\n        </table>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <show-gist></show-gist>\n        <edit-gist></edit-gist>\n    </div>\n</div>\n";
+	var __vue_script__, __vue_template__
+	__webpack_require__(154)
+	__vue_script__ = __webpack_require__(156)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src/Components/editGist.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(157)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-67a8367b/editGist.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
 
 /***/ },
 /* 154 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(155);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(123)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./editGist.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./editGist.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 155 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(89)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 156 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _store = __webpack_require__(125);
+
+	var _store2 = _interopRequireDefault(_store);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    data: function data() {
+	        return _store2.default;
+	    },
+
+	    events: {
+	        'edit-gist': function editGist() {
+	            var self = this;
+	            console.log(self.$get('salute'));
+	            console.log(self.$set('editing', true));
+	        }
+	    },
+	    methods: {
+	        finishEditing: function finishEditing() {
+	            this.$set('editing', false);
+	        }
+	    }
+
+	};
+
+/***/ },
+/* 157 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div v-if=\"editing\">\n    <h1>Edit Gist.</h1>\n    <div class=\"col-xs-4 col-xs-offset-8\">\n        <button class=\"btn btn-default\" v-on:click=\"finishEditing\">Done</button>\n    </div>\n</div>\n";
+
+/***/ },
+/* 158 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <input class=\"form-control table-filter\" type=\"text\" v-model=\"searchTitle\" placeholder=\"Filter table\">\n        {{ title }}\n        <table class=\"table table-condensed\">\n            <tr v-for=\"gist in gists | filterBy searchTitle\">\n                <td><a class=\"table-component_link\" v-on:click=\"showGist(gist.gist)\">{{ gist.gist.title }}</a></td>\n            </tr>\n        </table>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <show-gist></show-gist>\n        <edit-gist></edit-gist>\n    </div>\n</div>\nEditing: {{ editing }}\n";
+
+/***/ },
+/* 159 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"row admin-bar\" v-if=\"username\">\n    <div class=\"col-xs-8\">\n        <p class=\"salute\">Welcome: {{ username }}</p>\n    </div>\n    <div class=\"col-xs-4\">\n        <a href=\"#\" v-on:click=\"logoutAction\">Logout</a>\n    </div>\n</div>\n";

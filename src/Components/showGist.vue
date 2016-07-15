@@ -1,11 +1,11 @@
 <template>
-    <h1 class="gist-title">{{ gist.title }}</h1>
-    <div class="row">
+    <h1 class="gist-title" v-if="editing == false">{{ gist.title }}</h1>
+    <div class="row" v-if="editing == false">
         <div class="col-xs-4 col-xs-offset-8">
             <button class="btn btn-default" v-on:click="editGist(gist.id)">Edit</button>
         </div>
     </div>
-    <div id="gist-content">
+    <div id="gist-content" v-if="editing == false">
         {{{ gist.marked }}}
         <div v-for="tag in gist.tags">
             <a v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a>

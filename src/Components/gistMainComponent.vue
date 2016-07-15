@@ -14,8 +14,9 @@
             <edit-gist></edit-gist>
         </div>
     </div>
+    Editing: {{ editing }}
 </template>
-<style lang="sass">
+<style lang="sass" xml:lang="scss">
     .table-container {
         background-color: #eaeaea;
         padding-top: 12px;
@@ -49,12 +50,11 @@
     import store from './store'
     import router from './router'
     import showGistComponent from './showGist.vue'
+    import editGistComponent from './editGist.vue'
     export default{
         components: {
-            'show-gist': showGistComponent
-        },
-        props: {
-            searchTitle: ''
+            'show-gist': showGistComponent,
+            'edit-gist': editGistComponent
         },
         data: function() {
             return store
