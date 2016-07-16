@@ -20,9 +20,7 @@
         events: {
             'edit-gist': function() {
                 let self = this;
-                console.log(self.$get('salute'));
-                console.log(self.$set('editing', true));
-
+                self.$set('editing', true);
             }
         },
         methods: {

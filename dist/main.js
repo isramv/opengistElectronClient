@@ -23985,7 +23985,6 @@
 	    value: true
 	});
 	var store = {
-	    salute: 'Hello Friend',
 	    gists: '',
 	    auth: '',
 	    username: '',
@@ -45191,8 +45190,7 @@
 	    events: {
 	        'edit-gist': function editGist() {
 	            var self = this;
-	            console.log(self.$get('salute'));
-	            console.log(self.$set('editing', true));
+	            self.$set('editing', true);
 	        }
 	    },
 	    methods: {

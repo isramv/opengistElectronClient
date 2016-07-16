@@ -1,5 +1,4 @@
 var store =  {
-    salute: 'Hello Friend',
     gists: '',
     auth: '',
     username: '',
