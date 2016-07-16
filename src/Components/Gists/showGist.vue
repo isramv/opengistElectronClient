@@ -90,7 +90,9 @@
                 self.$broadcast('show-related-gists', relatedGist);
             },
             editGist(gistId) {
+                // Notifies the parent.
                 this.$dispatch('edit-gist', gistId);
+                // Notifies the showRelatedGistsCompnent to clear it's data.
                 this.$broadcast('edit-gist');
             }
         }

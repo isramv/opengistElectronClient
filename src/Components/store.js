@@ -1,8 +1,8 @@
 var store =  {
-    gists: '',
+    gists: [],
     auth: '',
     username: '',
-    gist: '',
+    gist: {},
     editing: false,
     gistToEdit: {}
 };

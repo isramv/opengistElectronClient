@@ -23656,7 +23656,7 @@
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/Components/adminBarComponent.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(159)
+	__vue_template__ = __webpack_require__(164)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -23985,10 +23985,10 @@
 	    value: true
 	});
 	var store = {
-	    gists: '',
+	    gists: [],
 	    auth: '',
 	    username: '',
-	    gist: '',
+	    gist: {},
 	    editing: false,
 	    gistToEdit: {}
 	};
@@ -26856,7 +26856,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-	    template: '#login-template',
 	    data: function data() {
 	        return {
 	            username: '',
@@ -26879,7 +26878,6 @@
 	    methods: {
 	        authorize: function authorize() {
 	            var self = this;
-	            var local = localStorage;
 	            self.loading = true;
 	            _jquery2.default.ajax({
 	                url: 'http://myapp.local/app_dev.php/api/login',
@@ -26909,6 +26907,7 @@
 	                self.loading = false;
 	            });
 	        },
+
 	        setLocalStorage: function setLocalStorage(token, username) {
 	            localStorage.setItem('Authorization', token);
 	            localStorage.setItem('username', username);
@@ -26939,7 +26938,7 @@
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/Components/Gists/gistMainComponent.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(158)
+	__vue_template__ = __webpack_require__(163)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -27027,7 +27026,7 @@
 
 	var _editGist2 = _interopRequireDefault(_editGist);
 
-	var _tableGist = __webpack_require__(160);
+	var _tableGist = __webpack_require__(158);
 
 	var _tableGist2 = _interopRequireDefault(_tableGist);
 
@@ -27046,10 +27045,10 @@
 	        if (localStorage.getItem('gists') !== null) {
 	            this.$set('gists', JSON.parse(localStorage.getItem('gists')));
 	        } else {
-	            console.log('retrieving gists');
 	            this.fetchGists();
 	        }
 	    },
+
 	    events: {
 	        'logout-all': function logoutAll() {
 	            var self = this;
@@ -27065,7 +27064,6 @@
 	    },
 	    methods: {
 	        fetchGists: function fetchGists() {
-	            console.log('fetch gists');
 	            var self = this;
 	            $.ajax({
 	                url: 'http://myapp.local/app_dev.php/api/v1/gists',
@@ -27079,8 +27077,7 @@
 	            });
 	        },
 	        showGist: function showGist(gist) {
-	            var self = this;
-	            self.$broadcast('view-gist', gist);
+	            this.$broadcast('view-gist', gist);
 	        },
 	        editGist: function editGist(gistId) {
 	            this.$broadcast('edit-gist', gistId);
@@ -27269,6 +27266,7 @@
 	        },
 	        editGist: function editGist(gistId) {
 	            this.$dispatch('edit-gist', gistId);
+
 	            this.$broadcast('edit-gist');
 	        }
 	    }
@@ -44998,7 +44996,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(165)
+	__webpack_require__(148)
 	__vue_script__ = __webpack_require__(150)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
@@ -45023,8 +45021,46 @@
 	})()}
 
 /***/ },
-/* 148 */,
-/* 149 */,
+/* 148 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(149);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(123)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showRelatedGists.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showRelatedGists.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 149 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(89)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".list-unstyled-rc {\n  padding-left: 16px; }\n  .list-unstyled-rc li {\n    margin-bottom: 5px; }\n\na {\n  cursor: pointer; }\n", ""]);
+
+	// exports
+
+
+/***/ },
 /* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -45051,7 +45087,6 @@
 
 	    events: {
 	        'show-related-gists': function showRelatedGists(relatedGists) {
-	            console.log(relatedGists);
 	            this.showRelatedGistsAction(relatedGists);
 	        },
 	        'clear-data': function clearData() {
@@ -45189,8 +45224,7 @@
 
 	    events: {
 	        'edit-gist': function editGist() {
-	            var self = this;
-	            self.$set('editing', true);
+	            this.$set('editing', true);
 	        }
 	    },
 	    methods: {
@@ -45209,28 +45243,16 @@
 
 /***/ },
 /* 158 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <show-gist></show-gist>\n        <edit-gist></edit-gist>\n    </div>\n</div>\nEditing: {{ editing }}\n";
-
-/***/ },
-/* 159 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"row admin-bar\" v-if=\"username\">\n    <div class=\"col-xs-8\">\n        <p class=\"salute\">Welcome: {{ username }}</p>\n    </div>\n    <div class=\"col-xs-4\">\n        <a href=\"#\" v-on:click=\"logoutAction\">Logout</a>\n    </div>\n</div>\n";
-
-/***/ },
-/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(161)
-	__vue_script__ = __webpack_require__(163)
+	__webpack_require__(159)
+	__vue_script__ = __webpack_require__(161)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/Components/Gists/tableGist.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(164)
+	__vue_template__ = __webpack_require__(162)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -45249,13 +45271,13 @@
 	})()}
 
 /***/ },
-/* 161 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(162);
+	var content = __webpack_require__(160);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(123)(content, {});
@@ -45275,7 +45297,7 @@
 	}
 
 /***/ },
-/* 162 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(89)();
@@ -45289,7 +45311,7 @@
 
 
 /***/ },
-/* 163 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45318,50 +45340,22 @@
 	};
 
 /***/ },
-/* 164 */
+/* 162 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<input class=\"form-control table-filter\" type=\"text\" v-model=\"searchTitle\" placeholder=\"Filter table\">\n{{ title }}\n<table class=\"table table-condensed\">\n    <tr v-for=\"gist in gists | filterBy searchTitle\">\n        <td><a class=\"table-component_link\" v-on:click=\"showGist(gist.gist)\">{{ gist.gist.title }}</a></td>\n    </tr>\n</table>\n";
 
 /***/ },
-/* 165 */
-/***/ function(module, exports, __webpack_require__) {
+/* 163 */
+/***/ function(module, exports) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(166);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(123)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showRelatedGists.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./showRelatedGists.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <show-gist></show-gist>\n        <edit-gist></edit-gist>\n    </div>\n</div>\nEditing: {{ editing }}\n";
 
 /***/ },
-/* 166 */
-/***/ function(module, exports, __webpack_require__) {
+/* 164 */
+/***/ function(module, exports) {
 
-	exports = module.exports = __webpack_require__(89)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".list-unstyled-rc {\n  padding-left: 16px; }\n  .list-unstyled-rc li {\n    margin-bottom: 5px; }\n\na {\n  cursor: pointer; }\n", ""]);
-
-	// exports
-
+	module.exports = "\n<div class=\"row admin-bar\" v-if=\"username\">\n    <div class=\"col-xs-8\">\n        <p class=\"salute\">Welcome: {{ username }}</p>\n    </div>\n    <div class=\"col-xs-4\">\n        <a href=\"#\" v-on:click=\"logoutAction\">Logout</a>\n    </div>\n</div>\n";
 
 /***/ }
 /******/ ]);

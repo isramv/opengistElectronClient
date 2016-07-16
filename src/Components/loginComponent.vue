@@ -59,7 +59,6 @@
     import router from './router'
     import fontAwesome from 'font-awesome-webpack';
     export default {
-        template: '#login-template',
         data() {
             return {
                 username: '',
@@ -79,11 +78,11 @@
             }
         },
         methods: {
-            authorize: function() {
-                var self = this;
-                var local = localStorage;
+            authorize() {
+                let self = this;
                 self.loading = true;
                 $.ajax({
+                    // TODO put the url in a variable.
                     url: 'http://myapp.local/app_dev.php/api/login',
                     type: 'POST',
                     data: $('.login-form').serialize(),
@@ -106,11 +105,10 @@
                     self.setLocalStorage(res.token, res.username);
                     self.$dispatch('just-logged', res.username);
                     router.go('app');
-                })
-                        .fail(function(res) {
-                            self.error = res.statusText;
-                            self.loading = false;
-                        });
+                }).fail(function(res) {
+                    self.error = res.statusText;
+                    self.loading = false;
+                });
             },
             setLocalStorage: function(token, username) {
                 localStorage.setItem('Authorization', token);

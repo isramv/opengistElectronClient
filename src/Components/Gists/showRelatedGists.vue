@@ -23,7 +23,7 @@
 <script>
     import _ from 'lodash'
     export default{
-        data () {
+        data() {
             return {
                 showRelatedGists: false,
                 relatedGists: [],
@@ -32,7 +32,6 @@
         },
         events: {
             'show-related-gists': function (relatedGists) {
-                console.log(relatedGists);
                 this.showRelatedGistsAction(relatedGists);
             },
             'clear-data': function() {

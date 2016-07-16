@@ -52,14 +52,13 @@
             'show-gist': showGistComponent,
             'edit-gist': editGistComponent
         },
-        data: function() {
+        data() {
             return store
         },
-        beforeCompile: function() {
+        beforeCompile() {
             if(localStorage.getItem('gists') !== null) {
                 this.$set('gists', JSON.parse(localStorage.getItem('gists')));
             } else {
-                console.log('retrieving gists');
                 this.fetchGists();
             }
         },
@@ -77,9 +76,8 @@
             }
         },
         methods: {
-            fetchGists: function() {
-                console.log('fetch gists');
-                var self = this;
+            fetchGists() {
+                let self = this;
                 $.ajax({
                     url: 'http://myapp.local/app_dev.php/api/v1/gists',
                     headers: { 'authorization': localStorage.getItem('Authorization') },
@@ -91,9 +89,8 @@
                     console.log('Ajax call finished');
                 });
             },
-            showGist: function(gist) {
-                var self = this;
-                self.$broadcast('view-gist', gist);
+            showGist(gist) {
+                this.$broadcast('view-gist', gist);
             },
             editGist(gistId) {
                 // this one is different that show, we need to fetch an updated version of the gist from the server.

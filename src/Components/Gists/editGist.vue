@@ -19,8 +19,7 @@
         },
         events: {
             'edit-gist': function() {
-                let self = this;
-                self.$set('editing', true);
+                this.$set('editing', true);
             }
         },
         methods: {
