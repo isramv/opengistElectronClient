@@ -32,15 +32,8 @@
         },
         events: {
             'show-related-gists': function (relatedGists) {
-                let self = this;
-                self.$set('relatedGists', relatedGists);
-                self.$set('showRelatedGists', true);
-                if(!relatedGists.length) {
-                    self.$set('message', 'Not related content.')
-                    self.$set('showRelatedGists', false)
-                } else {
-                    self.$set('message', '');
-                }
+                console.log(relatedGists);
+                this.showRelatedGistsAction(relatedGists);
             },
             'clear-data': function() {
                 this.clearRelatedGistData();
@@ -50,7 +43,7 @@
             }
         },
         methods: {
-            viewGist: function(gist) {
+            viewGist(gist) {
                 let self = this;
                 self.$dispatch('view-gist', gist);
             },
@@ -59,8 +52,16 @@
                 this.$set('relatedGists', []);
                 this.$set('message','');
             },
-            showRelatedGists() {
-
+            showRelatedGistsAction(relatedGists) {
+                let self = this;
+                self.$set('relatedGists', relatedGists);
+                self.$set('showRelatedGists', true);
+                if(!relatedGists.length) {
+                    self.$set('message', 'Not related content.')
+                    self.$set('showRelatedGists', false)
+                } else {
+                    self.$set('message', '');
+                }
             }
         }
     }

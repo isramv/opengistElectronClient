@@ -12,6 +12,7 @@
 <script>
     import store from '../store'
     export default{
+        props: ['searchTitle'],
         data(){
             return store
         },

@@ -45052,15 +45052,8 @@
 
 	    events: {
 	        'show-related-gists': function showRelatedGists(relatedGists) {
-	            var self = this;
-	            self.$set('relatedGists', relatedGists);
-	            self.$set('showRelatedGists', true);
-	            if (!relatedGists.length) {
-	                self.$set('message', 'Not related content.');
-	                self.$set('showRelatedGists', false);
-	            } else {
-	                self.$set('message', '');
-	            }
+	            console.log(relatedGists);
+	            this.showRelatedGistsAction(relatedGists);
 	        },
 	        'clear-data': function clearData() {
 	            this.clearRelatedGistData();
@@ -45079,7 +45072,17 @@
 	            this.$set('relatedGists', []);
 	            this.$set('message', '');
 	        },
-	        showRelatedGists: function showRelatedGists() {}
+	        showRelatedGistsAction: function showRelatedGistsAction(relatedGists) {
+	            var self = this;
+	            self.$set('relatedGists', relatedGists);
+	            self.$set('showRelatedGists', true);
+	            if (!relatedGists.length) {
+	                self.$set('message', 'Not related content.');
+	                self.$set('showRelatedGists', false);
+	            } else {
+	                self.$set('message', '');
+	            }
+	        }
 	    }
 	};
 
@@ -45304,6 +45307,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
+	    props: ['searchTitle'],
 	    data: function data() {
 	        return _store2.default;
 	    },
