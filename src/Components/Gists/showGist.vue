@@ -44,7 +44,7 @@
           'gist': function(oldVal, newVal) {
               let self = this;
               if(!_.isUndefined(newVal.id)) {
-                self.$broadcast('clearRelatedGistData');
+                self.$broadcast('clear-data');
               }
           }
         },
@@ -87,10 +87,11 @@
                         }
                     });
                 });
-                self.$broadcast('showRelatedGists', relatedGist);
+                self.$broadcast('show-related-gists', relatedGist);
             },
             editGist(gistId) {
                 this.$dispatch('edit-gist', gistId);
+                this.$broadcast('edit-gist');
             }
         }
     }

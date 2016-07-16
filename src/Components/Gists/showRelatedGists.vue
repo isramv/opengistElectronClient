@@ -31,7 +31,7 @@
             }
         },
         events: {
-            showRelatedGists (relatedGists) {
+            'show-related-gists': function (relatedGists) {
                 let self = this;
                 self.$set('relatedGists', relatedGists);
                 self.$set('showRelatedGists', true);
@@ -42,16 +42,25 @@
                     self.$set('message', '');
                 }
             },
-            clearRelatedGistData () {
-                this.$set('showRelatedGists', false);
-                this.$set('relatedGists', []);
-                this.$set('message','');
+            'clear-data': function() {
+                this.clearRelatedGistData();
+            },
+            'edit-gist': function() {
+                this.clearRelatedGistData();
             }
         },
         methods: {
             viewGist: function(gist) {
                 let self = this;
                 self.$dispatch('view-gist', gist);
+            },
+            clearRelatedGistData() {
+                this.$set('showRelatedGists', false);
+                this.$set('relatedGists', []);
+                this.$set('message','');
+            },
+            showRelatedGists() {
+
             }
         }
     }

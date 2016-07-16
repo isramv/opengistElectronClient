@@ -27223,7 +27223,7 @@
 	        'gist': function gist(oldVal, newVal) {
 	            var self = this;
 	            if (!_lodash2.default.isUndefined(newVal.id)) {
-	                self.$broadcast('clearRelatedGistData');
+	                self.$broadcast('clear-data');
 	            }
 	        }
 	    },
@@ -27266,10 +27266,11 @@
 	                    }
 	                });
 	            });
-	            self.$broadcast('showRelatedGists', relatedGist);
+	            self.$broadcast('show-related-gists', relatedGist);
 	        },
 	        editGist: function editGist(gistId) {
 	            this.$dispatch('edit-gist', gistId);
+	            this.$broadcast('edit-gist');
 	        }
 	    }
 	};
@@ -45050,7 +45051,7 @@
 	    },
 
 	    events: {
-	        showRelatedGists: function showRelatedGists(relatedGists) {
+	        'show-related-gists': function showRelatedGists(relatedGists) {
 	            var self = this;
 	            self.$set('relatedGists', relatedGists);
 	            self.$set('showRelatedGists', true);
@@ -45061,17 +45062,24 @@
 	                self.$set('message', '');
 	            }
 	        },
-	        clearRelatedGistData: function clearRelatedGistData() {
-	            this.$set('showRelatedGists', false);
-	            this.$set('relatedGists', []);
-	            this.$set('message', '');
+	        'clear-data': function clearData() {
+	            this.clearRelatedGistData();
+	        },
+	        'edit-gist': function editGist() {
+	            this.clearRelatedGistData();
 	        }
 	    },
 	    methods: {
 	        viewGist: function viewGist(gist) {
 	            var self = this;
 	            self.$dispatch('view-gist', gist);
-	        }
+	        },
+	        clearRelatedGistData: function clearRelatedGistData() {
+	            this.$set('showRelatedGists', false);
+	            this.$set('relatedGists', []);
+	            this.$set('message', '');
+	        },
+	        showRelatedGists: function showRelatedGists() {}
 	    }
 	};
 
@@ -45151,7 +45159,7 @@
 
 
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n", ""]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 	// exports
 
@@ -45196,7 +45204,7 @@
 /* 157 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div v-if=\"editing\">\n    <h1>Edit Gist.</h1>\n    <div class=\"col-xs-4 col-xs-offset-8\">\n        <button class=\"btn btn-default btn-sm\" v-on:click=\"finishEditing\">Done</button>\n    </div>\n</div>\n";
+	module.exports = "\n<div v-if=\"editing\">\n    <h1 class=\"gist-title\">Edit Gist.</h1>\n    <div class=\"row actions\">\n        <div class=\"col-xs-4 col-xs-offset-8\">\n            <button class=\"btn btn-default btn-sm\" v-on:click=\"finishEditing\">Done</button>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 158 */
