@@ -6,23 +6,37 @@
             </div>
         </div>
         <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="processing"></i>
-        <form>
+        <form v-show="!processing">
             <div class="form-group">
-                <input class="form-control" v-model="gistToEdit.title"></input>
+                <input class="title form-control" v-model="gistToEdit.title"></input>
             </div>
             <div class="form-group">
-                <textarea class="form-control" v-model="gistToEdit.body" debounce="300"></textarea>
+                <div id="js-editor" v-model="gistToEdit.body"></div>
             </div>
         </form>
     </div>
 
 </template>
-<style>
-
+<style lang="sass" xml:lang="scss">
+    input {
+        &.title.form-control {
+            max-width: 40%;
+        }
+    }
+    #js-editor {
+        position: absolute;
+        width: 90%;
+        height: 600px;
+        padding-right: 40px;
+        border: 1px solid #d4d4d4;
+    }
 </style>
 <script>
     import store from '../store'
     import $ from 'jquery'
+    import ace from 'brace'
+    require('brace/mode/markdown');
+    require('brace/theme/github');
     export default{
         props: ['processing'],
         data() {
@@ -51,6 +65,12 @@
                 }).done(function(res) {
                     self.$set('gistToEdit', res);
                     self.$set('processing', false);
+                    let editor = ace.edit('js-editor');
+                    console.log(res.body);
+                    editor.setValue(res.body, 1);
+                    editor.getSession().setMode('ace/mode/markdown');
+                    editor.setTheme('ace/theme/github');
+
                 });
             }
         }
