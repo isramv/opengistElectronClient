@@ -45196,7 +45196,7 @@
 
 
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 	// exports
 
@@ -45215,21 +45215,40 @@
 
 	var _store2 = _interopRequireDefault(_store);
 
+	var _jquery = __webpack_require__(85);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
+	    props: ['processing'],
 	    data: function data() {
 	        return _store2.default;
 	    },
 
 	    events: {
-	        'edit-gist': function editGist() {
+	        'edit-gist': function editGist(gistId) {
+	            var self = this;
+	            self.getUpdatedGist(gistId);
 	            this.$set('editing', true);
 	        }
 	    },
 	    methods: {
 	        finishEditing: function finishEditing() {
 	            this.$set('editing', false);
+	        },
+	        getUpdatedGist: function getUpdatedGist(gistId) {
+	            var self = this;
+	            self.$set('processing', true);
+	            _jquery2.default.ajax({
+	                url: 'http://myapp.local/app_dev.php/api/v1/gists/' + gistId,
+	                headers: { 'authorization': localStorage.getItem('Authorization') },
+	                type: 'GET'
+	            }).done(function (res) {
+	                self.$set('gistToEdit', res);
+	                self.$set('processing', false);
+	            });
 	        }
 	    }
 
@@ -45239,7 +45258,7 @@
 /* 157 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div v-if=\"editing\">\n    <h1 class=\"gist-title\">Edit Gist.</h1>\n    <div class=\"row actions\">\n        <div class=\"col-xs-4 col-xs-offset-8\">\n            <button class=\"btn btn-default btn-sm\" v-on:click=\"finishEditing\">Done</button>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div v-if=\"editing\">\n    <div class=\"row actions\">\n        <div class=\"col-xs-4 col-xs-offset-8\">\n            <button class=\"btn btn-default btn-sm\" v-on:click=\"finishEditing\">Done</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\"></i>\n    <form>\n        <div class=\"form-group\">\n            <input class=\"form-control\" v-model=\"gistToEdit.title\"></input>\n        </div>\n        <div class=\"form-group\">\n            <textarea class=\"form-control\" v-model=\"gistToEdit.body\" debounce=\"300\"></textarea>\n        </div>\n    </form>\n</div>\n\n";
 
 /***/ },
 /* 158 */
