@@ -67326,7 +67326,7 @@
 /* 166 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div v-if=\"editing\">\n    <div class=\"row actions\">\n        <div class=\"col-xs-4 col-xs-offset-8\">\n            <button class=\"btn btn-default btn-sm\" v-on:click=\"finishEditing\">Done</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\"></i>\n    <form v-show=\"!processing\">\n        <div class=\"form-group\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\"></input>\n        </div>\n        <div class=\"form-group editor-container\">\n            <div id=\"js-editor\"></div>\n        </div>\n        <br/>\n        <div class=\"form-group\">\n            <button class=\"btn btn-default\" v-on:click=\"saveGistAction()\">Save</button>\n        </div>\n    </form>\n</div>\n{{ gistToEdit.title }}\n{{ gistToEdit.body }}\n";
+	module.exports = "\n<div v-if=\"editing\">\n    <div class=\"row actions\">\n        <div class=\"col-xs-4 col-xs-offset-8\">\n            <button class=\"btn btn-default btn-sm\" v-on:click=\"finishEditing\">Done</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\"></i>\n    <form v-show=\"!processing\">\n        <div class=\"form-group\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\"></input>\n        </div>\n        <div class=\"form-group editor-container\">\n            <div id=\"js-editor\"></div>\n        </div>\n        <br/>\n        <div class=\"form-group\">\n            <button class=\"btn btn-default\" v-on:click=\"saveGistAction()\">Save</button>\n        </div>\n    </form>\n</div>\n";
 
 /***/ },
 /* 167 */

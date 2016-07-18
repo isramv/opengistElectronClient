@@ -19,8 +19,6 @@
             </div>
         </form>
     </div>
-    {{ gistToEdit.title }}
-    {{ gistToEdit.body }}
 </template>
 <style lang="sass" xml:lang="scss">
     input {
