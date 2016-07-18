@@ -10,18 +10,26 @@
             <div class="form-group">
                 <input class="title form-control" v-model="gistToEdit.title"></input>
             </div>
+            <div class="form-group editor-container">
+                <div id="js-editor"></div>
+            </div>
+            <br/>
             <div class="form-group">
-                <div id="js-editor" v-model="gistToEdit.body"></div>
+                <button class="btn btn-default" v-on:click="saveGistAction()">Save</button>
             </div>
         </form>
     </div>
-
+    {{ gistToEdit.title }}
+    {{ gistToEdit.body }}
 </template>
 <style lang="sass" xml:lang="scss">
     input {
         &.title.form-control {
             max-width: 40%;
         }
+    }
+    .editor-container {
+        min-height: 600px;
     }
     #js-editor {
         position: absolute;
@@ -38,7 +46,7 @@
     require('brace/mode/markdown');
     require('brace/theme/github');
     export default{
-        props: ['processing'],
+        props: ['processing', 'editor'],
         data() {
             return store
         },
@@ -63,15 +71,19 @@
                     headers: { 'authorization': localStorage.getItem('Authorization') },
                     type: 'GET'
                 }).done(function(res) {
-                    self.$set('gistToEdit', res);
-                    self.$set('processing', false);
                     let editor = ace.edit('js-editor');
-                    console.log(res.body);
                     editor.setValue(res.body, 1);
                     editor.getSession().setMode('ace/mode/markdown');
                     editor.setTheme('ace/theme/github');
-
+                    self.$set('editor', editor);
+                    self.$set('gistToEdit', res);
+                    self.$set('processing', false);
                 });
+            },
+            saveGistAction() {
+                let editor = this.$get('editor');
+                // Setting the body.
+                this.$set('gistToEdit.body', editor.getValue());
             }
         }
 
