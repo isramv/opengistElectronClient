@@ -55,6 +55,14 @@
                 let self = this;
                 self.getUpdatedGist(gistId);
                 this.$set('editing', true);
+            },
+            'logout-global': function() {
+                let self = this;
+                console.log('children notified');
+                self.$set('editing', false);
+                self.$set('processing', false);
+                self.$set('gistToEdit', {});
+                self.$set('gist', {});
             }
         },
         methods: {
@@ -81,9 +89,17 @@
                 });
             },
             saveGistAction() {
+                let self = this;
                 let editor = this.$get('editor');
                 // Setting the body.
                 this.$set('gistToEdit.body', editor.getValue());
+                // todo create the tags field.
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ self.$get('gistToEdit.id'),
+                    headers: { 'authorization': localStorage.getItem('Authorization') },
+                    data: self.$get('gistToEdit'),
+                });
             }
         }
 

@@ -66,6 +66,7 @@
             'logout-all': function() {
                 var self = this;
                 self.$set('gists', null);
+                self.$broadcast('logout-global');
                 router.go('login');
             },
             'view-gist': function(gist) {

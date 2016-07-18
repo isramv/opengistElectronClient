@@ -27053,6 +27053,7 @@
 	        'logout-all': function logoutAll() {
 	            var self = this;
 	            self.$set('gists', null);
+	            self.$broadcast('logout-global');
 	            _router2.default.go('login');
 	        },
 	        'view-gist': function viewGist(gist) {
@@ -45238,6 +45239,14 @@
 	            var self = this;
 	            self.getUpdatedGist(gistId);
 	            this.$set('editing', true);
+	        },
+	        'logout-global': function logoutGlobal() {
+	            var self = this;
+	            console.log('children notified');
+	            self.$set('editing', false);
+	            self.$set('processing', false);
+	            self.$set('gistToEdit', {});
+	            self.$set('gist', {});
 	        }
 	    },
 	    methods: {
@@ -45262,9 +45271,17 @@
 	            });
 	        },
 	        saveGistAction: function saveGistAction() {
+	            var self = this;
 	            var editor = this.$get('editor');
 
 	            this.$set('gistToEdit.body', editor.getValue());
+
+	            _jquery2.default.ajax({
+	                type: 'POST',
+	                url: 'http://myapp.local/app_dev.php/api/v1/gists/' + self.$get('gistToEdit.id'),
+	                headers: { 'authorization': localStorage.getItem('Authorization') },
+	                data: self.$get('gistToEdit')
+	            });
 	        }
 	    }
 
