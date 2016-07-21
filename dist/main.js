@@ -45308,6 +45308,10 @@
 	                url: 'http://myapp.local/app_dev.php/api/v1/gists/' + self.$get('gistToEdit.id'),
 	                headers: { 'authorization': localStorage.getItem('Authorization') },
 	                data: self.$get('gistToEdit')
+	            }).done(function (res) {
+	                console.log(res);
+	                self.$set('editing', false);
+	                self.$dispatch('view-gist', res);
 	            });
 	        }
 	    }
@@ -45318,7 +45322,7 @@
 /* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var require;var require;/* WEBPACK VAR INJECTION */(function($) {/*!
+	var require;var require;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function($) {/*!
 	 * Select2 4.0.3
 	 * https://select2.github.io
 	 *

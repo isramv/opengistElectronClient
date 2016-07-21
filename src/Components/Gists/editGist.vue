@@ -54,7 +54,6 @@
     require('brace/mode/markdown');
     require('brace/theme/github');
     import 'style-loader!css-loader!select2/dist/css/select2.css';
-
     export default{
         props: ['processing', 'editor'],
         data() {
@@ -129,7 +128,12 @@
                     url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ self.$get('gistToEdit.id'),
                     headers: { 'authorization': localStorage.getItem('Authorization') },
                     data: self.$get('gistToEdit'),
+                }).done(function(res) {
+                    console.log(res);
+                    self.$set('editing', false);
+                    self.$dispatch('view-gist', res);
                 });
+                // todo create updated in symfony.
             }
         }
     }
