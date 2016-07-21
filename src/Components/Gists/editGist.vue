@@ -10,6 +10,11 @@
             <div class="form-group">
                 <input class="title form-control" v-model="gistToEdit.title"></input>
             </div>
+            <div class="form-group">
+                <select multiple="true" class="select2-select form-control select2" data-tags="true">
+                    <option v-for="tag in gistToEdit.tags" value="{{ tag.id }}" selected>{{ tag.name }}</option>
+                </select>
+            </div>
             <div class="form-group editor-container">
                 <div id="js-editor"></div>
             </div>
@@ -20,7 +25,7 @@
         </form>
     </div>
 </template>
-<style lang="sass" xml:lang="scss">
+<style lang="sass" xml:lang="scss" scoped>
     input {
         &.title.form-control {
             max-width: 40%;
@@ -36,13 +41,20 @@
         padding-right: 40px;
         border: 1px solid #d4d4d4;
     }
+    .select2-select {
+
+    }
 </style>
 <script>
     import store from '../store'
-    import $ from 'jquery'
+    import 'jquery'
+    import _ from 'lodash'
+    import select2 from 'select2'
     import ace from 'brace'
     require('brace/mode/markdown');
     require('brace/theme/github');
+    import 'style-loader!css-loader!select2/dist/css/select2.css';
+
     export default{
         props: ['processing', 'editor'],
         data() {
@@ -75,8 +87,10 @@
                     // TODO update the url and put.
                     url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ gistId,
                     headers: { 'authorization': localStorage.getItem('Authorization') },
-                    type: 'GET'
+                    type: 'GET',
+                    dataType: 'json'
                 }).done(function(res) {
+
                     let editor = ace.edit('js-editor');
                     editor.setValue(res.body, 1);
                     editor.getSession().setMode('ace/mode/markdown');
@@ -84,6 +98,13 @@
                     self.$set('editor', editor);
                     self.$set('gistToEdit', res);
                     self.$set('processing', false);
+
+                    $('.select2-select').select2({
+                        multiple: "true",
+                        tags: "true",
+                        width: 250,
+                    });
+
                 });
             },
             saveGistAction() {
@@ -91,7 +112,18 @@
                 let editor = this.$get('editor');
                 // Setting the body.
                 this.$set('gistToEdit.body', editor.getValue());
-                // todo create the tags field.
+                // Tags data.
+                let newTags = $('.select2-select').select2('data');
+                let newTagsArray = [];
+                newTags.forEach( t => {
+                    let tag = {
+                        id: _.toInteger(t.id),
+                        name: t.text
+                    };
+                    newTagsArray.push(tag);
+                });
+                self.$set('gistToEdit.tags', newTagsArray);
+
                 $.ajax({
                     type: 'POST',
                     url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ self.$get('gistToEdit.id'),
@@ -100,6 +132,5 @@
                 });
             }
         }
-
     }
 </script>
