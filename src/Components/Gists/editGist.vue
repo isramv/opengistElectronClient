@@ -11,6 +11,7 @@
                 <input class="title form-control" v-model="gistToEdit.title"></input>
             </div>
             <div class="form-group">
+                {{ gistToEdit.tags }}
                 <select multiple="true" class="select2-select form-control select2" data-tags="true">
                     <option v-for="tag in gistToEdit.tags" value="{{ tag.id }}" selected>{{ tag.name }}</option>
                 </select>
@@ -104,6 +105,8 @@
                         width: 250,
                     });
 
+                    let select2select = $('.select2-select');
+
                 });
             },
             saveGistAction() {
@@ -111,6 +114,7 @@
                 let editor = this.$get('editor');
                 // Setting the body.
                 this.$set('gistToEdit.body', editor.getValue());
+
                 // Tags data.
                 let newTags = $('.select2-select').select2('data');
                 let newTagsArray = [];
@@ -121,6 +125,8 @@
                     };
                     newTagsArray.push(tag);
                 });
+                self.$set('gistToEdit.tags', '');
+                $('.select2-select').select2('destroy');
                 self.$set('gistToEdit.tags', newTagsArray);
 
                 $.ajax({
@@ -130,8 +136,12 @@
                     data: self.$get('gistToEdit'),
                 }).done(function(res) {
                     console.log(res);
-                    self.$set('editing', false);
-                    self.$dispatch('view-gist', res);
+                    self.$set('gistToEdit', res);
+                    $('.select2-select').select2({
+                        multiple: "true",
+                        tags: "true",
+                        width: 250,
+                    });
                 });
                 // todo create updated in symfony.
             }

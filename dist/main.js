@@ -45284,6 +45284,8 @@
 	                    tags: "true",
 	                    width: 250
 	                });
+
+	                var select2select = $('.select2-select');
 	            });
 	        },
 	        saveGistAction: function saveGistAction() {
@@ -45301,6 +45303,8 @@
 	                };
 	                newTagsArray.push(tag);
 	            });
+	            self.$set('gistToEdit.tags', '');
+	            $('.select2-select').select2('destroy');
 	            self.$set('gistToEdit.tags', newTagsArray);
 
 	            $.ajax({
@@ -45310,8 +45314,12 @@
 	                data: self.$get('gistToEdit')
 	            }).done(function (res) {
 	                console.log(res);
-	                self.$set('editing', false);
-	                self.$dispatch('view-gist', res);
+	                self.$set('gistToEdit', res);
+	                $('.select2-select').select2({
+	                    multiple: "true",
+	                    tags: "true",
+	                    width: 250
+	                });
 	            });
 	        }
 	    }
@@ -45322,7 +45330,7 @@
 /* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var require;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function($) {/*!
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var require;var require;/* WEBPACK VAR INJECTION */(function($) {/*!
 	 * Select2 4.0.3
 	 * https://select2.github.io
 	 *
@@ -73129,7 +73137,7 @@
 /* 169 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div v-if=\"editing\" _v-f547408c=\"\">\n    <div class=\"row actions\" _v-f547408c=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-f547408c=\"\">\n            <button class=\"btn btn-default btn-sm\" v-on:click=\"finishEditing\" _v-f547408c=\"\">Done</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-f547408c=\"\"></i>\n    <form v-show=\"!processing\" _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-f547408c=\"\">\n        </div>\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <select multiple=\"true\" class=\"select2-select form-control select2\" data-tags=\"true\" _v-f547408c=\"\">\n                <option v-for=\"tag in gistToEdit.tags\" value=\"{{ tag.id }}\" selected=\"\" _v-f547408c=\"\">{{ tag.name }}</option>\n            </select>\n        </div>\n        <div class=\"form-group editor-container\" _v-f547408c=\"\">\n            <div id=\"js-editor\" _v-f547408c=\"\"></div>\n        </div>\n        <br _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <button class=\"btn btn-default\" v-on:click=\"saveGistAction()\" _v-f547408c=\"\">Save</button>\n        </div>\n    </form>\n</div>\n";
+	module.exports = "\n<div v-if=\"editing\" _v-f547408c=\"\">\n    <div class=\"row actions\" _v-f547408c=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-f547408c=\"\">\n            <button class=\"btn btn-default btn-sm\" v-on:click=\"finishEditing\" _v-f547408c=\"\">Done</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-f547408c=\"\"></i>\n    <form v-show=\"!processing\" _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-f547408c=\"\">\n        </div>\n        <div class=\"form-group\" _v-f547408c=\"\">\n            {{ gistToEdit.tags }}\n            <select multiple=\"true\" class=\"select2-select form-control select2\" data-tags=\"true\" _v-f547408c=\"\">\n                <option v-for=\"tag in gistToEdit.tags\" value=\"{{ tag.id }}\" selected=\"\" _v-f547408c=\"\">{{ tag.name }}</option>\n            </select>\n        </div>\n        <div class=\"form-group editor-container\" _v-f547408c=\"\">\n            <div id=\"js-editor\" _v-f547408c=\"\"></div>\n        </div>\n        <br _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <button class=\"btn btn-default\" v-on:click=\"saveGistAction()\" _v-f547408c=\"\">Save</button>\n        </div>\n    </form>\n</div>\n";
 
 /***/ },
 /* 170 */
