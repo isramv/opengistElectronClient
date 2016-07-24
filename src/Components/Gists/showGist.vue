@@ -1,7 +1,7 @@
 <template>
     <h1 class="gist-title" v-if="editing == false">{{ gist.title }}</h1>
     <div class="row actions" v-if="editing == false">
-        <div class="col-xs-4 col-xs-offset-8">
+        <div class="col-xs-2 col-xs-offset-10">
             <button class="btn btn-default btn-sm" v-on:click="editGist(gist.id)">Edit</button>
         </div>
     </div>

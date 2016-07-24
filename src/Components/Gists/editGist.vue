@@ -1,29 +1,26 @@
 <template>
     <div v-if="editing">
         <div class="row actions">
-            <div class="col-xs-4 col-xs-offset-8">
-                <button class="btn btn-default btn-sm" v-on:click="finishEditing">Done</button>
+            <div class="col-xs-2 col-xs-offset-10">
+                <button class="btn btn-default btn-sm" v-on:click="saveGistAction()">Save</button>
             </div>
         </div>
         <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="processing"></i>
-        <form v-show="!processing">
+        <div v-show="!processing">
             <div class="form-group">
                 <input class="title form-control" v-model="gistToEdit.title"></input>
             </div>
             <div class="form-group">
-                {{ gistToEdit.tags }}
-                <select multiple="true" class="select2-select form-control select2" data-tags="true">
-                    <option v-for="tag in gistToEdit.tags" value="{{ tag.id }}" selected>{{ tag.name }}</option>
-                </select>
+                <tags-input-component></tags-input-component>
             </div>
             <div class="form-group editor-container">
                 <div id="js-editor"></div>
             </div>
             <br/>
             <div class="form-group">
-                <button class="btn btn-default" v-on:click="saveGistAction()">Save</button>
+                <button class="btn btn-default" @click="saveGistAction()">Save</button>
             </div>
-        </form>
+        </div>
     </div>
 </template>
 <style lang="sass" xml:lang="scss" scoped>
@@ -50,15 +47,17 @@
     import store from '../store'
     import 'jquery'
     import _ from 'lodash'
-    import select2 from 'select2'
     import ace from 'brace'
     require('brace/mode/markdown');
     require('brace/theme/github');
-    import 'style-loader!css-loader!select2/dist/css/select2.css';
+    import tagsInputComponent from './tagsInputComponent.vue';
     export default{
         props: ['processing', 'editor'],
         data() {
             return store
+        },
+        components: {
+            'tags-input-component': tagsInputComponent
         },
         events: {
             'edit-gist': function(gistId) {
@@ -76,10 +75,6 @@
             }
         },
         methods: {
-            finishEditing() {
-                // TODO discard not made changes.
-                this.$set('editing', false);
-            },
             getUpdatedGist(gistId) {
                 let self = this;
                 self.$set('processing', true);
@@ -99,13 +94,7 @@
                     self.$set('gistToEdit', res);
                     self.$set('processing', false);
 
-                    $('.select2-select').select2({
-                        multiple: "true",
-                        tags: "true",
-                        width: 250,
-                    });
-
-                    let select2select = $('.select2-select');
+                    // Select.
 
                 });
             },
@@ -115,20 +104,6 @@
                 // Setting the body.
                 this.$set('gistToEdit.body', editor.getValue());
 
-                // Tags data.
-                let newTags = $('.select2-select').select2('data');
-                let newTagsArray = [];
-                newTags.forEach( t => {
-                    let tag = {
-                        id: _.toInteger(t.id),
-                        name: t.text
-                    };
-                    newTagsArray.push(tag);
-                });
-                self.$set('gistToEdit.tags', '');
-                $('.select2-select').select2('destroy');
-                self.$set('gistToEdit.tags', newTagsArray);
-
                 $.ajax({
                     type: 'POST',
                     url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ self.$get('gistToEdit.id'),
@@ -137,13 +112,9 @@
                 }).done(function(res) {
                     console.log(res);
                     self.$set('gistToEdit', res);
-                    $('.select2-select').select2({
-                        multiple: "true",
-                        tags: "true",
-                        width: 250,
-                    });
+                    self.$dispatch('view-gist', res);
+                    self.$set('editing', false);
                 });
-                // todo create updated in symfony.
             }
         }
     }
