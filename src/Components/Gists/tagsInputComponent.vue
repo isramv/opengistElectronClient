@@ -1,7 +1,7 @@
 <template>
-    <input class="tags-input form-control" v-model="newTag" @keyup.enter="addTag()" placeholder="Add new tags..."/>
+    <input class="input-sm tags-input form-control" v-model="newTag" @keyup.enter="addTag()" placeholder="Add new tags..."/>
     <ul class="tags-list list-inline">
-        <li class="btn btn-default" v-for="tag in gistToEdit.tags">{{ tag.name }} <a @click="removeTag(tag.name)"><i class="fa fa-close"></i></a></li>
+        <li class="btn btn-default btn-tag" v-for="tag in gistToEdit.tags">{{ tag.name }} <a @click="removeTag(tag.name)"><i class="fa fa-close"></i></a></li>
     </ul>
 </template>
 <style lang="sass" xml:lang="scss" scoped>
@@ -16,6 +16,10 @@
     .tags-input {
         width: 240px;
         margin: 10px 0;
+    }
+    .btn-tag {
+        background: #d3d4de;
+        color: #585469;
     }
 </style>
 <script>

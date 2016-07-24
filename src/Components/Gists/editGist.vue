@@ -1,8 +1,9 @@
 <template>
     <div v-if="editing">
         <div class="row actions">
-            <div class="col-xs-2 col-xs-offset-10">
-                <button class="btn btn-default btn-sm" v-on:click="saveGistAction()">Save</button>
+            <div class="col-xs-4 col-xs-offset-8">
+                <button class="btn-sm btn btn-default btn-sm" v-on:click="saveGistAction()">Cancel</button>
+                <button class="btn-sm btn btn-default btn-sm" v-on:click="saveGistAction()">Save</button>
             </div>
         </div>
         <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="processing"></i>
@@ -26,7 +27,7 @@
 <style lang="sass" xml:lang="scss" scoped>
     input {
         &.title.form-control {
-            max-width: 40%;
+            max-width: 300px;
         }
     }
     .editor-container {
@@ -75,6 +76,11 @@
             }
         },
         methods: {
+            cancelUpdateGist() {
+                let self = this;
+                self.$set('editing', false);
+                self.$set('gistToEdit', {});
+            },
             getUpdatedGist(gistId) {
                 let self = this;
                 self.$set('processing', true);
@@ -85,17 +91,16 @@
                     type: 'GET',
                     dataType: 'json'
                 }).done(function(res) {
-
                     let editor = ace.edit('js-editor');
+                    if(_.isNull(res.body)) {
+                        res.body = '';
+                    }
                     editor.setValue(res.body, 1);
                     editor.getSession().setMode('ace/mode/markdown');
                     editor.setTheme('ace/theme/github');
                     self.$set('editor', editor);
                     self.$set('gistToEdit', res);
                     self.$set('processing', false);
-
-                    // Select.
-
                 });
             },
             saveGistAction() {
@@ -103,14 +108,12 @@
                 let editor = this.$get('editor');
                 // Setting the body.
                 this.$set('gistToEdit.body', editor.getValue());
-
                 $.ajax({
                     type: 'POST',
                     url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ self.$get('gistToEdit.id'),
                     headers: { 'authorization': localStorage.getItem('Authorization') },
                     data: self.$get('gistToEdit'),
                 }).done(function(res) {
-                    console.log(res);
                     self.$set('gistToEdit', res);
                     self.$dispatch('view-gist', res);
                     self.$set('editing', false);

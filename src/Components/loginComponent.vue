@@ -8,7 +8,7 @@
             </div>
             <div class="row form" v-if="!logged">
                 <div class="form-container">
-                    <form class="form login-form">
+                    <form class="form login-form" @submit.prevent="authorize">
                         <div class="form-group">
                             <label for="username">Username:</label>
                             <input id="username" type="text" v-model="username" name="username" placeholder="user" class="form-control"/>
@@ -18,7 +18,7 @@
                             <input id="password" class="form-control" type="password" placeholder="password" v-model="password" name="password"/>
                         </div>
                         <div class="form-group">
-                            <input class="submit btn btn-default btn-primary" type="button" value="login" v-on:click="authorize">
+                            <input class="submit btn btn-default btn-primary" type="submit" value="login">
                         </div>
                         <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="loading"></i>
                         <div class="rc-block alert alert-danger" v-if="error">
