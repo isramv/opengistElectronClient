@@ -77,7 +77,6 @@
             },
             'update-index': function(gist) {
                 // todo is going to search the gist by id and update with the new one.
-
             }
         },
         methods: {
