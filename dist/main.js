@@ -27062,6 +27062,9 @@
 	        'edit-gist': function editGist(gistId) {
 	            this.editGist(gistId);
 	        },
+	        'update-all': function updateAll() {
+	            console.log('update-all');
+	        },
 	        'update-index': function updateIndex(gist) {}
 	    },
 	    methods: {
@@ -67564,7 +67567,7 @@
 /* 177 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <show-gist></show-gist>\n        <edit-gist></edit-gist>\n    </div>\n</div>\nEditing: {{ editing }}\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <a href=\"#\" @click=\"fetchGists()\">update index</a>\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <show-gist></show-gist>\n        <edit-gist></edit-gist>\n    </div>\n</div>\n";
 
 /***/ },
 /* 178 */

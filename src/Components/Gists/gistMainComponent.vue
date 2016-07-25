@@ -31,6 +31,7 @@
 <template>
     <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-3 table-container">
+            <a href="#" @click="fetchGists()">update index</a>
             <table-gist></table-gist>
         </div>
         <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
@@ -38,7 +39,6 @@
             <edit-gist></edit-gist>
         </div>
     </div>
-    Editing: {{ editing }}
 </template>
 <script>
     import store from '../store'
@@ -74,6 +74,9 @@
             },
             'edit-gist': function(gistId) {
                 this.editGist(gistId);
+            },
+            'update-all': function() {
+                console.log('update-all');
             },
             'update-index': function(gist) {
                 // todo is going to search the gist by id and update with the new one.

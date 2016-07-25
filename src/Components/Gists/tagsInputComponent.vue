@@ -31,6 +31,7 @@
         },
         methods: {
             addTag() {
+                // todo trim whitespaces before and after the tag.
                 store.gistToEdit.tags.push({ id: 0, name: this.$get('newTag') });
                 this.$set('newTag', '');
             },

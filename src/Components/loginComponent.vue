@@ -31,7 +31,7 @@
     </div>
 </template>
 
-<style lang="sass">
+<style lang="sass" xml:lang="scss">
     .login-component {
     .form-container {
         width: 350px;
