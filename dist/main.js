@@ -26997,7 +26997,7 @@
 
 
 	// module
-	exports.push([module.id, ".table-container {\n  background-color: #eaeaea;\n  padding-top: 12px;\n  padding-bottom: 12px;\n  border-right: 1px solid #d2d2d2;\n  border-bottom: 1px solid #d2d2d2; }\n\n.table-filter {\n  margin-bottom: 12px; }\n\ntable {\n  border: 0; }\n  table tr:nth-child(odd) {\n    background: #f1f1f1; }\n  table tr:nth-child(even) {\n    background: #fafafa; }\n  table tbody > tr > td {\n    border-top: 0 !important; }\n    table tbody > tr > td a {\n      color: #464646; }\n", ""]);
+	exports.push([module.id, ".table-container {\n  background-color: #eaeaea;\n  padding-top: 12px;\n  padding-bottom: 12px;\n  border-right: 1px solid #d2d2d2;\n  border-bottom: 1px solid #d2d2d2; }\n\n.table-filter {\n  margin-bottom: 12px; }\n\n.rc-container {\n  margin: 15px 0; }\n\ntable {\n  border: 0; }\n  table tr:nth-child(odd) {\n    background: #f1f1f1; }\n  table tr:nth-child(even) {\n    background: #fafafa; }\n  table tbody > tr > td {\n    border-top: 0 !important; }\n    table tbody > tr > td a {\n      color: #464646; }\n", ""]);
 
 	// exports
 
@@ -27208,7 +27208,7 @@
 
 
 	// module
-	exports.push([module.id, ".show-gist-container {\n  background-color: #ffffff;\n  padding: 34px;\n  padding-top: 12px; }\n  .show-gist-container h1 {\n    margin-top: 0; }\n\n.gist-title {\n  border-bottom: 1px solid #d2d2d2;\n  margin-bottom: 0;\n  padding-bottom: 12px; }\n\n.actions {\n  margin: 5px 0; }\n", ""]);
+	exports.push([module.id, ".show-gist-container {\n  background-color: #ffffff;\n  padding: 34px;\n  padding-top: 12px; }\n  .show-gist-container h1 {\n    margin-top: 0; }\n\n.gist-title {\n  border-bottom: 1px solid #d2d2d2;\n  margin-bottom: 0;\n  padding-bottom: 12px; }\n\n#gist-content {\n  max-width: 650px; }\n\n.actions {\n  margin: 5px 0; }\n", ""]);
 
 	// exports
 
@@ -45331,6 +45331,7 @@
 	                    res.body = '';
 	                }
 	                editor.setValue(res.body, 1);
+	                editor.setOption("wrap", 80);
 	                editor.getSession().setMode('ace/mode/markdown');
 	                editor.setTheme('ace/theme/github');
 	                self.$set('editor', editor);
@@ -67507,7 +67508,7 @@
 /* 171 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div _v-f547408c=\"\">\n    <div class=\"row actions\" _v-f547408c=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-f547408c=\"\">\n            <!-- todo fix the cancel button. -->\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelUpdateGist()\" _v-f547408c=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"saveGistAction()\" _v-f547408c=\"\">Save</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-f547408c=\"\"></i>\n    <div v-show=\"!processing\" _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-f547408c=\"\">\n        </div>\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <tags-input-component _v-f547408c=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" _v-f547408c=\"\">\n            <div id=\"js-editor\" _v-f547408c=\"\"></div>\n        </div>\n        <br _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <button class=\"btn btn-default\" @click=\"saveGistAction()\" _v-f547408c=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div _v-f547408c=\"\">\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-f547408c=\"\"></i>\n    <div v-show=\"!processing\" _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-f547408c=\"\">\n        </div>\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <tags-input-component _v-f547408c=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" _v-f547408c=\"\">\n            <div id=\"js-editor\" _v-f547408c=\"\"></div>\n        </div>\n        <br _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelUpdateGist()\" _v-f547408c=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"saveGistAction()\" _v-f547408c=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 172 */
@@ -67617,7 +67618,7 @@
 /* 177 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <a href=\"#\" @click=\"fetchGists()\">update index</a>\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <a href=\"#\" class=\"btn btn-default btn-sm\" @click=\"changeState('new')\">New</a>\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <a href=\"#\" @click=\"fetchGists()\">update index</a>\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <div class=\"rc-container\">\n            <a href=\"#\" class=\"btn btn-default btn-sm\" @click=\"changeState('new')\">New</a>\n        </div>\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 178 */
@@ -67698,7 +67699,7 @@
 /* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -67754,6 +67755,7 @@
 	            setTimeout(function () {
 	                var editor = _brace2.default.edit('editor');
 	                editor.setValue('', 1);
+	                editor.setOption("wrap", 80);
 	                editor.getSession().setMode('ace/mode/markdown');
 	                editor.setTheme('ace/theme/github');
 	                self.$set('editornew', editor);
@@ -67770,10 +67772,18 @@
 	            var editor = self.$get('editornew');
 	            self.$set('gistToEdit.body', editor.getValue());
 	            var gte = self.$get('gistToEdit');
-	            console.log(gte);
+	            $.ajax({
+	                url: 'http://myapp.local/app_dev.php/api/v1/gists',
+	                headers: { 'authorization': localStorage.getItem('Authorization') },
+	                type: 'POST',
+	                data: gte
+	            }).done(function (res) {
+	                console.log(res);
+	            });
 	        }
 	    }
 	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)))
 
 /***/ },
 /* 183 */

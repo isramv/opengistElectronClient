@@ -27,6 +27,9 @@
         margin-bottom: 0;
         padding-bottom: 12px;
     }
+    #gist-content {
+        max-width: 650px;
+    }
     .actions {
         margin: 5px 0;
     }

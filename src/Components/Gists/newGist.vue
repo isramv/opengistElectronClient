@@ -80,6 +80,7 @@
                 setTimeout(function() {
                     let editor = ace.edit('editor');
                     editor.setValue('',1);
+                    editor.setOption("wrap", 80);
                     editor.getSession().setMode('ace/mode/markdown');
                     editor.setTheme('ace/theme/github');
                     self.$set('editornew', editor);
@@ -97,15 +98,14 @@
                 let editor = self.$get('editornew');
                 self.$set('gistToEdit.body', editor.getValue());
                 let gte = self.$get('gistToEdit');
-                console.log(gte);
-
-//                $.ajax({
-//                    url: 'http://myapp.local/app_dev.php/api/v1/gists',
-//                    headers: { 'authorization': localStorage.getItem('Authorization') },
-//                    type: 'POST'
-//                }).done(function(res) {
-//                    console.log(res);
-//                });
+                $.ajax({
+                    url: 'http://myapp.local/app_dev.php/api/v1/gists',
+                    headers: { 'authorization': localStorage.getItem('Authorization') },
+                    type: 'POST',
+                    data: gte,
+                }).done(function(res) {
+                    console.log(res);
+                });
             }
             // Todo save method.
         }

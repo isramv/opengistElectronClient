@@ -1,12 +1,5 @@
 <template>
     <div>
-        <div class="row actions">
-            <div class="col-xs-4 col-xs-offset-8">
-                <!-- todo fix the cancel button. -->
-                <button class="btn-sm btn btn-default btn-sm" v-on:click="cancelUpdateGist()">Cancel</button>
-                <button class="btn-sm btn btn-default btn-sm" v-on:click="saveGistAction()">Save</button>
-            </div>
-        </div>
         <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="processing"></i>
         <div v-show="!processing">
             <div class="form-group">
@@ -20,7 +13,8 @@
             </div>
             <br/>
             <div class="form-group">
-                <button class="btn btn-default" @click="saveGistAction()">Save</button>
+                <button class="btn-sm btn btn-default btn-sm" v-on:click="cancelUpdateGist()">Cancel</button>
+                <button class="btn-sm btn btn-default btn-sm" v-on:click="saveGistAction()">Save</button>
             </div>
         </div>
     </div>
@@ -115,6 +109,7 @@
                         res.body = '';
                     }
                     editor.setValue(res.body, 1);
+                    editor.setOption("wrap", 80);
                     editor.getSession().setMode('ace/mode/markdown');
                     editor.setTheme('ace/theme/github');
                     self.$set('editor', editor);

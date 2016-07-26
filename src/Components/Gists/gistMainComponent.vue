@@ -9,6 +9,9 @@
     .table-filter {
         margin-bottom: 12px;
     }
+    .rc-container {
+        margin: 15px 0;
+    }
     table {
         border: 0;
         tr:nth-child(odd) {
@@ -35,7 +38,9 @@
             <table-gist></table-gist>
         </div>
         <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
-            <a href="#" class="btn btn-default btn-sm" @click="changeState('new')">New</a>
+            <div class="rc-container">
+                <a href="#" class="btn btn-default btn-sm" @click="changeState('new')">New</a>
+            </div>
             <div v-show="state == 'view'">
                 <show-gist></show-gist>
             </div>
