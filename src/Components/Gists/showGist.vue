@@ -1,11 +1,11 @@
 <template>
-    <h1 class="gist-title" v-if="editing == false">{{ gist.title }}</h1>
-    <div class="row actions" v-if="editing == false">
+    <h1 class="gist-title">{{ gist.title }}</h1>
+    <div class="row actions">
         <div class="col-xs-2 col-xs-offset-10">
-            <button class="btn btn-default btn-sm" v-on:click="editGist(gist.id)">Edit</button>
+            <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
         </div>
     </div>
-    <div id="gist-content" v-if="editing == false">
+    <div id="gist-content">
         {{{ gist.marked }}}
         <ul class="list-inline">
             <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a></li>
@@ -90,9 +90,11 @@
                 self.$broadcast('show-related-gists', relatedGist);
             },
             editGist(gistId) {
+                let self = this;
+                console.log('edit clicked');
                 // Notifies the parent.
-                this.$dispatch('edit-gist', gistId);
-                // Notifies the showRelatedGistsCompnent to clear it's data.
+                self.$dispatch('edit-gist', gistId);
+                // Notifies the showRelatedGistsComponent to clear it's data.
                 this.$broadcast('edit-gist');
             }
         }

@@ -62,19 +62,12 @@
             'tags-input-component': tagsInputComponent
         },
         events: {
-            'edit-gist': function(gistId) {
-                console.log('edit gist notified');
-                let self = this;
-                self.getUpdatedGist(gistId);
-                this.$set('state', 'edit');
-            },
-            'logout-global': function() {
-                let self = this;
-                self.$set('editing', false);
-                self.$set('processing', false);
-                self.$set('gistToEdit', {});
-                self.$set('gist', {});
+            'new-gist': function() {
+                console.log('new gist notified');
             }
+        },
+        beforeCompile() {
+            this.newGist();
         },
         methods: {
             newGist() {
@@ -84,8 +77,6 @@
                     tags: []
                 };
                 let self = this;
-                self.$set('editing', true);
-                self.$set('isnew', true);
                 self.$set('gistToEdit', gistToEdit);
                 setTimeout(function () {
                     let editor = ace.edit('js-editor');
@@ -93,52 +84,10 @@
                     editor.getSession().setMode('ace/mode/markdown');
                     editor.setTheme('ace/theme/github');
                     self.$set('editor', editor);
-                }, 1000);
+                }, 2000);
 
-            },
-            cancelUpdateGist() {
-                let self = this;
-                self.$set('state', 'view');
-                self.$set('gistToEdit', {});
-            },
-            getUpdatedGist(gistId) {
-                let self = this;
-                self.$set('processing', true);
-                $.ajax({
-                    // TODO update the url and put.
-                    url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ gistId,
-                    headers: { 'authorization': localStorage.getItem('Authorization') },
-                    type: 'GET',
-                    dataType: 'json'
-                }).done(function(res) {
-                    let editor = ace.edit('js-editor');
-                    if(_.isNull(res.body)) {
-                        res.body = '';
-                    }
-                    editor.setValue(res.body, 1);
-                    editor.getSession().setMode('ace/mode/markdown');
-                    editor.setTheme('ace/theme/github');
-                    self.$set('editor', editor);
-                    self.$set('gistToEdit', res);
-                    self.$set('processing', false);
-                });
-            },
-            saveGistAction() {
-                let self = this;
-                let editor = self.$get('editor');
-                // Setting the body.
-                this.$set('gistToEdit.body', editor.getValue());
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ self.$get('gistToEdit.id'),
-                    headers: { 'authorization': localStorage.getItem('Authorization') },
-                    data: self.$get('gistToEdit'),
-                }).done(function(res) {
-                    self.$set('gistToEdit', {});
-                    self.$dispatch('view-gist', res);
-                    self.$set('editing', false);
-                });
             }
+            // Todo save method.
         }
     }
 </script>

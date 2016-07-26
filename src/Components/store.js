@@ -4,6 +4,7 @@ var store =  {
     username: '',
     gist: {},
     editing: false,
-    gistToEdit: {}
+    gistToEdit: {},
+    state: ''
 };
 export default store

@@ -23990,7 +23990,8 @@
 	    username: '',
 	    gist: {},
 	    editing: false,
-	    gistToEdit: {}
+	    gistToEdit: {},
+	    state: ''
 	};
 	exports.default = store;
 
@@ -24019,6 +24020,10 @@
 	var _gistMainComponent = __webpack_require__(133);
 
 	var _gistMainComponent2 = _interopRequireDefault(_gistMainComponent);
+
+	var _newGist = __webpack_require__(179);
+
+	var _newGist2 = _interopRequireDefault(_newGist);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27030,13 +27035,18 @@
 
 	var _tableGist2 = _interopRequireDefault(_tableGist);
 
+	var _newGist = __webpack_require__(179);
+
+	var _newGist2 = _interopRequireDefault(_newGist);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
 	    components: {
 	        'table-gist': _tableGist2.default,
 	        'show-gist': _showGist2.default,
-	        'edit-gist': _editGist2.default
+	        'edit-gist': _editGist2.default,
+	        'new-gist': _newGist2.default
 	    },
 	    data: function data() {
 	        return _store2.default;
@@ -27060,6 +27070,8 @@
 	            this.showGist(gist);
 	        },
 	        'edit-gist': function editGist(gistId) {
+	            console.log('parent notified');
+	            console.log('gid ' + gistId);
 	            this.editGist(gistId);
 	        },
 	        'update-all': function updateAll() {
@@ -27081,10 +27093,16 @@
 	                console.log('Ajax call finished');
 	            });
 	        },
+	        changeState: function changeState(state) {
+	            var self = this;
+	            self.$set('state', state);
+	        },
 	        showGist: function showGist(gist) {
+	            this.$set('state', 'view');
 	            this.$broadcast('view-gist', gist);
 	        },
 	        editGist: function editGist(gistId) {
+	            console.log('to broadcast');
 	            this.$broadcast('edit-gist', gistId);
 	        }
 	    }
@@ -27270,7 +27288,10 @@
 	            self.$broadcast('show-related-gists', relatedGist);
 	        },
 	        editGist: function editGist(gistId) {
-	            this.$dispatch('edit-gist', gistId);
+	            var self = this;
+	            console.log('edit clicked');
+
+	            self.$dispatch('edit-gist', gistId);
 
 	            this.$broadcast('edit-gist');
 	        }
@@ -45135,7 +45156,7 @@
 /* 152 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<h1 class=\"gist-title\" v-if=\"editing == false\">{{ gist.title }}</h1>\n<div class=\"row actions\" v-if=\"editing == false\">\n    <div class=\"col-xs-2 col-xs-offset-10\">\n        <button class=\"btn btn-default btn-sm\" v-on:click=\"editGist(gist.id)\">Edit</button>\n    </div>\n</div>\n<div id=\"gist-content\" v-if=\"editing == false\">\n    {{{ gist.marked }}}\n    <ul class=\"list-inline\">\n        <li v-for=\"tag in gist.tags\"><a class=\"btn btn-default btn-xs btn-info\" v-on:click=\"showRelatedGists(tag.id)\">{{ tag.name }}</a></li>\n    </ul>\n</div>\n<show-related-gists></show-related-gists>\n";
+	module.exports = "\n<h1 class=\"gist-title\">{{ gist.title }}</h1>\n<div class=\"row actions\">\n    <div class=\"col-xs-2 col-xs-offset-10\">\n        <button class=\"btn btn-default btn-sm\" @click=\"editGist(gist.id)\">Edit</button>\n    </div>\n</div>\n<div id=\"gist-content\">\n    {{{ gist.marked }}}\n    <ul class=\"list-inline\">\n        <li v-for=\"tag in gist.tags\"><a class=\"btn btn-default btn-xs btn-info\" v-on:click=\"showRelatedGists(tag.id)\">{{ tag.name }}</a></li>\n    </ul>\n</div>\n<show-related-gists></show-related-gists>\n";
 
 /***/ },
 /* 153 */
@@ -45249,13 +45270,13 @@
 	    },
 	    events: {
 	        'edit-gist': function editGist(gistId) {
+	            console.log('edit gist notified');
 	            var self = this;
 	            self.getUpdatedGist(gistId);
-	            this.$set('editing', true);
+	            this.$set('state', 'edit');
 	        },
 	        'logout-global': function logoutGlobal() {
 	            var self = this;
-	            console.log('children notified');
 	            self.$set('editing', false);
 	            self.$set('processing', false);
 	            self.$set('gistToEdit', {});
@@ -45263,9 +45284,27 @@
 	        }
 	    },
 	    methods: {
+	        newGist: function newGist() {
+	            var gistToEdit = {
+	                title: '',
+	                body: '',
+	                tags: []
+	            };
+	            var self = this;
+	            self.$set('editing', true);
+	            self.$set('isnew', true);
+	            self.$set('gistToEdit', gistToEdit);
+	            setTimeout(function () {
+	                var editor = _brace2.default.edit('js-editor');
+	                editor.setValue('', 1);
+	                editor.getSession().setMode('ace/mode/markdown');
+	                editor.setTheme('ace/theme/github');
+	                self.$set('editor', editor);
+	            }, 1000);
+	        },
 	        cancelUpdateGist: function cancelUpdateGist() {
 	            var self = this;
-	            self.$set('editing', false);
+	            self.$set('state', 'view');
 	            self.$set('gistToEdit', {});
 	        },
 	        getUpdatedGist: function getUpdatedGist(gistId) {
@@ -45291,7 +45330,7 @@
 	        },
 	        saveGistAction: function saveGistAction() {
 	            var self = this;
-	            var editor = this.$get('editor');
+	            var editor = self.$get('editor');
 
 	            this.$set('gistToEdit.body', editor.getValue());
 	            $.ajax({
@@ -45300,7 +45339,7 @@
 	                headers: { 'authorization': localStorage.getItem('Authorization') },
 	                data: self.$get('gistToEdit')
 	            }).done(function (res) {
-	                self.$set('gistToEdit', res);
+	                self.$set('gistToEdit', {});
 	                self.$dispatch('view-gist', res);
 	                self.$set('editing', false);
 	            });
@@ -67457,7 +67496,7 @@
 /* 171 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div v-if=\"editing\" _v-f547408c=\"\">\n    <div class=\"row actions\" _v-f547408c=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-f547408c=\"\">\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"saveGistAction()\" _v-f547408c=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"saveGistAction()\" _v-f547408c=\"\">Save</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-f547408c=\"\"></i>\n    <div v-show=\"!processing\" _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-f547408c=\"\">\n        </div>\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <tags-input-component _v-f547408c=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" _v-f547408c=\"\">\n            <div id=\"js-editor\" _v-f547408c=\"\"></div>\n        </div>\n        <br _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <button class=\"btn btn-default\" @click=\"saveGistAction()\" _v-f547408c=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div _v-f547408c=\"\">\n    <div class=\"row actions\" _v-f547408c=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-f547408c=\"\">\n            <!-- todo fix the cancel button. -->\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelUpdateGist()\" _v-f547408c=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"saveGistAction()\" _v-f547408c=\"\">Save</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-f547408c=\"\"></i>\n    <div v-show=\"!processing\" _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-f547408c=\"\">\n        </div>\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <tags-input-component _v-f547408c=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" _v-f547408c=\"\">\n            <div id=\"js-editor\" _v-f547408c=\"\"></div>\n        </div>\n        <br _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <button class=\"btn btn-default\" @click=\"saveGistAction()\" _v-f547408c=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 172 */
@@ -67567,13 +67606,158 @@
 /* 177 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <a href=\"#\" @click=\"fetchGists()\">update index</a>\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <show-gist></show-gist>\n        <edit-gist></edit-gist>\n    </div>\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <a href=\"#\" @click=\"fetchGists()\">update index</a>\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <a href=\"#\" class=\"btn btn-default btn-sm\" @click=\"changeState('new')\">New</a>\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 178 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"row admin-bar\" v-if=\"username\">\n    <div class=\"col-xs-8\">\n        <p class=\"salute\">Welcome: {{ username }}</p>\n    </div>\n    <div class=\"col-xs-4\">\n        <a href=\"#\" v-on:click=\"logoutAction\">Logout</a>\n    </div>\n</div>\n";
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(180)
+	__vue_script__ = __webpack_require__(182)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src/Components/Gists/newGist.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(183)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-6fb07346/newGist.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(181);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(123)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-6fb07346&scoped=true!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./newGist.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-6fb07346&scoped=true!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./newGist.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(89)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "input.title.form-control[_v-6fb07346] {\n  max-width: 300px; }\n\n.editor-container[_v-6fb07346] {\n  min-height: 600px; }\n\n#js-editor[_v-6fb07346] {\n  position: absolute;\n  width: 90%;\n  height: 600px;\n  padding-right: 40px;\n  border: 1px solid #d4d4d4; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _store = __webpack_require__(125);
+
+	var _store2 = _interopRequireDefault(_store);
+
+	__webpack_require__(85);
+
+	var _lodash = __webpack_require__(144);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _brace = __webpack_require__(157);
+
+	var _brace2 = _interopRequireDefault(_brace);
+
+	var _tagsInputComponent = __webpack_require__(160);
+
+	var _tagsInputComponent2 = _interopRequireDefault(_tagsInputComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	__webpack_require__(165);
+	__webpack_require__(170);
+	exports.default = {
+	    props: ['processing', 'editor'],
+	    data: function data() {
+	        return _store2.default;
+	    },
+
+	    components: {
+	        'tags-input-component': _tagsInputComponent2.default
+	    },
+	    events: {
+	        'new-gist': function newGist() {
+	            console.log('new gist notified');
+	        }
+	    },
+	    beforeCompile: function beforeCompile() {
+	        this.newGist();
+	    },
+
+	    methods: {
+	        newGist: function newGist() {
+	            var gistToEdit = {
+	                title: '',
+	                body: '',
+	                tags: []
+	            };
+	            var self = this;
+	            self.$set('gistToEdit', gistToEdit);
+	            setTimeout(function () {
+	                var editor = _brace2.default.edit('js-editor');
+	                editor.setValue('', 1);
+	                editor.getSession().setMode('ace/mode/markdown');
+	                editor.setTheme('ace/theme/github');
+	                self.$set('editor', editor);
+	            }, 2000);
+	        }
+	    }
+	};
+
+/***/ },
+/* 183 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div _v-6fb07346=\"\">\n    <div class=\"row actions\" _v-6fb07346=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-6fb07346=\"\">\n            <!-- todo fix the cancel button. -->\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelUpdateGist()\" _v-6fb07346=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"saveGistAction()\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-6fb07346=\"\"></i>\n    <div v-show=\"!processing\" _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-6fb07346=\"\">\n        </div>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <tags-input-component _v-6fb07346=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" _v-6fb07346=\"\">\n            <div id=\"js-editor\" _v-6fb07346=\"\"></div>\n        </div>\n        <br _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <button class=\"btn btn-default\" @click=\"saveGistAction()\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }
 /******/ ]);

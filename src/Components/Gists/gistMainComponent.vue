@@ -35,8 +35,16 @@
             <table-gist></table-gist>
         </div>
         <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
-            <show-gist></show-gist>
-            <edit-gist></edit-gist>
+            <a href="#" class="btn btn-default btn-sm" @click="changeState('new')">New</a>
+            <div v-show="state == 'view'">
+                <show-gist></show-gist>
+            </div>
+            <div v-show="state == 'edit'">
+                <edit-gist></edit-gist>
+            </div>
+            <div v-show="state == 'new'">
+                <new-gist></new-gist>
+            </div>
         </div>
     </div>
 </template>
@@ -46,11 +54,13 @@
     import showGistComponent from './showGist.vue'
     import editGistComponent from './editGist.vue'
     import tableGistComponent from './tableGist.vue'
+    import newGistComponent from './newGist.vue'
     export default{
         components: {
             'table-gist': tableGistComponent,
             'show-gist': showGistComponent,
-            'edit-gist': editGistComponent
+            'edit-gist': editGistComponent,
+            'new-gist': newGistComponent
         },
         data() {
             return store
@@ -73,6 +83,8 @@
                 this.showGist(gist);
             },
             'edit-gist': function(gistId) {
+                console.log('parent notified');
+                console.log('gid ' + gistId);
                 this.editGist(gistId);
             },
             'update-all': function() {
@@ -96,11 +108,16 @@
                     console.log('Ajax call finished');
                 });
             },
+            changeState(state) {
+                let self = this;
+                self.$set('state', state);
+            },
             showGist(gist) {
+                this.$set('state', 'view');
                 this.$broadcast('view-gist', gist);
             },
             editGist(gistId) {
-                // this one is different that show, we need to fetch an updated version of the gist from the server.
+                console.log('to broadcast');
                 this.$broadcast('edit-gist', gistId);
             }
         }
