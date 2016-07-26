@@ -5,6 +5,6 @@ var store =  {
     gist: {},
     editing: false,
     gistToEdit: {},
-    state: ''
+    state: 'view'
 };
 export default store

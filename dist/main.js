@@ -23991,7 +23991,7 @@
 	    gist: {},
 	    editing: false,
 	    gistToEdit: {},
-	    state: ''
+	    state: 'view'
 	};
 	exports.default = store;
 
@@ -27015,6 +27015,10 @@
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
+	var _lodash = __webpack_require__(144);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
 	var _store = __webpack_require__(125);
 
 	var _store2 = _interopRequireDefault(_store);
@@ -27063,6 +27067,7 @@
 	        'logout-all': function logoutAll() {
 	            var self = this;
 	            self.$set('gists', null);
+	            self.$set('state', '');
 	            self.$broadcast('logout-global');
 	            _router2.default.go('login');
 	        },
@@ -27073,7 +27078,16 @@
 	            this.editGist(gistId);
 	        },
 	        'update-all': function updateAll() {},
-	        'update-index': function updateIndex(gist) {}
+	        'update-gist-on-index': function updateGistOnIndex(gist) {
+	            var gid = gist.id;
+	            console.log(_store2.default.gists);
+
+	            _lodash2.default.find(_store2.default.gists, function (g) {
+	                if (g.gist.id == gid) {
+	                    g.gist = gist;
+	                }
+	            });
+	        }
 	    },
 	    methods: {
 	        fetchGists: function fetchGists() {
@@ -45336,6 +45350,7 @@
 	            }).done(function (res) {
 	                self.$set('gistToEdit', {});
 	                self.$dispatch('view-gist', res);
+	                self.$dispatch('update-gist-on-index', res);
 	                self.$set('editing', false);
 	            });
 	        }

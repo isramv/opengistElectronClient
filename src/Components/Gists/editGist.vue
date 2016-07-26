@@ -135,6 +135,7 @@
                 }).done(function(res) {
                     self.$set('gistToEdit', {});
                     self.$dispatch('view-gist', res);
+                    self.$dispatch('update-gist-on-index', res);
                     self.$set('editing', false);
                 });
             }

@@ -49,6 +49,7 @@
     </div>
 </template>
 <script>
+    import _ from 'lodash'
     import store from '../store'
     import router from '../router'
     import showGistComponent from './showGist.vue'
@@ -76,6 +77,7 @@
             'logout-all': function() {
                 var self = this;
                 self.$set('gists', null);
+                self.$set('state', '');
                 self.$broadcast('logout-global');
                 router.go('login');
             },
@@ -88,8 +90,15 @@
             'update-all': function() {
 
             },
-            'update-index': function(gist) {
+            'update-gist-on-index': function(gist) {
+                let gid = gist.id;
+                console.log(store.gists);
                 // todo is going to search the gist by id and update with the new one.
+                _.find(store.gists, function(g) {
+                    if(g.gist.id == gid) {
+                        g.gist = gist;
+                    }
+                });
             }
         },
         methods: {
