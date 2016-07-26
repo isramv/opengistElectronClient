@@ -3,12 +3,12 @@
         <div class="row actions">
             <div class="col-xs-4 col-xs-offset-8">
                 <!-- todo fix the cancel button. -->
-                <button class="btn-sm btn btn-default btn-sm" v-on:click="cancelUpdateGist()">Cancel</button>
-                <button class="btn-sm btn btn-default btn-sm" v-on:click="saveGistAction()">Save</button>
+                <button class="btn-sm btn btn-default btn-sm" v-on:click="cancelAction">Cancel</button>
+                <button class="btn-sm btn btn-default btn-sm" v-on:click="createAction">Save</button>
             </div>
         </div>
         <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="processing"></i>
-        <div v-show="!processing">
+        <div>
             <div class="form-group">
                 <input class="title form-control" v-model="gistToEdit.title"></input>
             </div>
@@ -16,11 +16,11 @@
                 <tags-input-component></tags-input-component>
             </div>
             <div class="form-group editor-container">
-                <div id="js-editor"></div>
+                <div id="editor"></div>
             </div>
             <br/>
             <div class="form-group">
-                <button class="btn btn-default" @click="saveGistAction()">Save</button>
+                <button class="btn btn-default" @click="createAction()">Save</button>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
     .editor-container {
         min-height: 600px;
     }
-    #js-editor {
+    #editor {
         position: absolute;
         width: 90%;
         height: 600px;
@@ -63,28 +63,29 @@
         },
         events: {
             'new-gist': function() {
-                console.log('new gist notified');
+                let self = this;
+                self.newGist();
             }
-        },
-        beforeCompile() {
-            this.newGist();
         },
         methods: {
             newGist() {
-                let gistToEdit = {
+                let newGist = {
                     title: '',
                     body: '',
                     tags: []
                 };
-                let self = this;
-                self.$set('gistToEdit', gistToEdit);
-                setTimeout(function () {
-                    let editor = ace.edit('js-editor');
-                    editor.setValue('', 1);
+                setTimeout(function() {
+                    let editor = ace.edit('editor');
+                    editor.setValue('',1);
                     editor.getSession().setMode('ace/mode/markdown');
                     editor.setTheme('ace/theme/github');
-                    self.$set('editor', editor);
-                }, 2000);
+                }, 1000);
+
+            },
+            cancelAction() {
+
+            },
+            createAction() {
 
             }
             // Todo save method.

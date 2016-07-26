@@ -27070,13 +27070,9 @@
 	            this.showGist(gist);
 	        },
 	        'edit-gist': function editGist(gistId) {
-	            console.log('parent notified');
-	            console.log('gid ' + gistId);
 	            this.editGist(gistId);
 	        },
-	        'update-all': function updateAll() {
-	            console.log('update-all');
-	        },
+	        'update-all': function updateAll() {},
 	        'update-index': function updateIndex(gist) {}
 	    },
 	    methods: {
@@ -27090,19 +27086,20 @@
 	                self.$set('gists', res);
 	                self.$get('gists');
 	                localStorage.setItem('gists', (0, _stringify2.default)(res));
-	                console.log('Ajax call finished');
 	            });
 	        },
 	        changeState: function changeState(state) {
 	            var self = this;
 	            self.$set('state', state);
+	            if (state === 'new') {
+	                self.$broadcast('new-gist');
+	            }
 	        },
 	        showGist: function showGist(gist) {
 	            this.$set('state', 'view');
 	            this.$broadcast('view-gist', gist);
 	        },
 	        editGist: function editGist(gistId) {
-	            console.log('to broadcast');
 	            this.$broadcast('edit-gist', gistId);
 	        }
 	    }
@@ -67678,7 +67675,7 @@
 
 
 	// module
-	exports.push([module.id, "input.title.form-control[_v-6fb07346] {\n  max-width: 300px; }\n\n.editor-container[_v-6fb07346] {\n  min-height: 600px; }\n\n#js-editor[_v-6fb07346] {\n  position: absolute;\n  width: 90%;\n  height: 600px;\n  padding-right: 40px;\n  border: 1px solid #d4d4d4; }\n", ""]);
+	exports.push([module.id, "input.title.form-control[_v-6fb07346] {\n  max-width: 300px; }\n\n.editor-container[_v-6fb07346] {\n  min-height: 600px; }\n\n#editor[_v-6fb07346] {\n  position: absolute;\n  width: 90%;\n  height: 600px;\n  padding-right: 40px;\n  border: 1px solid #d4d4d4; }\n", ""]);
 
 	// exports
 
@@ -67726,30 +67723,26 @@
 	    },
 	    events: {
 	        'new-gist': function newGist() {
-	            console.log('new gist notified');
+	            var self = this;
+	            self.newGist();
 	        }
 	    },
-	    beforeCompile: function beforeCompile() {
-	        this.newGist();
-	    },
-
 	    methods: {
 	        newGist: function newGist() {
-	            var gistToEdit = {
+	            var newGist = {
 	                title: '',
 	                body: '',
 	                tags: []
 	            };
-	            var self = this;
-	            self.$set('gistToEdit', gistToEdit);
 	            setTimeout(function () {
-	                var editor = _brace2.default.edit('js-editor');
+	                var editor = _brace2.default.edit('editor');
 	                editor.setValue('', 1);
 	                editor.getSession().setMode('ace/mode/markdown');
 	                editor.setTheme('ace/theme/github');
-	                self.$set('editor', editor);
-	            }, 2000);
-	        }
+	            }, 1000);
+	        },
+	        cancelAction: function cancelAction() {},
+	        createAction: function createAction() {}
 	    }
 	};
 
@@ -67757,7 +67750,7 @@
 /* 183 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div _v-6fb07346=\"\">\n    <div class=\"row actions\" _v-6fb07346=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-6fb07346=\"\">\n            <!-- todo fix the cancel button. -->\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelUpdateGist()\" _v-6fb07346=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"saveGistAction()\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-6fb07346=\"\"></i>\n    <div v-show=\"!processing\" _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-6fb07346=\"\">\n        </div>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <tags-input-component _v-6fb07346=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" _v-6fb07346=\"\">\n            <div id=\"js-editor\" _v-6fb07346=\"\"></div>\n        </div>\n        <br _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <button class=\"btn btn-default\" @click=\"saveGistAction()\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div _v-6fb07346=\"\">\n    <div class=\"row actions\" _v-6fb07346=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-6fb07346=\"\">\n            <!-- todo fix the cancel button. -->\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelAction\" _v-6fb07346=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"createAction\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-6fb07346=\"\"></i>\n    <div _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-6fb07346=\"\">\n        </div>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <tags-input-component _v-6fb07346=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" _v-6fb07346=\"\">\n            <div id=\"editor\" _v-6fb07346=\"\"></div>\n        </div>\n        <br _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <button class=\"btn btn-default\" @click=\"createAction()\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }
 /******/ ]);

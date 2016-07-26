@@ -83,12 +83,10 @@
                 this.showGist(gist);
             },
             'edit-gist': function(gistId) {
-                console.log('parent notified');
-                console.log('gid ' + gistId);
                 this.editGist(gistId);
             },
             'update-all': function() {
-                console.log('update-all');
+
             },
             'update-index': function(gist) {
                 // todo is going to search the gist by id and update with the new one.
@@ -105,19 +103,20 @@
                     self.$set('gists', res);
                     self.$get('gists');
                     localStorage.setItem('gists', JSON.stringify(res));
-                    console.log('Ajax call finished');
                 });
             },
             changeState(state) {
                 let self = this;
                 self.$set('state', state);
+                if(state === 'new') {
+                    self.$broadcast('new-gist');
+                }
             },
             showGist(gist) {
                 this.$set('state', 'view');
                 this.$broadcast('view-gist', gist);
             },
             editGist(gistId) {
-                console.log('to broadcast');
                 this.$broadcast('edit-gist', gistId);
             }
         }
