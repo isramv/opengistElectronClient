@@ -91,7 +91,6 @@
             },
             editGist(gistId) {
                 let self = this;
-                console.log('edit clicked');
                 // Notifies the parent.
                 self.$dispatch('edit-gist', gistId);
                 // Notifies the showRelatedGistsComponent to clear it's data.

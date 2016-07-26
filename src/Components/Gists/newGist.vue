@@ -15,7 +15,7 @@
             <div class="form-group">
                 <tags-input-component></tags-input-component>
             </div>
-            <div class="form-group editor-container">
+            <div class="form-group editor-container" v-if="!processing">
                 <div id="editor"></div>
             </div>
             <br/>
@@ -69,11 +69,13 @@
         },
         methods: {
             newGist() {
+                let self = this;
                 let newGist = {
                     title: '',
                     body: '',
                     tags: []
                 };
+                self.$set('gistToEdit', newGist);
                 setTimeout(function() {
                     let editor = ace.edit('editor');
                     editor.setValue('',1);
@@ -83,7 +85,7 @@
 
             },
             cancelAction() {
-
+                this.$set('state', 'view');
             },
             createAction() {
 

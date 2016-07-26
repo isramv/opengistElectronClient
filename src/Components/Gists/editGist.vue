@@ -63,7 +63,6 @@
         },
         events: {
             'edit-gist': function(gistId) {
-                console.log('edit gist notified');
                 let self = this;
                 self.getUpdatedGist(gistId);
                 this.$set('state', 'edit');

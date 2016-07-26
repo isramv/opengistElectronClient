@@ -27286,7 +27286,6 @@
 	        },
 	        editGist: function editGist(gistId) {
 	            var self = this;
-	            console.log('edit clicked');
 
 	            self.$dispatch('edit-gist', gistId);
 
@@ -45267,7 +45266,6 @@
 	    },
 	    events: {
 	        'edit-gist': function editGist(gistId) {
-	            console.log('edit gist notified');
 	            var self = this;
 	            self.getUpdatedGist(gistId);
 	            this.$set('state', 'edit');
@@ -67729,11 +67727,13 @@
 	    },
 	    methods: {
 	        newGist: function newGist() {
+	            var self = this;
 	            var newGist = {
 	                title: '',
 	                body: '',
 	                tags: []
 	            };
+	            self.$set('gistToEdit', newGist);
 	            setTimeout(function () {
 	                var editor = _brace2.default.edit('editor');
 	                editor.setValue('', 1);
@@ -67741,7 +67741,9 @@
 	                editor.setTheme('ace/theme/github');
 	            }, 1000);
 	        },
-	        cancelAction: function cancelAction() {},
+	        cancelAction: function cancelAction() {
+	            this.$set('state', 'view');
+	        },
 	        createAction: function createAction() {}
 	    }
 	};
@@ -67750,7 +67752,7 @@
 /* 183 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div _v-6fb07346=\"\">\n    <div class=\"row actions\" _v-6fb07346=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-6fb07346=\"\">\n            <!-- todo fix the cancel button. -->\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelAction\" _v-6fb07346=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"createAction\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-6fb07346=\"\"></i>\n    <div _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-6fb07346=\"\">\n        </div>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <tags-input-component _v-6fb07346=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" _v-6fb07346=\"\">\n            <div id=\"editor\" _v-6fb07346=\"\"></div>\n        </div>\n        <br _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <button class=\"btn btn-default\" @click=\"createAction()\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div _v-6fb07346=\"\">\n    <div class=\"row actions\" _v-6fb07346=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-6fb07346=\"\">\n            <!-- todo fix the cancel button. -->\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelAction\" _v-6fb07346=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"createAction\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-6fb07346=\"\"></i>\n    <div _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-6fb07346=\"\">\n        </div>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <tags-input-component _v-6fb07346=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" v-if=\"!processing\" _v-6fb07346=\"\">\n            <div id=\"editor\" _v-6fb07346=\"\"></div>\n        </div>\n        <br _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <button class=\"btn btn-default\" @click=\"createAction()\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }
 /******/ ]);
