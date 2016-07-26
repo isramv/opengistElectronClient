@@ -23991,7 +23991,8 @@
 	    gist: {},
 	    editing: false,
 	    gistToEdit: {},
-	    state: 'view'
+	    state: 'view',
+	    editornew: {}
 	};
 	exports.default = store;
 
@@ -67742,6 +67743,7 @@
 	    },
 	    methods: {
 	        newGist: function newGist() {
+
 	            var self = this;
 	            var newGist = {
 	                title: '',
@@ -67754,12 +67756,22 @@
 	                editor.setValue('', 1);
 	                editor.getSession().setMode('ace/mode/markdown');
 	                editor.setTheme('ace/theme/github');
+	                self.$set('editornew', editor);
 	            }, 1000);
 	        },
 	        cancelAction: function cancelAction() {
+	            this.$set('editornew', {});
+	            this.$set('gistToEdit', {});
 	            this.$set('state', 'view');
 	        },
-	        createAction: function createAction() {}
+	        createAction: function createAction() {
+	            var self = this;
+
+	            var editor = self.$get('editornew');
+	            self.$set('gistToEdit.body', editor.getValue());
+	            var gte = self.$get('gistToEdit');
+	            console.log(gte);
+	        }
 	    }
 	};
 

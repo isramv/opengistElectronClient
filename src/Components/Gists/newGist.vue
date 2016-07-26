@@ -69,6 +69,7 @@
         },
         methods: {
             newGist() {
+
                 let self = this;
                 let newGist = {
                     title: '',
@@ -81,14 +82,30 @@
                     editor.setValue('',1);
                     editor.getSession().setMode('ace/mode/markdown');
                     editor.setTheme('ace/theme/github');
+                    self.$set('editornew', editor);
                 }, 1000);
 
             },
             cancelAction() {
+                this.$set('editornew', {});
+                this.$set('gistToEdit', {});
                 this.$set('state', 'view');
             },
             createAction() {
+                let self = this;
+                // data.
+                let editor = self.$get('editornew');
+                self.$set('gistToEdit.body', editor.getValue());
+                let gte = self.$get('gistToEdit');
+                console.log(gte);
 
+//                $.ajax({
+//                    url: 'http://myapp.local/app_dev.php/api/v1/gists',
+//                    headers: { 'authorization': localStorage.getItem('Authorization') },
+//                    type: 'POST'
+//                }).done(function(res) {
+//                    console.log(res);
+//                });
             }
             // Todo save method.
         }
