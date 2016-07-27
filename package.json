@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
+  "name": "betterGist",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "betterGist client.",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
