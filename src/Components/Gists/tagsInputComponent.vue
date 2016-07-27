@@ -1,5 +1,5 @@
 <template>
-    <input class="input-sm tags-input form-control" v-model="newTag" @keyup.enter="addTag()" placeholder="Add new tags..."/>
+    <input class="input-sm tags-input form-control" v-model="newTag" v-on:keyup.188.13="addTag()" placeholder="Add new tags..."/>
     <ul class="tags-list list-inline">
         <li class="btn btn-default btn-tag" v-for="tag in gistToEdit.tags">{{ tag.name }} <a @click="removeTag(tag.name)"><i class="fa fa-close"></i></a></li>
     </ul>
@@ -24,6 +24,7 @@
 </style>
 <script>
     import store from '../store';
+    import keymaster from 'keymaster'
     export default{
         props: ['newTag'],
         data() {
@@ -32,7 +33,9 @@
         methods: {
             addTag() {
                 // todo trim whitespaces before and after the tag.
-                store.gistToEdit.tags.push({ id: 0, name: this.$get('newTag') });
+                let tag = this.$get('newTag');
+                let cleanTag = tag.replace(',', '');
+                store.gistToEdit.tags.push({ id: 0, name: cleanTag.trim() });
                 this.$set('newTag', '');
             },
             removeTag(name) {

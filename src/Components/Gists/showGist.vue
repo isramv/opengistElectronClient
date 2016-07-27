@@ -1,9 +1,8 @@
 <template>
     <h1 class="gist-title">{{ gist.title }}</h1>
     <div class="row actions">
-        <div class="col-xs-2 col-xs-offset-10">
-            <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
-        </div>
+        <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
+
     </div>
     <div id="gist-content">
         {{{ gist.marked }}}
@@ -55,7 +54,6 @@
             'show-related-gists': showRelatedGists
         },
         beforeCompile () {
-            var self = this;
             var lastGistViewed = JSON.parse(localStorage.getItem('gistViewed'));
             if(lastGistViewed) {
                 this.viewGist(lastGistViewed);

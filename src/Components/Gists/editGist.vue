@@ -46,6 +46,7 @@
     import ace from 'brace'
     require('brace/mode/markdown');
     require('brace/theme/github');
+    import keymaster from 'keymaster'
     import tagsInputComponent from './tagsInputComponent.vue';
     export default{
         props: ['processing', 'editor'],
@@ -112,6 +113,20 @@
                     editor.setOption("wrap", 80);
                     editor.getSession().setMode('ace/mode/markdown');
                     editor.setTheme('ace/theme/github');
+                    editor.commands.addCommand({
+                        name: 'savegist',
+                        bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+                        exec: function(editor) {
+                            self.saveGistAction();
+                        }
+                    });
+                    editor.commands.addCommand({
+                        name: 'cancel',
+                        bindKey: {win: 'Ctrl-P',  mac: 'Command-P'},
+                        exec: function(editor) {
+                            self.cancelUpdateGist();
+                        }
+                    });
                     self.$set('editor', editor);
                     self.$set('gistToEdit', res);
                     self.$set('processing', false);

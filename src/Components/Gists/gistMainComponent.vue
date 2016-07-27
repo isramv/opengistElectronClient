@@ -61,6 +61,7 @@
     import editGistComponent from './editGist.vue'
     import tableGistComponent from './tableGist.vue'
     import newGistComponent from './newGist.vue'
+    import keymaster from 'keymaster'
     export default{
         components: {
             'table-gist': tableGistComponent,
@@ -72,11 +73,23 @@
             return store
         },
         beforeCompile() {
+            let self = this;
             if(localStorage.getItem('gists') !== null) {
                 this.$set('gists', JSON.parse(localStorage.getItem('gists')));
             } else {
                 this.fetchGists();
             }
+            keymaster('⌘+n', function() {
+                self.changeState('new');
+            });
+            keymaster('command+escape', function() {
+                self.changeState('view');
+            });
+            keymaster('command+e', function() {
+                let gid = store.gist.id;
+                console.log(gid);
+                self.editGist(gid);
+            });
         },
         events: {
             'logout-all': function() {
