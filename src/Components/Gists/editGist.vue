@@ -15,6 +15,29 @@
             <div class="form-group">
                 <button class="btn-sm btn btn-default btn-sm" v-on:click="cancelUpdateGist()">Cancel</button>
                 <button class="btn-sm btn btn-default btn-sm" v-on:click="saveGistAction()">Save</button>
+                <!-- Triggers Modal -->
+                <button class="btn-sm btn btn-danger" data-toggle="modal" data-target="#deleteGist">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteGist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Delete Gist: {{ gistToEdit.title }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This Gist is about to get deleted, this means that there is not step back.
+                    Are you sure you want to continue?
+                    If so press `Delete`.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteGist()">Delete</button>
+                </div>
             </div>
         </div>
     </div>
@@ -148,6 +171,11 @@
                     self.$dispatch('update-gist-on-index', res);
                     self.$set('editing', false);
                 });
+            },
+            deleteGist() {
+                setTimeout(function(){
+                    $('#deleteGist').modal('hide');
+                }, 3000);
             }
         }
     }
