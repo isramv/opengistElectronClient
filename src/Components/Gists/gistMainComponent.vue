@@ -106,7 +106,7 @@
                 this.editGist(gistId);
             },
             'update-all': function() {
-
+                this.fetchGists();
             },
             'update-gist-on-index': function(gist) {
                 let gid = gist.id;

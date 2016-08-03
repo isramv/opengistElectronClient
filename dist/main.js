@@ -27094,7 +27094,9 @@
 	        'edit-gist': function editGist(gistId) {
 	            this.editGist(gistId);
 	        },
-	        'update-all': function updateAll() {},
+	        'update-all': function updateAll() {
+	            this.fetchGists();
+	        },
 	        'update-gist-on-index': function updateGistOnIndex(gist) {
 	            var gid = gist.id;
 	            console.log(_store2.default.gists);
@@ -45390,9 +45392,20 @@
 	            });
 	        },
 	        deleteGist: function deleteGist() {
-	            setTimeout(function () {
-	                $('#deleteGist').modal('hide');
-	            }, 3000);
+	            var self = this;
+	            $.ajax({
+	                type: 'DELETE',
+	                url: 'http://myapp.local/app_dev.php/api/v1/gists/' + self.$get('gistToEdit.id'),
+	                headers: { 'authorization': localStorage.getItem('Authorization') }
+	            }).done(function (res) {
+	                if (self.$get('gistToEdit.id') == res.id) {
+	                    self.$set('gistToEdit', {});
+	                    self.$set('gist', {});
+	                    self.$set('state', 'view');
+	                    self.$dispatch('update-all');
+	                    $('#deleteGist').modal('hide');
+	                }
+	            });
 	        }
 	    }
 	};

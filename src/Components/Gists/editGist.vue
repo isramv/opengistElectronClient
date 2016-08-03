@@ -173,9 +173,20 @@
                 });
             },
             deleteGist() {
-                setTimeout(function(){
-                    $('#deleteGist').modal('hide');
-                }, 3000);
+                let self = this;
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ self.$get('gistToEdit.id'),
+                    headers: { 'authorization': localStorage.getItem('Authorization') },
+                }).done(function(res) {
+                    if(self.$get('gistToEdit.id') == res.id) {
+                        self.$set('gistToEdit', {});
+                        self.$set('gist', {});
+                        self.$set('state', 'view');
+                        self.$dispatch('update-all');
+                        $('#deleteGist').modal('hide');
+                    }
+                });
             }
         }
     }
