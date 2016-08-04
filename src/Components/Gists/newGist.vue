@@ -9,6 +9,7 @@
         </div>
         <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="processing"></i>
         <div>
+            <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="saving"></i>
             <div class="form-group">
                 <input class="title form-control" v-model="gistToEdit.title"></input>
             </div>
@@ -54,7 +55,7 @@
     require('brace/theme/github');
     import tagsInputComponent from './tagsInputComponent.vue';
     export default{
-        props: ['processing', 'editor'],
+        props: ['processing', 'editor', 'saving'],
         data() {
             return store
         },
@@ -87,7 +88,7 @@
                         name: 'savegist',
                         bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
                         exec: function(editor) {
-                            self.createAction();
+                            self.saveWhileEditing(editor);
                         }
                     });
                     editor.commands.addCommand({
@@ -124,8 +125,35 @@
                     self.$dispatch('update-all');
                     self.$set('editing', false);
                 });
+            },
+            saveWhileEditing(editor) {
+                let self = this;
+                console.log('save while editing');
+                console.log(self.$get('gistToEdit.id'));
+                // if no id. create a new post.
+                // this is the create url.
+                let url = 'http://myapp.local/app_dev.php/api/v1/gists';
+                if(!_.isUndefined(self.$get('gistToEdit.id'))) {
+                    console.log('id is undefined');
+                    // this is the update URL.
+                    url = 'http://myapp.local/app_dev.php/api/v1/gists/'+ self.$get('gistToEdit.id');
+                }
+                console.log(url);
+                let body_value = editor.getValue();
+                let gte = self.$get('gistToEdit');
+                gte.body = body_value;
+                console.log(gte);
+                $.ajax({
+                    url: url,
+                    headers: { 'authorization': localStorage.getItem('Authorization') },
+                    type: 'POST',
+                    data: gte,
+                }).done(function(res) {
+                    self.$set('gistToEdit.id',res.id);
+                    console.log(res);
+                    self.$set('saving', false);
+                });
             }
-            // Todo save method.
         }
     }
 </script>

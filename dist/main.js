@@ -27067,7 +27067,7 @@
 	        } else {
 	            this.fetchGists();
 	        }
-	        (0, _keymaster2.default)('⌘+n', function () {
+	        (0, _keymaster2.default)('command+n', function () {
 	            self.changeState('new');
 	        });
 	        (0, _keymaster2.default)('command+escape', function () {
@@ -68075,7 +68075,7 @@
 	__webpack_require__(166);
 	__webpack_require__(171);
 	exports.default = {
-	    props: ['processing', 'editor'],
+	    props: ['processing', 'editor', 'saving'],
 	    data: function data() {
 	        return _store2.default;
 	    },
@@ -68109,7 +68109,7 @@
 	                    name: 'savegist',
 	                    bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
 	                    exec: function exec(editor) {
-	                        self.createAction();
+	                        self.saveWhileEditing(editor);
 	                    }
 	                });
 	                editor.commands.addCommand({
@@ -68145,6 +68145,33 @@
 	                self.$dispatch('update-all');
 	                self.$set('editing', false);
 	            });
+	        },
+	        saveWhileEditing: function saveWhileEditing(editor) {
+	            var self = this;
+	            console.log('save while editing');
+	            console.log(self.$get('gistToEdit.id'));
+
+	            var url = 'http://myapp.local/app_dev.php/api/v1/gists';
+	            if (!_lodash2.default.isUndefined(self.$get('gistToEdit.id'))) {
+	                console.log('id is undefined');
+
+	                url = 'http://myapp.local/app_dev.php/api/v1/gists/' + self.$get('gistToEdit.id');
+	            }
+	            console.log(url);
+	            var body_value = editor.getValue();
+	            var gte = self.$get('gistToEdit');
+	            gte.body = body_value;
+	            console.log(gte);
+	            $.ajax({
+	                url: url,
+	                headers: { 'authorization': localStorage.getItem('Authorization') },
+	                type: 'POST',
+	                data: gte
+	            }).done(function (res) {
+	                self.$set('gistToEdit.id', res.id);
+	                console.log(res);
+	                self.$set('saving', false);
+	            });
 	        }
 	    }
 	};
@@ -68154,7 +68181,7 @@
 /* 182 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div _v-6fb07346=\"\">\n    <div class=\"row actions\" _v-6fb07346=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-6fb07346=\"\">\n            <!-- todo fix the cancel button. -->\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelAction\" _v-6fb07346=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"createAction\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-6fb07346=\"\"></i>\n    <div _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-6fb07346=\"\">\n        </div>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <tags-input-component _v-6fb07346=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" v-if=\"!processing\" _v-6fb07346=\"\">\n            <div id=\"editor\" _v-6fb07346=\"\"></div>\n        </div>\n        <br _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <button class=\"btn btn-default\" @click=\"createAction()\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div _v-6fb07346=\"\">\n    <div class=\"row actions\" _v-6fb07346=\"\">\n        <div class=\"col-xs-4 col-xs-offset-8\" _v-6fb07346=\"\">\n            <!-- todo fix the cancel button. -->\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelAction\" _v-6fb07346=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"createAction\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-6fb07346=\"\"></i>\n    <div _v-6fb07346=\"\">\n        <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"saving\" _v-6fb07346=\"\"></i>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-6fb07346=\"\">\n        </div>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <tags-input-component _v-6fb07346=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" v-if=\"!processing\" _v-6fb07346=\"\">\n            <div id=\"editor\" _v-6fb07346=\"\"></div>\n        </div>\n        <br _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <button class=\"btn btn-default\" @click=\"createAction()\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 183 */

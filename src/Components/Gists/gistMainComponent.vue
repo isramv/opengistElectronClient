@@ -79,7 +79,7 @@
             } else {
                 this.fetchGists();
             }
-            keymaster('⌘+n', function() {
+            keymaster('command+n', function() {
                 self.changeState('new');
             });
             keymaster('command+escape', function() {
