@@ -68140,8 +68140,8 @@
 	                data: gte
 	            }).done(function (res) {
 	                self.$set('gistToEdit', res);
-	                self.$set('state', 'view');
 	                self.$dispatch('view-gist', res);
+	                self.$set('state', 'view');
 	                self.$dispatch('update-all');
 	                self.$set('editing', false);
 	            });
