@@ -68139,7 +68139,11 @@
 	                type: 'POST',
 	                data: gte
 	            }).done(function (res) {
-	                console.log(res);
+	                self.$set('gistToEdit', res);
+	                self.$set('state', 'view');
+	                self.$dispatch('view-gist', res);
+	                self.$dispatch('update-all');
+	                self.$set('editing', false);
 	            });
 	        }
 	    }
