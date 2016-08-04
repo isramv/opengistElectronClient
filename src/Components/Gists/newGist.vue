@@ -83,6 +83,20 @@
                     editor.setOption("wrap", 80);
                     editor.getSession().setMode('ace/mode/markdown');
                     editor.setTheme('ace/theme/github');
+                    editor.commands.addCommand({
+                        name: 'savegist',
+                        bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+                        exec: function(editor) {
+                            self.createAction();
+                        }
+                    });
+                    editor.commands.addCommand({
+                        name: 'cancel',
+                        bindKey: {win: 'Ctrl-P',  mac: 'Command-P'},
+                        exec: function(editor) {
+                            self.cancelAction();
+                        }
+                    });
                     self.$set('editornew', editor);
                 }, 1000);
 
@@ -105,6 +119,7 @@
                     data: gte,
                 }).done(function(res) {
                     console.log(res);
+
                 });
             }
             // Todo save method.
