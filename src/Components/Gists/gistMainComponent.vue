@@ -1,4 +1,9 @@
 <style lang="sass" xml:lang="scss">
+    body {
+        font-family: Ubuntu;
+        font-weight: normal;
+        font-style: normal;
+    }
     .table-container {
         background-color: #eaeaea;
         padding-top: 12px;
@@ -54,6 +59,7 @@
     </div>
 </template>
 <script>
+    import '../../scss/ubuntu.scss'
     import _ from 'lodash'
     import store from '../store'
     import router from '../router'

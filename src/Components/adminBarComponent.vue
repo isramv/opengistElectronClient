@@ -8,7 +8,7 @@
         </div>
     </div>
 </template>
-<style lang="sass">
+<style lang="sass" xml:lang="scss">
     .admin-bar {
         padding: 20px 0;
         background: #292c61;
