@@ -23700,7 +23700,7 @@
 
 
 	// module
-	exports.push([module.id, ".admin-bar {\n  padding: 20px 0;\n  background: #292c61; }\n  .admin-bar a {\n    color: #33b5ff; }\n  .admin-bar strong {\n    color: #fbfbfb; }\n  .admin-bar div:nth-child(2) {\n    text-align: right; }\n\n.salute {\n  margin: 0;\n  color: #f1f1f1; }\n", ""]);
+	exports.push([module.id, ".admin-bar {\n  padding: 20px 0; }\n  .admin-bar div:nth-child(2) {\n    text-align: right; }\n  .admin-bar i {\n    color: #27456F;\n    font-size: 18px; }\n\n.salute {\n  margin: 0;\n  color: #27456F; }\n  .salute i {\n    margin-left: 10px;\n    position: relative;\n    top: 1px; }\n", ""]);
 
 	// exports
 
@@ -68243,13 +68243,13 @@
 /* 188 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <a href=\"#\" @click=\"fetchGists()\">update index</a>\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-8 show-gist-container\">\n        <div class=\"rc-container\">\n            <a href=\"#\" class=\"btn btn-default btn-sm\" @click=\"changeState('new')\">New</a>\n        </div>\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n    <div class=\"col-xs-1 col-sm-1 col-md-1 account-configuration\">\n        <admin-bar-component></admin-bar-component>\n    </div>\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <!--<a href=\"#\" @click=\"fetchGists()\">update index</a>-->\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-8 show-gist-container\">\n        <div class=\"rc-container\">\n            <a href=\"#\" class=\"btn btn-default btn-sm\" @click=\"changeState('new')\">New</a>\n        </div>\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n    <div class=\"col-xs-1 col-sm-1 col-md-1 account-configuration\">\n        <admin-bar-component></admin-bar-component>\n    </div>\n</div>\n";
 
 /***/ },
 /* 189 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row admin-bar\" v-if=\"username\">\n    <div class=\"col-xs-8\">\n        <p class=\"salute\">Welcome: {{ username }}</p>\n    </div>\n    <div class=\"col-xs-4\">\n        <a href=\"#\" v-on:click=\"logoutAction\">Logout</a>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"row admin-bar\" v-if=\"username\">\n    <p class=\"salute\">{{ username }}<a href=\"#\" v-on:click=\"logoutAction\"><i class=\"fa fa-sign-out\"></i></a></p>\n</div>\n";
 
 /***/ }
 /******/ ]);

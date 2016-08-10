@@ -39,7 +39,7 @@
 <template>
     <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-3 table-container">
-            <a href="#" @click="fetchGists()">update index</a>
+            <!--<a href="#" @click="fetchGists()">update index</a>-->
             <table-gist></table-gist>
         </div>
         <div class="col-xs-8 col-sm-8 col-md-8 show-gist-container">
