@@ -17,6 +17,9 @@
     </div>
 </template>
 <style lang="sass" xml:lang="scss">
+    .btn-sm {
+        border: 0;
+    }
     div.actions {
         padding-left: 10px;
         margin-top: 0;
