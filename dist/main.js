@@ -26988,7 +26988,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  font-family: Ubuntu;\n  font-weight: normal;\n  font-style: normal; }\n\n.table-container {\n  background-color: #eaeaea;\n  padding-top: 12px;\n  padding-bottom: 12px;\n  border-right: 1px solid #d2d2d2;\n  border-bottom: 1px solid #d2d2d2; }\n\n.table-filter {\n  margin-bottom: 12px; }\n\n.rc-container {\n  margin: 15px 0; }\n\ntable {\n  border: 0; }\n  table tr:nth-child(odd) {\n    background: #f1f1f1; }\n  table tr:nth-child(even) {\n    background: #fafafa; }\n  table tbody > tr > td {\n    border-top: 0 !important; }\n    table tbody > tr > td a {\n      color: #464646; }\n", ""]);
+	exports.push([module.id, "body {\n  font-family: Ubuntu;\n  font-weight: normal;\n  font-style: normal;\n  background: #F8F6F6; }\n\n.table-container {\n  background-color: #eaeaea;\n  padding-top: 12px;\n  padding-bottom: 12px;\n  border-right: 1px solid #d2d2d2;\n  border-bottom: 1px solid #d2d2d2; }\n\n.table-filter {\n  margin-bottom: 12px; }\n\n.rc-container {\n  margin: 15px 0; }\n\ntable {\n  border: 0; }\n  table tr:nth-child(odd) {\n    background: #f1f1f1; }\n  table tr:nth-child(even) {\n    background: #fafafa; }\n  table tbody > tr > td {\n    border-top: 0 !important; }\n    table tbody > tr > td a {\n      color: #464646; }\n", ""]);
 
 	// exports
 
@@ -43709,7 +43709,7 @@
 
 
 	// module
-	exports.push([module.id, ".show-gist-container {\n  background-color: #ffffff;\n  padding: 34px;\n  padding-top: 12px; }\n  .show-gist-container h1 {\n    margin-top: 0; }\n\n.gist-title {\n  border-bottom: 1px solid #d2d2d2;\n  margin-bottom: 0;\n  padding-bottom: 12px; }\n\n#gist-content {\n  max-width: 650px; }\n\n.actions {\n  margin: 5px 0; }\n", ""]);
+	exports.push([module.id, "div.actions {\n  padding-left: 10px;\n  margin-top: 0; }\n\n.small-title {\n  margin: 10px;\n  font-weight: bold; }\n\n.show-gist-container {\n  width: 900px;\n  padding: 12px 0 34px 24px; }\n  .show-gist-container h1 {\n    margin-top: 0; }\n\n#gist-content {\n  width: 650px;\n  background: #FFFFFF;\n  padding: 22px 37px 22px 27px;\n  box-shadow: 0px 3px 5px -1px rgba(69, 69, 69, 0.25); }\n\n.gist-title {\n  margin-bottom: 0;\n  padding-bottom: 12px;\n  font-family: \"Ubuntu\";\n  font-weight: bold; }\n\n#gist-content {\n  max-width: 700px; }\n\n.gist-tags {\n  width: 225px;\n  float: right; }\n  .gist-tags .list {\n    text-align: left;\n    padding-left: 10px; }\n    .gist-tags .list li {\n      list-style: none;\n      margin-bottom: 5px; }\n\n.show-container {\n  float: left; }\n\n.actions {\n  margin: 5px 0; }\n", ""]);
 
 	// exports
 
@@ -43801,9 +43801,7 @@
 	        },
 	        editGist: function editGist(gistId) {
 	            var self = this;
-
 	            self.$dispatch('edit-gist', gistId);
-
 	            this.$broadcast('edit-gist');
 	        }
 	    }
@@ -45165,7 +45163,7 @@
 
 
 	// module
-	exports.push([module.id, ".list-unstyled-rc {\n  padding-left: 16px; }\n  .list-unstyled-rc li {\n    margin-bottom: 5px; }\n\na {\n  cursor: pointer; }\n", ""]);
+	exports.push([module.id, ".related-gists {\n  padding-left: 10px; }\n\nh3.related-gist-title {\n  margin-top: 10px; }\n\n.related-gist-title {\n  font-weight: bold; }\n\n.list-unstyled-rc {\n  padding-left: 0; }\n  .list-unstyled-rc li {\n    list-style: none;\n    margin-bottom: 5px; }\n\na {\n  cursor: pointer; }\n", ""]);
 
 	// exports
 
@@ -45234,13 +45232,13 @@
 /* 156 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div v-if=\"message\">\n    {{ message }}\n</div>\n<div v-if=\"showRelatedGists\">\n    <h3>Related Gists:</h3>\n    <ul class=\"list-unstyled-rc\">\n        <li v-for=\"gist in relatedGists\"><a class=\"btn btn-default btn-xs\" v-on:click=\"viewGist(gist)\">{{ gist.title }}</a></li>\n    </ul>\n</div>\n";
+	module.exports = "\n<div class=\"related-gists\">\n    <div v-if=\"message\">\n        {{ message }}\n    </div>\n    <div v-if=\"showRelatedGists\">\n        <h3 class=\"related-gist-title\">Related Gists:</h3>\n        <ul class=\"list-unstyled-rc\">\n            <li v-for=\"gist in relatedGists\"><a class=\"btn btn-default btn-xs\" v-on:click=\"viewGist(gist)\">{{ gist.title }}</a></li>\n        </ul>\n    </div>\n</div>\n";
 
 /***/ },
 /* 157 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<h1 class=\"gist-title\">{{ gist.title }}</h1>\n<div class=\"row actions\">\n    <button class=\"btn btn-default btn-sm\" @click=\"editGist(gist.id)\">Edit</button>\n\n</div>\n<div id=\"gist-content\">\n    {{{ gist.marked }}}\n    <ul class=\"list-inline\">\n        <li v-for=\"tag in gist.tags\"><a class=\"btn btn-default btn-xs btn-info\" v-on:click=\"showRelatedGists(tag.id)\">{{ tag.name }}</a></li>\n    </ul>\n</div>\n<show-related-gists></show-related-gists>\n";
+	module.exports = "\n<h1 class=\"gist-title\">{{ gist.title }}</h1>\n<div class=\"show-container\">\n    <div id=\"gist-content\">\n        {{{ gist.marked }}}\n    </div>\n</div>\n<div class=\"gist-tags\">\n    <div class=\"actions\">\n        <a class=\"btn btn-default btn-sm\" @click=\"editGist(gist.id)\">Edit</a>\n    </div>\n    <h3 class=\"small-title\">Tags:</h3>\n    <ul class=\"list\">\n        <li v-for=\"tag in gist.tags\"><a class=\"btn btn-default btn-xs btn-info\" v-on:click=\"showRelatedGists(tag.id)\">{{ tag.name }}</a></li>\n    </ul>\n    <show-related-gists></show-related-gists>\n</div>\n";
 
 /***/ },
 /* 158 */
@@ -68243,7 +68241,7 @@
 /* 188 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <!--<a href=\"#\" @click=\"fetchGists()\">update index</a>-->\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-8 show-gist-container\">\n        <div class=\"rc-container\">\n            <a href=\"#\" class=\"btn btn-default btn-sm\" @click=\"changeState('new')\">New</a>\n        </div>\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n    <div class=\"col-xs-1 col-sm-1 col-md-1 account-configuration\">\n        <admin-bar-component></admin-bar-component>\n    </div>\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <!--<a href=\"#\" @click=\"fetchGists()\">update index</a>-->\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-8 show-gist-container\">\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n    <div class=\"col-xs-1 col-sm-1 col-md-1 account-configuration\">\n        <admin-bar-component></admin-bar-component>\n    </div>\n</div>\n";
 
 /***/ },
 /* 189 */

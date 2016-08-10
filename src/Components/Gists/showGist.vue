@@ -1,33 +1,68 @@
 <template>
     <h1 class="gist-title">{{ gist.title }}</h1>
-    <div class="row actions">
-        <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
-
+    <div class="show-container">
+        <div id="gist-content">
+            {{{ gist.marked }}}
+        </div>
     </div>
-    <div id="gist-content">
-        {{{ gist.marked }}}
-        <ul class="list-inline">
+    <div class="gist-tags">
+        <div class="actions">
+            <a class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</a>
+        </div>
+        <h3 class="small-title">Tags:</h3>
+        <ul class="list">
             <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a></li>
         </ul>
+        <show-related-gists></show-related-gists>
     </div>
-    <show-related-gists></show-related-gists>
 </template>
 <style lang="sass" xml:lang="scss">
+    div.actions {
+        padding-left: 10px;
+        margin-top: 0;
+    }
+    .small-title {
+        margin: 10px;
+        font-weight: bold;
+    }
     .show-gist-container {
-        background-color: #ffffff;
-        padding:34px;
-        padding-top: 12px;
+        width: 900px;
+        padding: 12px 0 34px 24px;
         h1 {
         margin-top: 0;
         }
     }
+    #gist-content {
+        width: 650px;
+        background: #FFFFFF;
+        padding: 22px 37px 22px 27px;
+        -webkit-box-shadow: 0px 3px 5px -1px rgba(69,69,69,.25);
+        -moz-box-shadow: 0px 3px 5px -1px rgba(69,69,69,.25);
+        box-shadow: 0px 3px 5px -1px rgba(69,69,69,.25);
+    }
     .gist-title {
-        border-bottom: 1px solid #d2d2d2;
         margin-bottom: 0;
         padding-bottom: 12px;
+        font-family: "Ubuntu";
+        font-weight: bold;
     }
     #gist-content {
-        max-width: 650px;
+        max-width: 700px;
+    }
+    .gist-tags {
+        width: 225px;
+        float: right;
+        .list {
+            text-align: left;
+            padding-left: 10px;
+            li {
+                list-style: none;
+                margin-bottom: 5px;
+            }
+        }
+    }
+    .show-container {
+        float: left;
     }
     .actions {
         margin: 5px 0;
@@ -92,9 +127,7 @@
             },
             editGist(gistId) {
                 let self = this;
-                // Notifies the parent.
                 self.$dispatch('edit-gist', gistId);
-                // Notifies the showRelatedGistsComponent to clear it's data.
                 this.$broadcast('edit-gist');
             }
         }

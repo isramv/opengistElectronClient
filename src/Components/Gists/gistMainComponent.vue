@@ -3,6 +3,7 @@
         font-family: Ubuntu;
         font-weight: normal;
         font-style: normal;
+        background: #F8F6F6;
     }
     .table-container {
         background-color: #eaeaea;
@@ -43,9 +44,6 @@
             <table-gist></table-gist>
         </div>
         <div class="col-xs-8 col-sm-8 col-md-8 show-gist-container">
-            <div class="rc-container">
-                <a href="#" class="btn btn-default btn-sm" @click="changeState('new')">New</a>
-            </div>
             <div v-show="state == 'view'">
                 <show-gist></show-gist>
             </div>

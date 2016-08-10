@@ -1,18 +1,30 @@
 <template>
-    <div v-if="message">
-        {{ message }}
-    </div>
-    <div v-if="showRelatedGists">
-        <h3>Related Gists:</h3>
-        <ul class="list-unstyled-rc">
-            <li v-for="gist in relatedGists"><a class="btn btn-default btn-xs" v-on:click="viewGist(gist)">{{ gist.title }}</a></li>
-        </ul>
+    <div class="related-gists">
+        <div v-if="message">
+            {{ message }}
+        </div>
+        <div v-if="showRelatedGists">
+            <h3 class="related-gist-title">Related Gists:</h3>
+            <ul class="list-unstyled-rc">
+                <li v-for="gist in relatedGists"><a class="btn btn-default btn-xs" v-on:click="viewGist(gist)">{{ gist.title }}</a></li>
+            </ul>
+        </div>
     </div>
 </template>
 <style lang="sass" xml:lang="scss">
+    .related-gists {
+        padding-left: 10px;
+    }
+    h3.related-gist-title {
+        margin-top: 10px;
+    }
+    .related-gist-title {
+        font-weight: bold;
+    }
     .list-unstyled-rc {
-        padding-left: 16px;
+        padding-left: 0;
         li {
+            list-style: none;
             margin-bottom: 5px;
         }
     }
