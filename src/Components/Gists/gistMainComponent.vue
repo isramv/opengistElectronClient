@@ -42,7 +42,7 @@
             <a href="#" @click="fetchGists()">update index</a>
             <table-gist></table-gist>
         </div>
-        <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
+        <div class="col-xs-8 col-sm-8 col-md-8 show-gist-container">
             <div class="rc-container">
                 <a href="#" class="btn btn-default btn-sm" @click="changeState('new')">New</a>
             </div>
@@ -56,6 +56,9 @@
                 <new-gist></new-gist>
             </div>
         </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 account-configuration">
+            <admin-bar-component></admin-bar-component>
+        </div>
     </div>
 </template>
 <script>
@@ -67,9 +70,11 @@
     import editGistComponent from './editGist.vue'
     import tableGistComponent from './tableGist.vue'
     import newGistComponent from './newGist.vue'
+    import adminBarComponent from '../adminBarComponent.vue'
     import keymaster from 'keymaster'
     export default{
         components: {
+            'admin-bar-component': adminBarComponent,
             'table-gist': tableGistComponent,
             'show-gist': showGistComponent,
             'edit-gist': editGistComponent,

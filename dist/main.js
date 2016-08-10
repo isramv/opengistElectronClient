@@ -58,10 +58,6 @@
 
 	var _fontAwesomeWebpack2 = _interopRequireDefault(_fontAwesomeWebpack);
 
-	var _adminBarComponent = __webpack_require__(120);
-
-	var _adminBarComponent2 = _interopRequireDefault(_adminBarComponent);
-
 	var _store = __webpack_require__(125);
 
 	var _store2 = _interopRequireDefault(_store);
@@ -76,9 +72,6 @@
 	    data: function data() {
 	        return _store2.default;
 	    },
-	    components: {
-	        'admin-bar-component': _adminBarComponent2.default
-	    },
 	    events: {
 	        'just-logged': function justLogged(username) {
 	            var self = this;
@@ -89,8 +82,6 @@
 	        }
 	    }
 	});
-	// Vue.use(Router);
-
 	_router2.default.start(App, '#app');
 
 /***/ },
@@ -27046,6 +27037,10 @@
 
 	var _newGist2 = _interopRequireDefault(_newGist);
 
+	var _adminBarComponent = __webpack_require__(120);
+
+	var _adminBarComponent2 = _interopRequireDefault(_adminBarComponent);
+
 	var _keymaster = __webpack_require__(165);
 
 	var _keymaster2 = _interopRequireDefault(_keymaster);
@@ -27054,6 +27049,7 @@
 
 	exports.default = {
 	    components: {
+	        'admin-bar-component': _adminBarComponent2.default,
 	        'table-gist': _tableGist2.default,
 	        'show-gist': _showGist2.default,
 	        'edit-gist': _editGist2.default,
@@ -68247,7 +68243,7 @@
 /* 188 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <a href=\"#\" @click=\"fetchGists()\">update index</a>\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-9 show-gist-container\">\n        <div class=\"rc-container\">\n            <a href=\"#\" class=\"btn btn-default btn-sm\" @click=\"changeState('new')\">New</a>\n        </div>\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"row\">\n    <div class=\"col-xs-4 col-sm-4 col-md-3 table-container\">\n        <a href=\"#\" @click=\"fetchGists()\">update index</a>\n        <table-gist></table-gist>\n    </div>\n    <div class=\"col-xs-8 col-sm-8 col-md-8 show-gist-container\">\n        <div class=\"rc-container\">\n            <a href=\"#\" class=\"btn btn-default btn-sm\" @click=\"changeState('new')\">New</a>\n        </div>\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n    <div class=\"col-xs-1 col-sm-1 col-md-1 account-configuration\">\n        <admin-bar-component></admin-bar-component>\n    </div>\n</div>\n";
 
 /***/ },
 /* 189 */
