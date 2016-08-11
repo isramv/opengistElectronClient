@@ -1,11 +1,14 @@
 <template>
-    <div class="row admin-bar" v-if="username">
+    <div class="admin-bar" v-if="username">
         <p class="salute">{{ username }}<a href="#" v-on:click="logoutAction"><i class="fa fa-sign-out"></i></a></p>
     </div>
 </template>
 <style lang="sass" xml:lang="scss">
     .admin-bar {
-        padding: 20px 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+        padding: 10px 10px 0 0;
         a {
         }
         strong {

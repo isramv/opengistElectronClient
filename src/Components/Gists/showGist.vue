@@ -30,6 +30,7 @@
     }
     .show-gist-container {
         width: 900px;
+        overflow: scroll;
         padding: 12px 0 34px 24px;
         h1 {
         margin-top: 0;
@@ -54,7 +55,7 @@
     }
     .gist-tags {
         width: 225px;
-        float: right;
+        float: left;
         .list {
             text-align: left;
             padding-left: 10px;

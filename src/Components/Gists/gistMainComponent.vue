@@ -1,5 +1,13 @@
 <style lang="sass" xml:lang="scss">
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
     body {
+        width: 100%;
+        overflow-y: visible;
         font-family: Ubuntu;
         font-weight: normal;
         font-style: normal;
@@ -36,14 +44,67 @@
             }
         }
     }
+    .app-container {
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: stretch;
+        align-items: stretch;
+        .menu-container {
+            width: 320px;
+            height: 100%;
+            position: absolute;
+            display:flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-content: stretch;
+            align-items: stretch;
+            .main-menu {
+                width: 60px;
+            }
+            .menu-show-container {
+                overflow-y: scroll;
+                background: rgba(185,185,185,.5);
+                -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
+                -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
+                box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
+                padding: 10px;
+                width: 260px;
+                flex-grow: 1;
+                flex-shrink: 0;
+                flex-basis: 1;
+            }
+        }
+        .show-gist-container {
+            flex-grow: 1;
+            flex-shrink: 0;
+            flex-basis: 1;
+            padding-left: 380px;
+        }
+        .account-configuration {
+        }
+    }
+    .main-menu {
+        background: #27456F;
+        height: 100%;
+    }
 </style>
 <template>
-    <div class="row">
-        <div class="col-xs-4 col-sm-4 col-md-3 table-container">
-            <!--<a href="#" @click="fetchGists()">update index</a>-->
-            <table-gist></table-gist>
+    <div class="app-container">
+        <div class="menu-container">
+            <div class="main-menu">
+                <ul>
+                    <li><a @click="fetchGists()"><i class="fa fa-close"></i></a></li>
+                </ul>
+            </div>
+            <div class="menu-show-container">
+                <table-gist></table-gist>
+            </div>
         </div>
-        <div class="col-xs-8 col-sm-8 col-md-8 show-gist-container">
+        <!--<a href="#" @click="fetchGists()">update index</a>-->
+        <div class="show-gist-container">
             <div v-show="state == 'view'">
                 <show-gist></show-gist>
             </div>
@@ -54,7 +115,7 @@
                 <new-gist></new-gist>
             </div>
         </div>
-        <div class="col-xs-1 col-sm-1 col-md-1 account-configuration">
+        <div class="account-configuration">
             <admin-bar-component></admin-bar-component>
         </div>
     </div>
@@ -70,6 +131,7 @@
     import newGistComponent from './newGist.vue'
     import adminBarComponent from '../adminBarComponent.vue'
     import keymaster from 'keymaster'
+
     export default{
         components: {
             'admin-bar-component': adminBarComponent,
@@ -99,6 +161,11 @@
                 console.log(gid);
                 self.editGist(gid);
             });
+            // window height.
+            let windowHeight = window.innerHeight;
+            setTimeout(function() {
+                $('.app-container').css('height', windowHeight);
+            },1000);
         },
         events: {
             'logout-all': function() {
