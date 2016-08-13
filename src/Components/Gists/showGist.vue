@@ -30,7 +30,7 @@
     }
     .show-gist-container {
         width: 900px;
-        overflow: scroll;
+        overflow-y: scroll;
         padding: 12px 0 34px 24px;
         h1 {
         margin-top: 0;
@@ -46,7 +46,7 @@
     }
     .gist-title {
         margin-bottom: 0;
-        padding-bottom: 12px;
+        padding: 20px 0;
         font-family: "Ubuntu";
         font-weight: bold;
     }

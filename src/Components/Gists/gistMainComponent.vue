@@ -66,7 +66,7 @@
             }
             .menu-show-container {
                 overflow-y: scroll;
-                background: rgba(185,185,185,.5);
+                background: rgba(230,230,230,1);
                 -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
                 -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
                 box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
@@ -102,6 +102,19 @@
             }
         }
     }
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+        background-color: rgba(230, 230, 230, 1);
+        /*border-left: 1px solid #ccc;*/
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(200, 200, 200, .5);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #aaa;
+    }
 </style>
 <template>
     <div class="app-container">
@@ -117,6 +130,7 @@
         </div>
         <!--<a href="#" @click="fetchGists()">update index</a>-->
         <div class="show-gist-container">
+            <admin-bar-component></admin-bar-component>
             <div v-show="state == 'view'">
                 <show-gist></show-gist>
             </div>
@@ -125,9 +139,6 @@
             </div>
             <div v-show="state == 'new'">
                 <new-gist></new-gist>
-            </div>
-            <div class="account-configuration">
-                <admin-bar-component></admin-bar-component>
             </div>
         </div>
     </div>
@@ -225,14 +236,15 @@
             showGist(gist) {
                 this.$set('state', 'view');
                 this.$broadcast('view-gist', gist);
+                resizedw();
             },
             editGist(gistId) {
                 this.$broadcast('edit-gist', gistId);
+
             }
         }
     }
     function resizedw(){
-        // Thing's to do
         console.log('resized');
         $('.app-container').css('height', window.innerHeight);
     }

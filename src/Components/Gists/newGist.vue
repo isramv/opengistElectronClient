@@ -1,12 +1,5 @@
     <template>
         <div>
-            <div class="row actions">
-                <div class="col-xs-4 col-xs-offset-8">
-                    <!-- todo fix the cancel button. -->
-                    <button class="btn-sm btn btn-default btn-sm" v-on:click="cancelAction">Cancel</button>
-                    <button class="btn-sm btn btn-default btn-sm" v-on:click="createAction">Save</button>
-                </div>
-            </div>
             <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="processing"></i>
             <div>
                 <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="saving"></i>
@@ -21,7 +14,8 @@
                 </div>
                 <br/>
                 <div class="form-group">
-                    <button class="btn btn-default" @click="createAction()">Save</button>
+                    <button class="btn btn-default btn-sm" @click="cancelAction()">Cancel</button>
+                    <button class="btn btn-default btn-sm" @click="createAction()">Save</button>
                 </div>
             </div>
         </div>
@@ -37,7 +31,7 @@
         }
         #editor {
             position: absolute;
-            width: 90%;
+            width: 650px;
             height: 600px;
             padding-right: 40px;
             border: 1px solid #d4d4d4;
