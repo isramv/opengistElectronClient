@@ -242,16 +242,20 @@
                 this.$broadcast('edit-gist', gistId);
 
             }
+        },
+        ready: function() {
+            function resizedw(){
+                console.log('resized');
+                $('.app-container').css('height', window.innerHeight);
+            }
+            var doit;
+            window.onresize = function(){
+                clearTimeout(doit);
+                doit = setTimeout(resizedw, 100);
+            };
+            console.log('Ready.');
+            resizedw();
         }
     }
-    function resizedw(){
-        console.log('resized');
-        $('.app-container').css('height', window.innerHeight);
-    }
-    var doit;
-    window.onresize = function(){
-        clearTimeout(doit);
-        doit = setTimeout(resizedw, 100);
-    };
-    resizedw();
+
 </script>

@@ -27026,19 +27026,21 @@
 	        editGist: function editGist(gistId) {
 	            this.$broadcast('edit-gist', gistId);
 	        }
+	    },
+	    ready: function ready() {
+	        function resizedw() {
+	            console.log('resized');
+	            $('.app-container').css('height', window.innerHeight);
+	        }
+	        var doit;
+	        window.onresize = function () {
+	            clearTimeout(doit);
+	            doit = setTimeout(resizedw, 100);
+	        };
+	        console.log('Ready.');
+	        resizedw();
 	    }
 	};
-
-	function resizedw() {
-	    console.log('resized');
-	    $('.app-container').css('height', window.innerHeight);
-	}
-	var doit;
-	window.onresize = function () {
-	    clearTimeout(doit);
-	    doit = setTimeout(resizedw, 100);
-	};
-	resizedw();
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)))
 
 /***/ },
