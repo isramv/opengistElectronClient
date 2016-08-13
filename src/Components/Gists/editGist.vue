@@ -52,7 +52,6 @@
         min-height: 600px;
     }
     #js-editor {
-        position: absolute;
         width: 650px;
         height: 600px;
         padding-right: 40px;

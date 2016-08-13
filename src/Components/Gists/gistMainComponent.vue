@@ -90,13 +90,25 @@
         background: #27456F;
         height: 100%;
     }
+    .plain-list {
+        padding: 20px 18px;
+        li {
+            list-style: none;
+            a {
+                color: #70A2E7;
+                &:hover {
+                    color: #fff;
+                }
+            }
+        }
+    }
 </style>
 <template>
     <div class="app-container">
         <div class="menu-container">
             <div class="main-menu">
-                <ul>
-                    <li><a @click="fetchGists()"><i class="fa fa-close"></i></a></li>
+                <ul class="plain-list">
+                    <li><a @click="fetchGists()"><i class="fa fa-refresh fa-2x"></i></a></li>
                 </ul>
             </div>
             <div class="menu-show-container">
