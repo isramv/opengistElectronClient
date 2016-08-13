@@ -53,7 +53,7 @@
     }
     #js-editor {
         position: absolute;
-        width: 90%;
+        width: 650px;
         height: 600px;
         padding-right: 40px;
         border: 1px solid #d4d4d4;

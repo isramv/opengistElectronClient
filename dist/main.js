@@ -26968,11 +26968,6 @@
 	            console.log(gid);
 	            self.editGist(gid);
 	        });
-
-	        var windowHeight = window.innerHeight;
-	        setTimeout(function () {
-	            $('.app-container').css('height', windowHeight);
-	        }, 1000);
 	    },
 
 	    events: {
@@ -27032,6 +27027,17 @@
 	        }
 	    }
 	};
+
+	function resizedw() {
+	    console.log('resized');
+	    $('.app-container').css('height', window.innerHeight);
+	}
+	var doit;
+	window.onresize = function () {
+	    clearTimeout(doit);
+	    doit = setTimeout(resizedw, 100);
+	};
+	resizedw();
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)))
 
 /***/ },
@@ -45201,7 +45207,7 @@
 
 
 	// module
-	exports.push([module.id, "input.title.form-control[_v-f547408c] {\n  max-width: 300px; }\n\n.editor-container[_v-f547408c] {\n  min-height: 600px; }\n\n#js-editor[_v-f547408c] {\n  position: absolute;\n  width: 90%;\n  height: 600px;\n  padding-right: 40px;\n  border: 1px solid #d4d4d4; }\n", ""]);
+	exports.push([module.id, "input.title.form-control[_v-f547408c] {\n  max-width: 300px; }\n\n.editor-container[_v-f547408c] {\n  min-height: 600px; }\n\n#js-editor[_v-f547408c] {\n  position: absolute;\n  width: 650px;\n  height: 600px;\n  padding-right: 40px;\n  border: 1px solid #d4d4d4; }\n", ""]);
 
 	// exports
 
@@ -68252,7 +68258,7 @@
 /* 189 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"app-container\">\n    <div class=\"menu-container\">\n        <div class=\"main-menu\">\n            <ul>\n                <li><a @click=\"fetchGists()\"><i class=\"fa fa-close\"></i></a></li>\n            </ul>\n        </div>\n        <div class=\"menu-show-container\">\n            <table-gist></table-gist>\n        </div>\n    </div>\n    <!--<a href=\"#\" @click=\"fetchGists()\">update index</a>-->\n    <div class=\"show-gist-container\">\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n    <div class=\"account-configuration\">\n        <admin-bar-component></admin-bar-component>\n    </div>\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"app-container\">\n    <div class=\"menu-container\">\n        <div class=\"main-menu\">\n            <ul>\n                <li><a @click=\"fetchGists()\"><i class=\"fa fa-close\"></i></a></li>\n            </ul>\n        </div>\n        <div class=\"menu-show-container\">\n            <table-gist></table-gist>\n        </div>\n    </div>\n    <!--<a href=\"#\" @click=\"fetchGists()\">update index</a>-->\n    <div class=\"show-gist-container\">\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n        <div class=\"account-configuration\">\n            <admin-bar-component></admin-bar-component>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }
 /******/ ]);

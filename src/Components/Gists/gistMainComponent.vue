@@ -114,9 +114,9 @@
             <div v-show="state == 'new'">
                 <new-gist></new-gist>
             </div>
-        </div>
-        <div class="account-configuration">
-            <admin-bar-component></admin-bar-component>
+            <div class="account-configuration">
+                <admin-bar-component></admin-bar-component>
+            </div>
         </div>
     </div>
 </template>
@@ -161,11 +161,6 @@
                 console.log(gid);
                 self.editGist(gid);
             });
-            // window height.
-            let windowHeight = window.innerHeight;
-            setTimeout(function() {
-                $('.app-container').css('height', windowHeight);
-            },1000);
         },
         events: {
             'logout-all': function() {
@@ -224,4 +219,15 @@
             }
         }
     }
+    function resizedw(){
+        // Thing's to do
+        console.log('resized');
+        $('.app-container').css('height', window.innerHeight);
+    }
+    var doit;
+    window.onresize = function(){
+        clearTimeout(doit);
+        doit = setTimeout(resizedw, 100);
+    };
+    resizedw();
 </script>
