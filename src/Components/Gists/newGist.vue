@@ -10,7 +10,7 @@
                 <tags-input-component></tags-input-component>
             </div>
             <div class="form-group editor-container" v-if="!processing">
-                <div id="editor"></div>
+                <div id="new-editor"></div>
             </div>
             <br/>
             <div class="form-group">
@@ -29,7 +29,7 @@
     .editor-container {
         min-height: 600px;
     }
-    #editor {
+    #new-editor {
         width: 650px;
         height: 600px;
         padding-right: 40px;
@@ -63,7 +63,6 @@
         },
         methods: {
             newGist() {
-
                 let self = this;
                 let newGist = {
                     title: '',
@@ -72,7 +71,7 @@
                 };
                 self.$set('gistToEdit', newGist);
                 setTimeout(function() {
-                    let editor = ace.edit('editor');
+                    let editor = ace.edit('new-editor');
                     editor.setValue('',1);
                     editor.setOption("wrap", 80);
                     editor.getSession().setMode('ace/mode/markdown');

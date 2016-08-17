@@ -45207,7 +45207,7 @@
 
 
 	// module
-	exports.push([module.id, "input.title.form-control[_v-f547408c] {\n  max-width: 300px; }\n\n.editor-container[_v-f547408c] {\n  min-height: 600px; }\n\n#js-editor[_v-f547408c] {\n  width: 650px;\n  height: 600px;\n  padding-right: 40px;\n  border: 1px solid #d4d4d4; }\n", ""]);
+	exports.push([module.id, "input.title.form-control[_v-f547408c] {\n  max-width: 300px; }\n\n.editor-container[_v-f547408c] {\n  min-height: 600px; }\n\n#editor[_v-f547408c] {\n  width: 650px;\n  height: 600px;\n  padding-right: 40px;\n  border: 1px solid #d4d4d4; }\n", ""]);
 
 	// exports
 
@@ -45306,7 +45306,7 @@
 	                type: 'GET',
 	                dataType: 'json'
 	            }).done(function (res) {
-	                var editor = _brace2.default.edit('js-editor');
+	                var editor = _brace2.default.edit('editor');
 	                if (_lodash2.default.isNull(res.body)) {
 	                    res.body = '';
 	                }
@@ -45318,7 +45318,7 @@
 	                    name: 'savegist',
 	                    bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
 	                    exec: function exec(editor) {
-	                        self.saveGistAction();
+	                        self.saveWhileEditing();
 	                    }
 	                });
 	                editor.commands.addCommand({
@@ -45344,11 +45344,18 @@
 	                headers: { 'authorization': localStorage.getItem('Authorization') },
 	                data: self.$get('gistToEdit')
 	            }).done(function (res) {
-	                self.$set('gistToEdit', {});
-	                self.$dispatch('view-gist', res);
+	                self.$set('gistToEdit', res);
 	                self.$dispatch('update-gist-on-index', res);
 	                self.$set('editing', false);
 	            });
+	        },
+	        saveWhileEditing: function saveWhileEditing() {
+	            this.saveGistAction();
+	        },
+	        saveAndClose: function saveAndClose() {
+	            var self = this;
+	            this.saveGistAction();
+	            self.$dispatch('view-gist', self.$get('gistToEdit'));
 	        },
 	        deleteGist: function deleteGist() {
 	            var self = this;
@@ -67826,7 +67833,7 @@
 /* 173 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div _v-f547408c=\"\">\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-f547408c=\"\"></i>\n    <div v-show=\"!processing\" _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-f547408c=\"\">\n        </div>\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <tags-input-component _v-f547408c=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" _v-f547408c=\"\">\n            <div id=\"js-editor\" _v-f547408c=\"\"></div>\n        </div>\n        <br _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelUpdateGist()\" _v-f547408c=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"saveGistAction()\" _v-f547408c=\"\">Save</button>\n            <!-- Triggers Modal -->\n            <button class=\"btn-sm btn btn-danger\" data-toggle=\"modal\" data-target=\"#deleteGist\" _v-f547408c=\"\">Delete</button>\n        </div>\n    </div>\n</div>\n\n<!-- Modal -->\n<div class=\"modal fade\" id=\"deleteGist\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-f547408c=\"\">\n    <div class=\"modal-dialog\" role=\"document\" _v-f547408c=\"\">\n        <div class=\"modal-content\" _v-f547408c=\"\">\n            <div class=\"modal-header\" _v-f547408c=\"\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-f547408c=\"\"><span aria-hidden=\"true\" _v-f547408c=\"\">×</span></button>\n                <h4 class=\"modal-title\" id=\"myModalLabel\" _v-f547408c=\"\">Delete Gist: {{ gistToEdit.title }}</h4>\n            </div>\n            <div class=\"modal-body\" _v-f547408c=\"\">\n                <p _v-f547408c=\"\">This Gist is about to get deleted, this means that there is not step back.\n                Are you sure you want to continue?\n                If so press `Delete`.</p>\n            </div>\n            <div class=\"modal-footer\" _v-f547408c=\"\">\n                <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-f547408c=\"\">Cancel</button>\n                <button type=\"button\" class=\"btn btn-sm btn-danger\" v-on:click=\"deleteGist()\" _v-f547408c=\"\">Delete</button>\n            </div>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div _v-f547408c=\"\">\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-f547408c=\"\"></i>\n    <div v-show=\"!processing\" _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-f547408c=\"\">\n        </div>\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <tags-input-component _v-f547408c=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" _v-f547408c=\"\">\n            <div id=\"editor\" _v-f547408c=\"\"></div>\n        </div>\n        <br _v-f547408c=\"\">\n        <div class=\"form-group\" _v-f547408c=\"\">\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"cancelUpdateGist()\" _v-f547408c=\"\">Cancel</button>\n            <button class=\"btn-sm btn btn-default btn-sm\" v-on:click=\"saveAndClose()\" _v-f547408c=\"\">Save</button>\n            <!-- Triggers Modal -->\n            <button class=\"btn-sm btn btn-danger\" data-toggle=\"modal\" data-target=\"#deleteGist\" _v-f547408c=\"\">Delete</button>\n        </div>\n    </div>\n</div>\n\n<!-- Modal -->\n<div class=\"modal fade\" id=\"deleteGist\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-f547408c=\"\">\n    <div class=\"modal-dialog\" role=\"document\" _v-f547408c=\"\">\n        <div class=\"modal-content\" _v-f547408c=\"\">\n            <div class=\"modal-header\" _v-f547408c=\"\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-f547408c=\"\"><span aria-hidden=\"true\" _v-f547408c=\"\">×</span></button>\n                <h4 class=\"modal-title\" id=\"myModalLabel\" _v-f547408c=\"\">Delete Gist: {{ gistToEdit.title }}</h4>\n            </div>\n            <div class=\"modal-body\" _v-f547408c=\"\">\n                <p _v-f547408c=\"\">This Gist is about to get deleted, this means that there is not step back.\n                Are you sure you want to continue?\n                If so press `Delete`.</p>\n            </div>\n            <div class=\"modal-footer\" _v-f547408c=\"\">\n                <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-f547408c=\"\">Cancel</button>\n                <button type=\"button\" class=\"btn btn-sm btn-danger\" v-on:click=\"deleteGist()\" _v-f547408c=\"\">Delete</button>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 174 */
@@ -67996,7 +68003,7 @@
 
 
 	// module
-	exports.push([module.id, "input.title.form-control[_v-6fb07346] {\n  max-width: 300px; }\n\n.editor-container[_v-6fb07346] {\n  min-height: 600px; }\n\n#editor[_v-6fb07346] {\n  width: 650px;\n  height: 600px;\n  padding-right: 40px;\n  border: 1px solid #d4d4d4; }\n", ""]);
+	exports.push([module.id, "input.title.form-control[_v-6fb07346] {\n  max-width: 300px; }\n\n.editor-container[_v-6fb07346] {\n  min-height: 600px; }\n\n#new-editor[_v-6fb07346] {\n  width: 650px;\n  height: 600px;\n  padding-right: 40px;\n  border: 1px solid #d4d4d4; }\n", ""]);
 
 	// exports
 
@@ -68052,7 +68059,6 @@
 	    },
 	    methods: {
 	        newGist: function newGist() {
-
 	            var self = this;
 	            var newGist = {
 	                title: '',
@@ -68061,7 +68067,7 @@
 	            };
 	            self.$set('gistToEdit', newGist);
 	            setTimeout(function () {
-	                var editor = _brace2.default.edit('editor');
+	                var editor = _brace2.default.edit('new-editor');
 	                editor.setValue('', 1);
 	                editor.setOption("wrap", 80);
 	                editor.getSession().setMode('ace/mode/markdown');
@@ -68124,7 +68130,7 @@
 /* 183 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div _v-6fb07346=\"\">\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-6fb07346=\"\"></i>\n    <div _v-6fb07346=\"\">\n        <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"saving\" _v-6fb07346=\"\"></i>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-6fb07346=\"\">\n        </div>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <tags-input-component _v-6fb07346=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" v-if=\"!processing\" _v-6fb07346=\"\">\n            <div id=\"editor\" _v-6fb07346=\"\"></div>\n        </div>\n        <br _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <button class=\"btn btn-default btn-sm\" @click=\"cancelAction()\" _v-6fb07346=\"\">Cancel</button>\n            <button class=\"btn btn-default btn-sm\" @click=\"createAction()\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div _v-6fb07346=\"\">\n    <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"processing\" _v-6fb07346=\"\"></i>\n    <div _v-6fb07346=\"\">\n        <i class=\"fa fa-circle-o-notch fa-spin fa-2x fa-fw\" v-if=\"saving\" _v-6fb07346=\"\"></i>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <input class=\"title form-control\" v-model=\"gistToEdit.title\" _v-6fb07346=\"\">\n        </div>\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <tags-input-component _v-6fb07346=\"\"></tags-input-component>\n        </div>\n        <div class=\"form-group editor-container\" v-if=\"!processing\" _v-6fb07346=\"\">\n            <div id=\"new-editor\" _v-6fb07346=\"\"></div>\n        </div>\n        <br _v-6fb07346=\"\">\n        <div class=\"form-group\" _v-6fb07346=\"\">\n            <button class=\"btn btn-default btn-sm\" @click=\"cancelAction()\" _v-6fb07346=\"\">Cancel</button>\n            <button class=\"btn btn-default btn-sm\" @click=\"createAction()\" _v-6fb07346=\"\">Save</button>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 184 */

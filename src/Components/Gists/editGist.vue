@@ -9,12 +9,12 @@
                 <tags-input-component></tags-input-component>
             </div>
             <div class="form-group editor-container">
-                <div id="js-editor"></div>
+                <div id="editor"></div>
             </div>
             <br/>
             <div class="form-group">
                 <button class="btn-sm btn btn-default btn-sm" v-on:click="cancelUpdateGist()">Cancel</button>
-                <button class="btn-sm btn btn-default btn-sm" v-on:click="saveGistAction()">Save</button>
+                <button class="btn-sm btn btn-default btn-sm" v-on:click="saveAndClose()">Save</button>
                 <!-- Triggers Modal -->
                 <button class="btn-sm btn btn-danger" data-toggle="modal" data-target="#deleteGist">Delete</button>
             </div>
@@ -51,14 +51,11 @@
     .editor-container {
         min-height: 600px;
     }
-    #js-editor {
+    #editor {
         width: 650px;
         height: 600px;
         padding-right: 40px;
         border: 1px solid #d4d4d4;
-    }
-    .select2-select {
-
     }
 </style>
 <script>
@@ -127,7 +124,7 @@
                     type: 'GET',
                     dataType: 'json'
                 }).done(function(res) {
-                    let editor = ace.edit('js-editor');
+                    let editor = ace.edit('editor');
                     if(_.isNull(res.body)) {
                         res.body = '';
                     }
@@ -139,7 +136,7 @@
                         name: 'savegist',
                         bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
                         exec: function(editor) {
-                            self.saveGistAction();
+                            self.saveWhileEditing();
                         }
                     });
                     editor.commands.addCommand({
@@ -165,11 +162,18 @@
                     headers: { 'authorization': localStorage.getItem('Authorization') },
                     data: self.$get('gistToEdit'),
                 }).done(function(res) {
-                    self.$set('gistToEdit', {});
-                    self.$dispatch('view-gist', res);
+                    self.$set('gistToEdit', res);
                     self.$dispatch('update-gist-on-index', res);
                     self.$set('editing', false);
                 });
+            },
+            saveWhileEditing() {
+                this.saveGistAction();
+            },
+            saveAndClose() {
+                let self = this;
+                this.saveGistAction();
+                self.$dispatch('view-gist', self.$get('gistToEdit'));
             },
             deleteGist() {
                 let self = this;
