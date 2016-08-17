@@ -205,12 +205,13 @@
             },
             'update-gist-on-index': function(gist) {
                 let gid = gist.id;
-                // todo is going to search the gist by id and update with the new one.
                 _.find(store.gists, function(g) {
                     if(g.gist.id == gid) {
                         g.gist = gist;
+                        return;
                     }
                 });
+                this.$dispatch('update-all');
             }
         },
         methods: {

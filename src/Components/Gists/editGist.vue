@@ -168,12 +168,15 @@
                 });
             },
             saveWhileEditing() {
-                this.saveGistAction();
+                let self = this;
+                self.saveGistAction();
+                self.$dispatch('update-gist-on-index', self.$get('gistToEdit'));
             },
             saveAndClose() {
                 let self = this;
                 this.saveGistAction();
                 self.$dispatch('view-gist', self.$get('gistToEdit'));
+                self.$dispatch('update-gist-on-index', self.$get('gistToEdit'));
             },
             deleteGist() {
                 let self = this;
@@ -189,6 +192,7 @@
                         self.$dispatch('update-all');
                         $('#deleteGist').modal('hide');
                         self.$set('state','');
+                        localStorage.setItem('gistViewed', {});
                     }
                 });
             }

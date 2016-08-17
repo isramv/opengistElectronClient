@@ -102,6 +102,7 @@
             createAction() {
                 this.saveWhileEditing(this.$get('editornew'));
                 this.$dispatch('view-gist', this.$get('gistToEdit'));
+                self.$dispatch('update-gist-on-index', self.$get('gistToEdit'));
             },
             saveWhileEditing(editor) {
                 let self = this;
@@ -123,6 +124,7 @@
                     }).done(function(res) {
                         self.$set('gistToEdit.id',res.id);
                         self.$set('saving', false);
+                        self.$dispatch('update-gist-on-index', self.$get('gistToEdit'));
                     });
                 }
             }

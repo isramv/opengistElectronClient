@@ -26988,12 +26988,13 @@
 	        },
 	        'update-gist-on-index': function updateGistOnIndex(gist) {
 	            var gid = gist.id;
-
 	            _lodash2.default.find(_store2.default.gists, function (g) {
 	                if (g.gist.id == gid) {
 	                    g.gist = gist;
+	                    return;
 	                }
 	            });
+	            this.$dispatch('update-all');
 	        }
 	    },
 	    methods: {
@@ -45350,12 +45351,15 @@
 	            });
 	        },
 	        saveWhileEditing: function saveWhileEditing() {
-	            this.saveGistAction();
+	            var self = this;
+	            self.saveGistAction();
+	            self.$dispatch('update-gist-on-index', self.$get('gistToEdit'));
 	        },
 	        saveAndClose: function saveAndClose() {
 	            var self = this;
 	            this.saveGistAction();
 	            self.$dispatch('view-gist', self.$get('gistToEdit'));
+	            self.$dispatch('update-gist-on-index', self.$get('gistToEdit'));
 	        },
 	        deleteGist: function deleteGist() {
 	            var self = this;
@@ -45371,6 +45375,7 @@
 	                    self.$dispatch('update-all');
 	                    (0, _jquery2.default)('#deleteGist').modal('hide');
 	                    self.$set('state', '');
+	                    localStorage.setItem('gistViewed', {});
 	                }
 	            });
 	        }
@@ -68097,6 +68102,7 @@
 	        createAction: function createAction() {
 	            this.saveWhileEditing(this.$get('editornew'));
 	            this.$dispatch('view-gist', this.$get('gistToEdit'));
+	            self.$dispatch('update-gist-on-index', self.$get('gistToEdit'));
 	        },
 	        saveWhileEditing: function saveWhileEditing(editor) {
 	            var self = this;
@@ -68117,6 +68123,7 @@
 	                }).done(function (res) {
 	                    self.$set('gistToEdit.id', res.id);
 	                    self.$set('saving', false);
+	                    self.$dispatch('update-gist-on-index', self.$get('gistToEdit'));
 	                });
 	            }
 	        }
