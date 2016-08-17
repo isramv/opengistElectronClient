@@ -94,6 +94,7 @@
         padding: 20px 18px;
         li {
             list-style: none;
+            margin-bottom: 10px;
             a {
                 color: #70A2E7;
                 &:hover {
@@ -122,6 +123,7 @@
             <div class="main-menu">
                 <ul class="plain-list">
                     <li><a @click="fetchGists()"><i class="fa fa-refresh fa-2x"></i></a></li>
+                    <li><a @click="changeState('new')"><i class="fa fa-plus-square fa-2x"></i></a></li>
                 </ul>
             </div>
             <div class="menu-show-container">
@@ -181,7 +183,6 @@
             });
             keymaster('command+e', function() {
                 let gid = store.gist.id;
-                console.log(gid);
                 self.editGist(gid);
             });
         },
@@ -204,7 +205,6 @@
             },
             'update-gist-on-index': function(gist) {
                 let gid = gist.id;
-                console.log(store.gists);
                 // todo is going to search the gist by id and update with the new one.
                 _.find(store.gists, function(g) {
                     if(g.gist.id == gid) {
@@ -244,18 +244,18 @@
             }
         },
         ready: function() {
-            function resizedw(){
-                console.log('resized');
-                $('.app-container').css('height', window.innerHeight);
-            }
+//            function resizedw(){
+//                $('.app-container').css('height', window.innerHeight);
+//            }
             var doit;
             window.onresize = function(){
                 clearTimeout(doit);
                 doit = setTimeout(resizedw, 100);
             };
-            console.log('Ready.');
             resizedw();
         }
     }
-
+    function resizedw(){
+        $('.app-container').css('height', window.innerHeight);
+    }
 </script>

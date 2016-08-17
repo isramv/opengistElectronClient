@@ -26880,7 +26880,7 @@
 
 
 	// module
-	exports.push([module.id, "html, body {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0; }\n\nbody {\n  width: 100%;\n  overflow-y: visible;\n  font-family: Ubuntu;\n  font-weight: normal;\n  font-style: normal;\n  background: #F8F6F6; }\n\n.table-container {\n  background-color: #eaeaea;\n  padding-top: 12px;\n  padding-bottom: 12px;\n  border-right: 1px solid #d2d2d2;\n  border-bottom: 1px solid #d2d2d2; }\n\n.table-filter {\n  margin-bottom: 12px; }\n\n.rc-container {\n  margin: 15px 0; }\n\ntable {\n  border: 0; }\n  table tr:nth-child(odd) {\n    background: #f1f1f1; }\n  table tr:nth-child(even) {\n    background: #fafafa; }\n  table tbody > tr > td {\n    border-top: 0 !important; }\n    table tbody > tr > td a {\n      color: #464646; }\n\n.app-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -ms-flex-line-pack: stretch;\n      align-content: stretch;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch; }\n  .app-container .menu-container {\n    width: 320px;\n    height: 100%;\n    position: absolute;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start;\n    -ms-flex-line-pack: stretch;\n        align-content: stretch;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch; }\n    .app-container .menu-container .main-menu {\n      width: 60px; }\n    .app-container .menu-container .menu-show-container {\n      overflow-y: scroll;\n      background: #e6e6e6;\n      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);\n      padding: 10px;\n      width: 260px;\n      -webkit-box-flex: 1;\n          -ms-flex-positive: 1;\n              flex-grow: 1;\n      -ms-flex-negative: 0;\n          flex-shrink: 0;\n      -ms-flex-preferred-size: 1;\n          flex-basis: 1; }\n  .app-container .show-gist-container {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n    -ms-flex-preferred-size: 1;\n        flex-basis: 1;\n    padding-left: 380px; }\n\n.main-menu {\n  background: #27456F;\n  height: 100%; }\n\n.plain-list {\n  padding: 20px 18px; }\n  .plain-list li {\n    list-style: none; }\n    .plain-list li a {\n      color: #70A2E7; }\n      .plain-list li a:hover {\n        color: #fff; }\n\n::-webkit-scrollbar {\n  width: 12px; }\n\n::-webkit-scrollbar-track {\n  background-color: #e6e6e6;\n  /*border-left: 1px solid #ccc;*/ }\n\n::-webkit-scrollbar-thumb {\n  background-color: rgba(200, 200, 200, 0.5); }\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: #aaa; }\n", ""]);
+	exports.push([module.id, "html, body {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0; }\n\nbody {\n  width: 100%;\n  overflow-y: visible;\n  font-family: Ubuntu;\n  font-weight: normal;\n  font-style: normal;\n  background: #F8F6F6; }\n\n.table-container {\n  background-color: #eaeaea;\n  padding-top: 12px;\n  padding-bottom: 12px;\n  border-right: 1px solid #d2d2d2;\n  border-bottom: 1px solid #d2d2d2; }\n\n.table-filter {\n  margin-bottom: 12px; }\n\n.rc-container {\n  margin: 15px 0; }\n\ntable {\n  border: 0; }\n  table tr:nth-child(odd) {\n    background: #f1f1f1; }\n  table tr:nth-child(even) {\n    background: #fafafa; }\n  table tbody > tr > td {\n    border-top: 0 !important; }\n    table tbody > tr > td a {\n      color: #464646; }\n\n.app-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -ms-flex-line-pack: stretch;\n      align-content: stretch;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch; }\n  .app-container .menu-container {\n    width: 320px;\n    height: 100%;\n    position: absolute;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start;\n    -ms-flex-line-pack: stretch;\n        align-content: stretch;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch; }\n    .app-container .menu-container .main-menu {\n      width: 60px; }\n    .app-container .menu-container .menu-show-container {\n      overflow-y: scroll;\n      background: #e6e6e6;\n      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);\n      padding: 10px;\n      width: 260px;\n      -webkit-box-flex: 1;\n          -ms-flex-positive: 1;\n              flex-grow: 1;\n      -ms-flex-negative: 0;\n          flex-shrink: 0;\n      -ms-flex-preferred-size: 1;\n          flex-basis: 1; }\n  .app-container .show-gist-container {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n    -ms-flex-preferred-size: 1;\n        flex-basis: 1;\n    padding-left: 380px; }\n\n.main-menu {\n  background: #27456F;\n  height: 100%; }\n\n.plain-list {\n  padding: 20px 18px; }\n  .plain-list li {\n    list-style: none;\n    margin-bottom: 10px; }\n    .plain-list li a {\n      color: #70A2E7; }\n      .plain-list li a:hover {\n        color: #fff; }\n\n::-webkit-scrollbar {\n  width: 12px; }\n\n::-webkit-scrollbar-track {\n  background-color: #e6e6e6;\n  /*border-left: 1px solid #ccc;*/ }\n\n::-webkit-scrollbar-thumb {\n  background-color: rgba(200, 200, 200, 0.5); }\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: #aaa; }\n", ""]);
 
 	// exports
 
@@ -26965,7 +26965,6 @@
 	        });
 	        (0, _keymaster2.default)('command+e', function () {
 	            var gid = _store2.default.gist.id;
-	            console.log(gid);
 	            self.editGist(gid);
 	        });
 	    },
@@ -26989,7 +26988,6 @@
 	        },
 	        'update-gist-on-index': function updateGistOnIndex(gist) {
 	            var gid = gist.id;
-	            console.log(_store2.default.gists);
 
 	            _lodash2.default.find(_store2.default.gists, function (g) {
 	                if (g.gist.id == gid) {
@@ -27028,19 +27026,18 @@
 	        }
 	    },
 	    ready: function ready() {
-	        function resizedw() {
-	            console.log('resized');
-	            $('.app-container').css('height', window.innerHeight);
-	        }
 	        var doit;
 	        window.onresize = function () {
 	            clearTimeout(doit);
 	            doit = setTimeout(resizedw, 100);
 	        };
-	        console.log('Ready.');
 	        resizedw();
 	    }
 	};
+
+	function resizedw() {
+	    $('.app-container').css('height', window.innerHeight);
+	}
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)))
 
 /***/ },
@@ -67997,7 +67994,7 @@
 
 
 	// module
-	exports.push([module.id, "input.title.form-control[_v-6fb07346] {\n  max-width: 300px; }\n\n.editor-container[_v-6fb07346] {\n  min-height: 600px; }\n\n#editor[_v-6fb07346] {\n  position: absolute;\n  width: 650px;\n  height: 600px;\n  padding-right: 40px;\n  border: 1px solid #d4d4d4; }\n", ""]);
+	exports.push([module.id, "input.title.form-control[_v-6fb07346] {\n  max-width: 300px; }\n\n.editor-container[_v-6fb07346] {\n  min-height: 600px; }\n\n#editor[_v-6fb07346] {\n  width: 650px;\n  height: 600px;\n  padding-right: 40px;\n  border: 1px solid #d4d4d4; }\n", ""]);
 
 	// exports
 
@@ -68108,31 +68105,29 @@
 	        },
 	        saveWhileEditing: function saveWhileEditing(editor) {
 	            var self = this;
-	            console.log('save while editing');
-	            console.log(self.$get('gistToEdit.id'));
-
-	            var url = 'http://myapp.local/app_dev.php/api/v1/gists';
-	            if (!_lodash2.default.isUndefined(self.$get('gistToEdit.id'))) {
-	                console.log('id is undefined');
-
-	                url = 'http://myapp.local/app_dev.php/api/v1/gists/' + self.$get('gistToEdit.id');
+	            if (self.$get('saving') === false) {
+	                self.$set('saving', true);
+	                var url = 'http://myapp.local/app_dev.php/api/v1/gists';
+	                if (!_lodash2.default.isUndefined(self.$get('gistToEdit.id'))) {
+	                    url = 'http://myapp.local/app_dev.php/api/v1/gists/' + self.$get('gistToEdit.id');
+	                }
+	                var body_value = editor.getValue();
+	                var gte = self.$get('gistToEdit');
+	                gte.body = body_value;
+	                $.ajax({
+	                    url: url,
+	                    headers: { 'authorization': localStorage.getItem('Authorization') },
+	                    type: 'POST',
+	                    data: gte
+	                }).done(function (res) {
+	                    self.$set('gistToEdit.id', res.id);
+	                    self.$set('saving', false);
+	                });
 	            }
-	            console.log(url);
-	            var body_value = editor.getValue();
-	            var gte = self.$get('gistToEdit');
-	            gte.body = body_value;
-	            console.log(gte);
-	            $.ajax({
-	                url: url,
-	                headers: { 'authorization': localStorage.getItem('Authorization') },
-	                type: 'POST',
-	                data: gte
-	            }).done(function (res) {
-	                self.$set('gistToEdit.id', res.id);
-	                console.log(res);
-	                self.$set('saving', false);
-	            });
 	        }
+	    },
+	    ready: function ready() {
+	        this.$set('saving', false);
 	    }
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)))
@@ -68261,7 +68256,7 @@
 /* 189 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"app-container\">\n    <div class=\"menu-container\">\n        <div class=\"main-menu\">\n            <ul class=\"plain-list\">\n                <li><a @click=\"fetchGists()\"><i class=\"fa fa-refresh fa-2x\"></i></a></li>\n            </ul>\n        </div>\n        <div class=\"menu-show-container\">\n            <table-gist></table-gist>\n        </div>\n    </div>\n    <!--<a href=\"#\" @click=\"fetchGists()\">update index</a>-->\n    <div class=\"show-gist-container\">\n        <admin-bar-component></admin-bar-component>\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"app-container\">\n    <div class=\"menu-container\">\n        <div class=\"main-menu\">\n            <ul class=\"plain-list\">\n                <li><a @click=\"fetchGists()\"><i class=\"fa fa-refresh fa-2x\"></i></a></li>\n                <li><a @click=\"changeState('new')\"><i class=\"fa fa-plus-square fa-2x\"></i></a></li>\n            </ul>\n        </div>\n        <div class=\"menu-show-container\">\n            <table-gist></table-gist>\n        </div>\n    </div>\n    <!--<a href=\"#\" @click=\"fetchGists()\">update index</a>-->\n    <div class=\"show-gist-container\">\n        <admin-bar-component></admin-bar-component>\n        <div v-show=\"state == 'view'\">\n            <show-gist></show-gist>\n        </div>\n        <div v-show=\"state == 'edit'\">\n            <edit-gist></edit-gist>\n        </div>\n        <div v-show=\"state == 'new'\">\n            <new-gist></new-gist>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }
 /******/ ]);
