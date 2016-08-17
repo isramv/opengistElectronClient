@@ -244,9 +244,6 @@
             }
         },
         ready: function() {
-//            function resizedw(){
-//                $('.app-container').css('height', window.innerHeight);
-//            }
             var doit;
             window.onresize = function(){
                 clearTimeout(doit);

@@ -45216,7 +45216,7 @@
 /* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -45226,7 +45226,9 @@
 
 	var _store2 = _interopRequireDefault(_store);
 
-	__webpack_require__(85);
+	var _jquery = __webpack_require__(85);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
 
 	var _lodash = __webpack_require__(141);
 
@@ -45298,7 +45300,7 @@
 	        getUpdatedGist: function getUpdatedGist(gistId) {
 	            var self = this;
 	            self.$set('processing', true);
-	            $.ajax({
+	            _jquery2.default.ajax({
 	                url: 'http://myapp.local/app_dev.php/api/v1/gists/' + gistId,
 	                headers: { 'authorization': localStorage.getItem('Authorization') },
 	                type: 'GET',
@@ -45336,7 +45338,7 @@
 	            var editor = self.$get('editor');
 
 	            this.$set('gistToEdit.body', editor.getValue());
-	            $.ajax({
+	            _jquery2.default.ajax({
 	                type: 'POST',
 	                url: 'http://myapp.local/app_dev.php/api/v1/gists/' + self.$get('gistToEdit.id'),
 	                headers: { 'authorization': localStorage.getItem('Authorization') },
@@ -45350,7 +45352,7 @@
 	        },
 	        deleteGist: function deleteGist() {
 	            var self = this;
-	            $.ajax({
+	            _jquery2.default.ajax({
 	                type: 'DELETE',
 	                url: 'http://myapp.local/app_dev.php/api/v1/gists/' + self.$get('gistToEdit.id'),
 	                headers: { 'authorization': localStorage.getItem('Authorization') }
@@ -45360,13 +45362,13 @@
 	                    self.$set('gist', {});
 	                    self.$set('state', 'view');
 	                    self.$dispatch('update-all');
-	                    $('#deleteGist').modal('hide');
+	                    (0, _jquery2.default)('#deleteGist').modal('hide');
+	                    self.$set('state', '');
 	                }
 	            });
 	        }
 	    }
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)))
 
 /***/ },
 /* 158 */
@@ -68003,7 +68005,7 @@
 /* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -68013,7 +68015,9 @@
 
 	var _store2 = _interopRequireDefault(_store);
 
-	__webpack_require__(85);
+	var _jquery = __webpack_require__(85);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
 
 	var _lodash = __webpack_require__(141);
 
@@ -68085,23 +68089,8 @@
 	            this.$set('state', 'view');
 	        },
 	        createAction: function createAction() {
-	            var self = this;
-
-	            var editor = self.$get('editornew');
-	            self.$set('gistToEdit.body', editor.getValue());
-	            var gte = self.$get('gistToEdit');
-	            $.ajax({
-	                url: 'http://myapp.local/app_dev.php/api/v1/gists',
-	                headers: { 'authorization': localStorage.getItem('Authorization') },
-	                type: 'POST',
-	                data: gte
-	            }).done(function (res) {
-	                self.$set('gistToEdit', res);
-	                self.$dispatch('view-gist', res);
-	                self.$set('state', 'view');
-	                self.$dispatch('update-all');
-	                self.$set('editing', false);
-	            });
+	            this.saveWhileEditing(this.$get('editornew'));
+	            this.$dispatch('view-gist', this.$get('gistToEdit'));
 	        },
 	        saveWhileEditing: function saveWhileEditing(editor) {
 	            var self = this;
@@ -68114,7 +68103,7 @@
 	                var body_value = editor.getValue();
 	                var gte = self.$get('gistToEdit');
 	                gte.body = body_value;
-	                $.ajax({
+	                _jquery2.default.ajax({
 	                    url: url,
 	                    headers: { 'authorization': localStorage.getItem('Authorization') },
 	                    type: 'POST',
@@ -68130,7 +68119,6 @@
 	        this.$set('saving', false);
 	    }
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)))
 
 /***/ },
 /* 183 */

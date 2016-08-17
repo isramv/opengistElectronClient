@@ -41,7 +41,7 @@
 </style>
 <script>
     import store from '../store'
-    import 'jquery'
+    import $ from 'jquery'
     import _ from 'lodash'
     import ace from 'brace'
     require('brace/mode/markdown');
@@ -101,23 +101,8 @@
                 this.$set('state', 'view');
             },
             createAction() {
-                let self = this;
-                // data.
-                let editor = self.$get('editornew');
-                self.$set('gistToEdit.body', editor.getValue());
-                let gte = self.$get('gistToEdit');
-                $.ajax({
-                    url: 'http://myapp.local/app_dev.php/api/v1/gists',
-                    headers: { 'authorization': localStorage.getItem('Authorization') },
-                    type: 'POST',
-                    data: gte,
-                }).done(function(res) {
-                    self.$set('gistToEdit', res);
-                    self.$dispatch('view-gist', res);
-                    self.$set('state', 'view');
-                    self.$dispatch('update-all');
-                    self.$set('editing', false);
-                });
+                this.saveWhileEditing(this.$get('editornew'));
+                this.$dispatch('view-gist', this.$get('gistToEdit'));
             },
             saveWhileEditing(editor) {
                 let self = this;

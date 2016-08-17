@@ -63,7 +63,7 @@
 </style>
 <script>
     import store from '../store'
-    import 'jquery'
+    import $ from 'jquery'
     import _ from 'lodash'
     import ace from 'brace'
     require('brace/mode/markdown');
@@ -184,6 +184,7 @@
                         self.$set('state', 'view');
                         self.$dispatch('update-all');
                         $('#deleteGist').modal('hide');
+                        self.$set('state','');
                     }
                 });
             }
