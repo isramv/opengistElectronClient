@@ -1,16 +1,19 @@
 <template>
-    <h1 class="gist-title">{{ gist.title }}</h1>
-    <div class="row actions">
-        <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
+    <div>
+        <h1 class="gist-title">{{ gist.title }}</h1>
+        <div class="row actions">
+            <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
 
+        </div>
+        <div id="gist-content">
+            <div v-html="gist.marked"></div>
+            <!--{{{ gist.marked }}}-->
+            <ul class="list-inline">
+                <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a></li>
+            </ul>
+        </div>
+        <show-related-gists></show-related-gists>
     </div>
-    <div id="gist-content">
-        {{{ gist.marked }}}
-        <ul class="list-inline">
-            <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a></li>
-        </ul>
-    </div>
-    <show-related-gists></show-related-gists>
 </template>
 <style lang="sass" xml:lang="scss">
     .show-gist-container {

@@ -1,8 +1,10 @@
 <template>
-    <input class="input-sm tags-input form-control" v-model="newTag" v-on:keyup.188.13="addTag()" placeholder="Add new tags..."/>
-    <ul class="tags-list list-inline">
-        <li class="btn btn-default btn-tag" v-for="tag in gistToEdit.tags">{{ tag.name }} <a @click="removeTag(tag.name)"><i class="fa fa-close"></i></a></li>
-    </ul>
+    <div>
+        <input class="input-sm tags-input form-control" v-model="newTag" v-on:keyup.188.13="addTag()" placeholder="Add new tags..."/>
+        <ul class="tags-list list-inline">
+            <li class="btn btn-default btn-tag" v-for="tag in gistToEdit.tags">{{ tag.name }} <a @click="removeTag(tag.name)"><i class="fa fa-close"></i></a></li>
+        </ul>
+    </div>
 </template>
 <style lang="sass" xml:lang="scss" scoped>
     ul {
