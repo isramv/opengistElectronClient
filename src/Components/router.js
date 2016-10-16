@@ -11,39 +11,18 @@ var router = new Router({
         { path: '/gistapp', component: gistMainComponent }
     ]
 });
+
+router.beforeEach((to, from, next) => {
+
+    let goesToSecurePath = to.path === '/gistapp'
+    let nouser = localStorage.getItem('username') === null
+
+    if(goesToSecurePath && nouser) {
+        next(false)
+    } else {
+        next()
+    }
+
+});
+
 export default router
-
-// router.beforeEach((to, from, next) => {
-//     if(localStorage.getItem('username') == null) {
-//         next({
-//             path: '/',
-//             query: { redirect: to.fullPath }
-//         })
-//     } else {
-//         next({
-//             path: '/gistapp',
-//             query: { redirect: to.fullPath }
-//         })
-//     }
-// });
-
-// @todo deprecated
-// router.map({
-//     '/login': {
-//         name: 'login',
-//         component: loginComponent
-//     },
-//     '/app': {
-//         name: 'app',
-//         component: gistMainComponent
-//     }
-// });
-
-// router.beforeEach(function(transition) {
-//     if(localStorage.getItem('username') == null) {
-//         router.push('login');
-//     } else {
-//         router.push('app');
-//     }
-//     // transition.next();
-// });

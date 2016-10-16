@@ -13,4 +13,5 @@
 </template>
 <script>
     import bootstrap from 'bootstrap-webpack'
+    import fontawesome from 'font-awesome-webpack'
 </script>

@@ -6009,6 +6009,10 @@
 
 	var _bootstrapWebpack2 = _interopRequireDefault(_bootstrapWebpack);
 
+	var _fontAwesomeWebpack = __webpack_require__(119);
+
+	var _fontAwesomeWebpack2 = _interopRequireDefault(_fontAwesomeWebpack);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
@@ -18978,6 +18982,19 @@
 	var router = new _vueRouter2.default({
 	    routes: [{ path: '/', component: _loginComponent2.default }, { path: '/gistapp', component: _gistMainComponent2.default }]
 	});
+
+	router.beforeEach(function (to, from, next) {
+
+	    var goesToSecurePath = to.path === '/gistapp';
+	    var nouser = localStorage.getItem('username') === null;
+
+	    if (goesToSecurePath && nouser) {
+	        next(false);
+	    } else {
+	        next();
+	    }
+	});
+
 	exports.default = router;
 
 /***/ },
