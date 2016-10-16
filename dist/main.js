@@ -5947,13 +5947,13 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-	    data: function data() {
-	        return {
-	            msg: 'App container with router'
-	        };
-	    },
-
-	    router: _router2.default
+	    router: _router2.default,
+	    methods: {
+	        goTo: function goTo() {
+	            console.log(_router2.default);
+	            console.log(this._router);
+	        }
+	    }
 	};
 
 /***/ },
@@ -60696,15 +60696,11 @@
 	    attrs: {
 	      "id": "app"
 	    }
-	  }, [_h('p', [_h('router-link', {
-	    attrs: {
-	      "to": "/"
+	  }, [_h('a', {
+	    on: {
+	      "click": goTo
 	    }
-	  }, ["login"]), " ", _h('router-link', {
-	    attrs: {
-	      "to": "/gistapp"
-	    }
-	  }, ["App"])]), " ", _h('router-view')])
+	  }, ["goTo"]), " ", _h('router-view')])
 	}},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()
