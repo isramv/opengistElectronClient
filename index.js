@@ -2,18 +2,12 @@ import Vue from 'vue'
 import App from './src/Components/App.vue'
 import router from './src/Components/router'
 
-// new Vue({
-//     el: '#app',
-//     render: h => h(App)
-// })
-
 const app = new Vue({
     el: '#app',
-    router,
+    router: router,
     render: h => h(App)
 })
 
-//
 // let App = new Vue({
 //     template: '#app',
 //     data: {

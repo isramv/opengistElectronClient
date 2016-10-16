@@ -1,18 +1,16 @@
 <template>
-    <div id="app">
-        <a @click="goTo">goTo</a>
-        <router-view></router-view>
+    <div class="layout" id="app" v-cloak>
+        <router-link to="/">login</router-link>
+        <router-link to="gistapp">main</router-link>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <router-view></router-view>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
-    import router from './router'
-    export default{
-        router: router,
-        methods: {
-            goTo() {
-                console.log(router)
-                console.log(this._router)
-            }
-        }
-    }
+    import bootstrap from 'bootstrap-webpack'
 </script>
