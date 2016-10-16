@@ -56,7 +56,7 @@
 
 <script>
     import $ from 'jquery';
-    import router from './router'
+    import router from '../router'
     import fontAwesome from 'font-awesome-webpack';
     export default {
         data() {

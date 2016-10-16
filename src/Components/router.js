@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import loginComponent from './loginComponent.vue'
+import loginComponent from './Gists/loginComponent.vue'
 import gistMainComponent from './Gists/gistMainComponent.vue'
 
 Vue.use(Router);
