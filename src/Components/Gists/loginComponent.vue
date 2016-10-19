@@ -3,12 +3,12 @@
         <div class="container-fluid">
             <div class="row header" v-if="logged">
                 <div class="col-md-12">
-                    <a href="#" v-on:click="logout">Logout</a>
+                    <a href="#" @click="logout">Logout</a>
                 </div>
             </div>
             <div class="row form" v-if="!logged">
                 <div class="form-container">
-                    <form class="form login-form" @submit.prevent="authorize">
+                    <form class="form login-form" @submit.prevent="login">
                         <div class="form-group">
                             <label for="username">Username:</label>
                             <input id="username" type="text" v-model="username" name="username" placeholder="user" class="form-control"/>
@@ -56,7 +56,7 @@
 
 <script>
     import $ from 'jquery';
-    import router from '../router'
+    import store from '../vuex_store'
     import fontAwesome from 'font-awesome-webpack';
     export default {
         data() {
@@ -69,57 +69,69 @@
                 loading: false
             }
         },
-        beforeCompile() {
-            var authorization = localStorage.getItem('Authorization');
-            var username = localStorage.getItem('username');
-            if(authorization !== null) {
-                this.logged = true;
-                this.username = localStorage.getItem('username');
-            }
-        },
+        store: store,
         methods: {
-            authorize() {
-                let self = this;
-                self.loading = true;
-                $.ajax({
-                    // TODO put the url in a variable.
-                    url: 'http://myapp.local/app_dev.php/api/login',
-                    type: 'POST',
-                    data: $('.login-form').serialize(),
-                    timeout: 25000,
-                    statusCode: {
-                        401: function (data) {
-                            self.error = data.responseText;
-                            self.loading = false;
-                        },
-                        404: function (data) {
-                            self.error = 'Service not found, check your internet connection.';
-                            self.loading = false;
-                        }
-                    }
-                }).done(function(res) {
-                    self.hash = res.token;
-                    self.password = '';
-                    self.logged = true;
-                    self.loading = false;
-                    self.setLocalStorage(res.token, res.username);
-                    self.$dispatch('just-logged', res.username);
-                    router.go('app');
-                }).fail(function(res) {
-                    self.error = res.statusText;
-                    self.loading = false;
-                });
-            },
-            setLocalStorage: function(token, username) {
-                localStorage.setItem('Authorization', token);
-                localStorage.setItem('username', username);
-            },
-            logout: function() {
-                localStorage.clear();
-                store = {};
-                var self = this;
-                self.logged = false;
+            login () {
+                let login_data = {
+                    username: this.username,
+                    password: this.password
+                }
+                store.dispatch('loginAction', login_data)
             }
         }
+//        beforeCompile() {
+//            var authorization = localStorage.getItem('Authorization');
+//            var username = localStorage.getItem('username');
+//            if(authorization !== null) {
+//                this.logged = true;
+//                this.username = localStorage.getItem('username');
+//            }
+//        },
+//        methods: {
+//            authorize() {
+//                console.log('authorize')
+
+//                let self = this;
+//                self.loading = true;
+//                $.ajax({
+//                    // TODO put the url in a variable.
+//                    url: 'http://myapp.local/app_dev.php/api/login',
+//                    type: 'POST',
+//                    data: $('.login-form').serialize(),
+//                    timeout: 25000,
+//                    statusCode: {
+//                        401: function (data) {
+//                            self.error = data.responseText;
+//                            self.loading = false;
+//                        },
+//                        404: function (data) {
+//                            self.error = 'Service not found, check your internet connection.';
+//                            self.loading = false;
+//                        }
+//                    }
+//                }).done(function(res) {
+//                    self.hash = res.token;
+//                    self.password = '';
+//                    self.logged = true;
+//                    self.loading = false;
+//                    self.setLocalStorage(res.token, res.username);
+//                    self.$dispatch('just-logged', res.username);
+////                    router.go('app');
+//                }).fail(function(res) {
+//                    self.error = res.statusText;
+//                    self.loading = false;
+//                });
+//            },
+//            setLocalStorage: function(token, username) {
+//                localStorage.setItem('Authorization', token);
+//                localStorage.setItem('username', username);
+//            },
+//            logout: function() {
+//                localStorage.clear();
+////                store = {};
+//                var self = this;
+//                self.logged = false;
+//            }
+//        }
     }
 </script>

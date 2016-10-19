@@ -1,3 +1,4 @@
+// @todo move the logic in this object to vuex.
 var store =  {
     gists: [],
     auth: '',
