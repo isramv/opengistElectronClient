@@ -19,6 +19,9 @@ export default {
         }
       }
     }).done(function (res) {
+      context.commit('USERNAME', res.username)
+      context.commit('ACCESSTOKEN', res.token)
+      context.commit('LOGLOCALSTORE')
       // self.hash = res.token;
       // self.password = '';
       // self.logged = true;
