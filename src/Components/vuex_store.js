@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 const state = {
   username: '',
-  auth: ''
+  auth: '',
+  loadingLogin: false
 }
 
 const mutations = {
@@ -18,8 +19,7 @@ const mutations = {
     state.auth = value;
     localStorage.setItem('auth', value)
   },
-  LOGLOCALSTORE (state, valaue) {
-    console.log(state)
+  LOGLOCALSTORE (state) {
     console.log(localStorage)
   }
 }

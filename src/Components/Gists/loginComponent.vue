@@ -69,14 +69,50 @@
                 loading: false
             }
         },
+//        computed: {
+//            loading() {
+//                return store.loadingLogin;
+//            }
+//        },
         store: store,
         methods: {
             login () {
+                let self = this
                 let login_data = {
                     username: this.username,
                     password: this.password
                 }
-                store.dispatch('loginAction', login_data)
+                self.loading = true
+                $.ajax({
+                    url: 'http://myapp.local/app_dev.php/api/login',
+                    type: 'POST',
+                    data: $('.login-form').serialize(),
+                    timeout: 25000,
+                    statusCode: {
+                        401: function (data) {
+                            self.error = data.responseText;
+                            self.loading = false;
+                        },
+                        404: function (data) {
+                            self.error = 'Service not found, check your internet connection.';
+                            self.loading = false;
+                        }
+                    }
+                }).done(function (res) {
+                    context.commit('USERNAME', res.username)
+                    context.commit('ACCESSTOKEN', res.token)
+                    context.commit('LOGLOCALSTORE')
+                    self.loading = false
+                    // self.hash = res.token;
+                    // self.password = '';
+                    // self.logged = true;
+                    // self.loading = false;
+                    // self.setLocalStorage(res.token, res.username);
+                    // self.$dispatch('just-logged', res.username);
+                }).fail(function (res) {
+                    // self.error = res.statusText;
+                    // self.loading = false;
+                });
             }
         }
 //        beforeCompile() {
