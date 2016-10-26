@@ -1,7 +1,6 @@
 <template>
     <div>
         <input class="form-control table-filter" type="text" v-model="searchTitle" placeholder="Filter table">
-        {{ title }}
         <table class="table table-condensed">
             <!-- @todo fix this filter. -->
             <!--<tr v-for="gist in gists | filterBy searchTitle">-->
@@ -14,15 +13,22 @@
 <style>
 </style>
 <script>
-    import store from '../store'
     export default{
         props: ['searchTitle'],
-        data(){
-            return store
+        computed: {
+            gists() {
+                return this.$store.state.gists;
+            }
+        },
+        created () {
+            if(this.gists.length === 0) {
+                this.$store.dispatch('getGists')
+            }
         },
         methods: {
             showGist(gist) {
-                this.$dispatch('view-gist', gist);
+                console.log(gist)
+//                this.$dispatch('view-gist', gist);
             }
         }
     }

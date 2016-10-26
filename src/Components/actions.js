@@ -8,8 +8,7 @@ export default {
       headers: { 'authorization': context.state.auth },
       type: 'GET'
     }).done(function(res) {
-      let gists = JSON.stringify(res)
-      context.commit('GISTS', gists)
+      context.commit('GISTS', res)
     });
   }
 
