@@ -35,7 +35,7 @@
     <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-3 table-container">
             <a href="#" @click="fetchGists()">update index</a>
-            <!--<table-gist></table-gist>-->
+            <table-gist></table-gist>
         </div>
         <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
             <div class="rc-container">
@@ -63,7 +63,7 @@
     import keymaster from 'keymaster'
     export default{
         components: {
-//            'table-gist': tableGistComponent,
+            'table-gist': tableGistComponent,
 //            'show-gist': showGistComponent,
 //            'edit-gist': editGistComponent,
 //            'new-gist': newGistComponent
@@ -82,22 +82,22 @@
                 this.$store.commit('USERNAME', localStorage.username)
             }
             if(localStorage.auth !== null) {
-                this.$store.commit('ACCESSTOKEN', localStorage.auth)
+                this.$store.commit('AUTH', localStorage.auth)
             }
         },
         created() {
             let self = this
             // @todo if computed gist is empty trigger fetchGists
             keymaster('command+n', function() {
-                self.changeState('new')
+//                self.changeState('new')
             });
             keymaster('command+escape', function() {
-                self.changeState('view')
+//                self.changeState('view')
             });
             keymaster('command+e', function() {
                 let gid = store.gist.id;
-                console.log(gid);
-                self.editGist(gid);
+//                console.log(gid);
+//                self.editGist(gid);
             });
         },
 //        events: {
@@ -132,15 +132,6 @@
             fetchGists() {
                 let self = this;
                 self.$store.dispatch('getGists')
-//                $.ajax({
-//                    url: 'http://myapp.local/app_dev.php/api/v1/gists',
-//                    headers: { 'authorization': self.auth },
-//                    type: 'GET'
-//                }).done(function(res) {
-////                    self.$set('gists', res);
-////                    self.$get('gists');
-////                    localStorage.setItem('gists', JSON.stringify(res));
-//                });
             },
 //            changeState(state) {
 //                let self = this;

@@ -94,8 +94,7 @@
                     }
                 }).done(function (res) {
                     store.commit('USERNAME', res.username)
-                    store.commit('ACCESSTOKEN', res.token)
-                    store.commit('LOGLOCALSTORE')
+                    store.commit('AUTH', res.token)
                     self.loading = false
                     self.clearForm()
                     self.$router.push('/gistapp')

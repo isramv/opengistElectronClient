@@ -7,7 +7,8 @@ Vue.use(Vuex)
 const state = {
   username: '',
   auth: '',
-  loadingLogin: false
+  loadingLogin: false,
+  gists: []
 }
 
 const mutations = {
@@ -15,12 +16,13 @@ const mutations = {
     state.username = value;
     localStorage.setItem('username', value)
   },
-  ACCESSTOKEN (state, value) {
+  AUTH (state, value) {
     state.auth = value;
     localStorage.setItem('auth', value)
   },
-  LOGLOCALSTORE (state) {
-    console.log(localStorage)
+  GISTS (state, gists) {
+    state.gists = gists;
+    localStorage.setItem('GISTS', gists)
   }
 }
 
