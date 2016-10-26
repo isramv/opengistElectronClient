@@ -35,7 +35,7 @@
     <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-3 table-container">
             <a href="#" @click="fetchGists()">update index</a>
-            <table-gist></table-gist>
+            <!--<table-gist></table-gist>-->
         </div>
         <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
             <div class="rc-container">
@@ -63,7 +63,7 @@
     import keymaster from 'keymaster'
     export default{
         components: {
-            'table-gist': tableGistComponent,
+//            'table-gist': tableGistComponent,
 //            'show-gist': showGistComponent,
 //            'edit-gist': editGistComponent,
 //            'new-gist': newGistComponent
@@ -87,7 +87,7 @@
         },
         created() {
             let self = this
-            this.fetchGists()
+            // @todo if computed gist is empty trigger fetchGists
             keymaster('command+n', function() {
                 self.changeState('new')
             });
@@ -131,15 +131,16 @@
         methods: {
             fetchGists() {
                 let self = this;
-                $.ajax({
-                    url: 'http://myapp.local/app_dev.php/api/v1/gists',
-                    headers: { 'authorization': self.auth },
-                    type: 'GET'
-                }).done(function(res) {
-//                    self.$set('gists', res);
-//                    self.$get('gists');
-//                    localStorage.setItem('gists', JSON.stringify(res));
-                });
+                self.$store.dispatch('getGists')
+//                $.ajax({
+//                    url: 'http://myapp.local/app_dev.php/api/v1/gists',
+//                    headers: { 'authorization': self.auth },
+//                    type: 'GET'
+//                }).done(function(res) {
+////                    self.$set('gists', res);
+////                    self.$get('gists');
+////                    localStorage.setItem('gists', JSON.stringify(res));
+//                });
             },
 //            changeState(state) {
 //                let self = this;
