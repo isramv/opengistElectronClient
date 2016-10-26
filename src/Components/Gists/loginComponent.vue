@@ -57,31 +57,26 @@
 <script>
     import $ from 'jquery';
     import store from '../vuex_store'
-    import fontAwesome from 'font-awesome-webpack';
+//    import router from '../router'
+    import fontAwesome from 'font-awesome-webpack'
     export default {
         data() {
             return {
                 username: '',
                 password: '',
-                hash: '',
                 logged: false,
                 error: '',
                 loading: false
             }
         },
-//        computed: {
-//            loading() {
-//                return store.loadingLogin;
-//            }
-//        },
         store: store,
         methods: {
+            clearForm() {
+              this.username = ''
+              this.password = ''
+            },
             login () {
                 let self = this
-                let login_data = {
-                    username: this.username,
-                    password: this.password
-                }
                 self.loading = true
                 $.ajax({
                     url: 'http://myapp.local/app_dev.php/api/login',
@@ -99,19 +94,15 @@
                         }
                     }
                 }).done(function (res) {
-                    context.commit('USERNAME', res.username)
-                    context.commit('ACCESSTOKEN', res.token)
-                    context.commit('LOGLOCALSTORE')
+                    store.commit('USERNAME', res.username)
+                    store.commit('ACCESSTOKEN', res.token)
+                    store.commit('LOGLOCALSTORE')
                     self.loading = false
-                    // self.hash = res.token;
-                    // self.password = '';
-                    // self.logged = true;
-                    // self.loading = false;
-                    // self.setLocalStorage(res.token, res.username);
-                    // self.$dispatch('just-logged', res.username);
+                    self.clearForm()
+                    self.$router.push('/gistapp')
                 }).fail(function (res) {
-                    // self.error = res.statusText;
-                    // self.loading = false;
+                     self.error = res.statusText;
+                     self.loading = false;
                 });
             }
         }

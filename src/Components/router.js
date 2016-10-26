@@ -16,9 +16,12 @@ router.beforeEach((to, from, next) => {
 
     let goesToSecurePath = to.path === '/gistapp'
     let nouser = localStorage.getItem('username') === null
-
-    if(goesToSecurePath && nouser) {
+    if(to.path === '/' && !nouser) {
         next(false)
+    } else if(goesToSecurePath && nouser) {
+        next({ path: '/'})
+    } else if(goesToSecurePath && !nouser) {
+        next()
     } else {
         next()
     }
