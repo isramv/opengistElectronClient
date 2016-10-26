@@ -35,12 +35,14 @@
     <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-3 table-container">
             <a href="#" @click="fetchGists()">update index</a>
+            <router-link to="/gistapp/new">New</router-link>
             <table-gist></table-gist>
         </div>
         <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
             <div class="rc-container">
                 <a href="#" class="btn btn-default btn-sm" @click="changeState('new')">New</a>
             </div>
+            <router-view></router-view>
             <!--<div v-show="state == 'view'">-->
                 <!--<show-gist></show-gist>-->
             <!--</div>-->
@@ -63,7 +65,7 @@
     import keymaster from 'keymaster'
     export default{
         components: {
-            'table-gist': tableGistComponent,
+             'table-gist': tableGistComponent,
 //            'show-gist': showGistComponent,
 //            'edit-gist': editGistComponent,
 //            'new-gist': newGistComponent
