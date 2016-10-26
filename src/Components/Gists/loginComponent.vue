@@ -57,7 +57,6 @@
 <script>
     import $ from 'jquery';
     import store from '../vuex_store'
-//    import router from '../router'
     import fontAwesome from 'font-awesome-webpack'
     export default {
         data() {
@@ -106,59 +105,5 @@
                 });
             }
         }
-//        beforeCompile() {
-//            var authorization = localStorage.getItem('Authorization');
-//            var username = localStorage.getItem('username');
-//            if(authorization !== null) {
-//                this.logged = true;
-//                this.username = localStorage.getItem('username');
-//            }
-//        },
-//        methods: {
-//            authorize() {
-//                console.log('authorize')
-
-//                let self = this;
-//                self.loading = true;
-//                $.ajax({
-//                    // TODO put the url in a variable.
-//                    url: 'http://myapp.local/app_dev.php/api/login',
-//                    type: 'POST',
-//                    data: $('.login-form').serialize(),
-//                    timeout: 25000,
-//                    statusCode: {
-//                        401: function (data) {
-//                            self.error = data.responseText;
-//                            self.loading = false;
-//                        },
-//                        404: function (data) {
-//                            self.error = 'Service not found, check your internet connection.';
-//                            self.loading = false;
-//                        }
-//                    }
-//                }).done(function(res) {
-//                    self.hash = res.token;
-//                    self.password = '';
-//                    self.logged = true;
-//                    self.loading = false;
-//                    self.setLocalStorage(res.token, res.username);
-//                    self.$dispatch('just-logged', res.username);
-////                    router.go('app');
-//                }).fail(function(res) {
-//                    self.error = res.statusText;
-//                    self.loading = false;
-//                });
-//            },
-//            setLocalStorage: function(token, username) {
-//                localStorage.setItem('Authorization', token);
-//                localStorage.setItem('username', username);
-//            },
-//            logout: function() {
-//                localStorage.clear();
-////                store = {};
-//                var self = this;
-//                self.logged = false;
-//            }
-//        }
     }
 </script>
