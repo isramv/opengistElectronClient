@@ -13,23 +13,24 @@
 <style>
 </style>
 <script>
-    export default{
-        props: ['searchTitle'],
-        computed: {
-            gists() {
-                return this.$store.state.gists;
-            }
-        },
-        created () {
-            if(this.gists.length === 0) {
-                this.$store.dispatch('getGists')
-            }
-        },
-        methods: {
-            showGist(gist) {
-                console.log(gist)
-//                this.$dispatch('view-gist', gist);
-            }
-        }
+  export default{
+    props: ['searchTitle'],
+    computed: {
+      gists() {
+        return this.$store.state.gists;
+      }
+    },
+    beforeCreate() {
+      if (localStorage.getItem('GISTS') === null) {
+        this.$store.dispatch('getGists')
+      } else {
+        this.$store.commit('GISTS', JSON.parse(localStorage.getItem('GISTS')))
+      }
+    },
+    methods: {
+      showGist(gist) {
+        //this.$dispatch('view-gist', gist);
+      }
     }
+  }
 </script>

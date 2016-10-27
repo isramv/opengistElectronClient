@@ -27,8 +27,16 @@ const mutations = {
   }
 }
 
+const getters = {
+  gistCount: state => {
+    console.log(state)
+    return state.gists;
+  }
+}
+
 export default new Vuex.Store({
   state,
   mutations,
-  actions
+  actions,
+  getters
 })
