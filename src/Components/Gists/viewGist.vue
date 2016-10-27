@@ -45,6 +45,11 @@
             gistId() {
                 return this.$route.params.id
             }
+        },
+        beforeCreate() {
+            // todo fetch the gist to edit.
+            // if user_offline, get the localStorage version.
+
         }
 //        data () {
 //            return store;
