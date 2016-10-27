@@ -1,7 +1,6 @@
 <template>
     <div>
         <div class="row actions">
-            <h1>Hello Friend</h1>
             <div class="col-xs-4 col-xs-offset-8">
                 <!-- todo fix the cancel button. -->
                 <button class="btn-sm btn btn-default btn-sm" v-on:click="cancelAction">Cancel</button>
