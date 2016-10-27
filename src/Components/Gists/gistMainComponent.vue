@@ -37,8 +37,6 @@
             <div class="rc-container">
                 <a href="#" @click="fetchGists()">Update index</a>
                 <router-link to="/gistapp/new" class="btn">New</router-link>
-                <router-link to="/gistapp/edit" class="btn">Edit</router-link>
-                <router-link to="/gistapp/view" class="btn">View</router-link>
             </div>
             <table-gist></table-gist>
         </div>
