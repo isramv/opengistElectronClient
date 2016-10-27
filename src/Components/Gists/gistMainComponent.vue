@@ -34,41 +34,29 @@
 <template>
     <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-3 table-container">
-            <a href="#" @click="fetchGists()">update index</a>
-            <router-link to="/gistapp/new">New</router-link>
+            <div class="rc-container">
+                <a href="#" @click="fetchGists()">Update index</a>
+                <router-link to="/gistapp/new" class="btn">New</router-link>
+                <router-link to="/gistapp/edit" class="btn">Edit</router-link>
+                <router-link to="/gistapp/view" class="btn">View</router-link>
+            </div>
             <table-gist></table-gist>
         </div>
         <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
             <div class="rc-container">
-                <a href="#" class="btn btn-default btn-sm" @click="changeState('new')">New</a>
+                <router-view></router-view>
             </div>
-            <router-view></router-view>
-            <!--<div v-show="state == 'view'">-->
-                <!--<show-gist></show-gist>-->
-            <!--</div>-->
-            <!--<div v-show="state == 'edit'">-->
-                <!--<edit-gist></edit-gist>-->
-            <!--</div>-->
-            <!--<div v-show="state == 'new'">-->
-                <!--<new-gist></new-gist>-->
-            <!--</div>-->
         </div>
     </div>
 </template>
 <script>
     import _ from 'lodash'
     import store from '../vuex_store'
-//    import showGistComponent from './showGist.vue'
-//    import editGistComponent from './editGist.vue'
     import tableGistComponent from './tableGist.vue'
-//    import newGistComponent from './newGist.vue'
     import keymaster from 'keymaster'
     export default{
         components: {
-             'table-gist': tableGistComponent,
-//            'show-gist': showGistComponent,
-//            'edit-gist': editGistComponent,
-//            'new-gist': newGistComponent
+             'table-gist': tableGistComponent
         },
         store: store,
         computed: {
