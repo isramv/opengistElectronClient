@@ -24,7 +24,8 @@ var router = new Router({
           component: editGist
         },
         {
-          path: 'view',
+          name: 'viewGist',
+          path: 'view/:id',
           component: viewGist
         }
       ]

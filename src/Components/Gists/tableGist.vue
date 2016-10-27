@@ -5,7 +5,10 @@
             <!-- @todo fix this filter. -->
             <!--<tr v-for="gist in gists | filterBy searchTitle">-->
             <tr v-for="gist in gists">
-                <td><a class="table-component_link" v-on:click="showGist(gist.gist)">{{ gist.gist.title }}</a></td>
+                <td>
+                  <!--<a class="table-component_link" v-on:click="showGist(gist.gist.id)">{{ gist.gist.title }}</a>-->
+                  <router-link :to="{ name: 'viewGist', params: { id: gist.gist.id } }">{{ gist.gist.title }}</router-link>
+                </td>
             </tr>
         </table>
     </div>
@@ -25,11 +28,6 @@
         this.$store.dispatch('getGists')
       } else {
         this.$store.commit('GISTS', JSON.parse(localStorage.getItem('GISTS')))
-      }
-    },
-    methods: {
-      showGist(gist) {
-        //this.$dispatch('view-gist', gist);
       }
     }
   }
