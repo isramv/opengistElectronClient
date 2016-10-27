@@ -33,23 +33,24 @@ var router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log(from)
-  console.log(to)
+  // console.log(from)
+  // console.log(to)
   let goesToSecurePath = to.path === '/gistapp'
   let nouser = localStorage.getItem('username') === null
   if (to.path === '/' && !nouser) {
-    console.log(1)
+    // console.log(1)
     next(false)
   } else if (goesToSecurePath && nouser) {
-    console.log(2)
+    // console.log(2)
     next({path: '/'})
   } else if (goesToSecurePath && !nouser) {
-    console.log(3)
+    // console.log(3)
     next()
   } else {
-    console.log(4)
+    // console.log(4)
     next()
   }
+
 });
 
 export default router
