@@ -10,7 +10,7 @@
                 <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a></li>
             </ul>
         </div>
-        <!--<show-related-gists></show-related-gists>-->
+        <show-related-gists></show-related-gists>
     </div>
 </template>
 <style lang="sass" xml:lang="scss">
@@ -35,51 +35,37 @@
     }
 </style>
 <script>
-    import _ from 'lodash'
-    import marked from 'marked'
-    import store from '../store'
-//    import showRelatedGists from './showRelatedGists.vue'
-    export default{
-        computed: {
-            gistId() {
-                return this.$route.params.id
-            },
-            gist() {
-                let self = this
-                let gists = this.$store.state.gists
-                let result = _.filter(gists, o => {
-                    if(o.gist.id == self.gistId) {
-                        return o.gist
-                    }
-                })
-                return result[0].gist
-            },
-            gistRender () {
-                return marked(this.gist.body)
-            }
-        }
-        // todo manage sync
-        // todo autosave
-//        components: {
-//            'show-related-gists': showRelatedGists
-//        },
-//            showRelatedGists(tagId) {
-//                var self = this;
-//                var gists = self.$get('gists');
-//                var currentGist = JSON.parse(localStorage.getItem('gistViewed'));
-//                var relatedGist = [];
-//                _.find(gists, function(o) {
-//                    _.find(o.gist.tags, function(t) {
-//                        if(t.id == tagId) {
-//                            // Don't show the current gist.
-//                            if(o.gist.id !== currentGist.id) {
-//                                relatedGist.push(o.gist);
-//                            }
-//                        }
-//                    });
-//                });
-//                self.$broadcast('show-related-gists', relatedGist);
-//            },
-//        }
+  import _ from 'lodash'
+  import marked from 'marked'
+  import store from '../store'
+  import showRelatedGists from './showRelatedGists.vue'
+  export default{
+    computed: {
+      gistId() {
+        return this.$route.params.id
+      },
+      gist() {
+        let self = this
+        let gists = this.$store.state.gists
+        let result = _.filter(gists, o => {
+          if (o.gist.id == self.gistId) {
+            return o.gist
+          }
+        })
+        return result[0].gist
+      },
+      gistRender () {
+        return marked(this.gist.body)
+      }
+    },
+    components: {
+      'show-related-gists': showRelatedGists
+    },
+    methods: {
+      showRelatedGists (tid) {
+        let gid = _.toInteger(this.gistId)
+        this.$store.dispatch('showRelatedGists', { tagId: tid, gistId: gid})
+      }
     }
+  }
 </script>

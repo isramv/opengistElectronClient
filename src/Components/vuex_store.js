@@ -8,6 +8,7 @@ const state = {
   username: '',
   auth: '',
   loadingLogin: false,
+  relatedGists: {},
   gists: {}
 }
 
@@ -24,6 +25,9 @@ const mutations = {
     state.gists = gists;
     let ls_gists = JSON.stringify(gists)
     localStorage.setItem('GISTS', ls_gists)
+  },
+  RELATEDGISTS (state, gists) {
+    state.relatedGists = gists
   }
 }
 

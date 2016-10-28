@@ -10,6 +10,26 @@ export default {
     }).done(function(res) {
       context.commit('GISTS', res)
     });
+  },
+  // show the gist also tagged with
+  // params is an object with the following structure
+  // { tagId: n, gistId: n}
+  showRelatedGists(context, params) {
+    let relatedGist = []
+    _.find(context.state.gists, function (o) {
+      _.find(o.gist.tags, function (t) {
+        if (t.id == params.tagId) {
+          // Don't show the current gist.
+          if (o.gist.id !== params.gistId) {
+            relatedGist.push(o.gist);
+          }
+        }
+      });
+    });
+    if(relatedGist.length > 0) {
+      context.commit('RELATEDGISTS', relatedGist)
+    } else {
+      context.commit('RELATEDGISTS', null)
+    }
   }
-
 }
