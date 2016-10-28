@@ -58,6 +58,11 @@
         return marked(this.gist.body)
       }
     },
+    watch: {
+      gistId () {
+        this.$store.dispatch('showRelatedGists', { tagId: 0, gistId: 0})
+      }
+    },
     components: {
       'show-related-gists': showRelatedGists
     },

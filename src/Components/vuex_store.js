@@ -8,7 +8,7 @@ const state = {
   username: '',
   auth: '',
   loadingLogin: false,
-  relatedGists: {},
+  relatedGists: null,
   gists: {}
 }
 
