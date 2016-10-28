@@ -1,16 +1,15 @@
 <template>
     <div>
-        <h1>Hello World {{ gistId }}</h1>
-        <!--<h1 class="gist-title">{{ gist.title }}</h1>-->
+        <h1 class="gist-title">{{ gist.title }}</h1>
         <!--<div class="row actions">-->
             <!--<button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>-->
         <!--</div>-->
-        <!--<div id="gist-content">-->
-            <!--<div v-html="gist.marked"></div>-->
-            <!--<ul class="list-inline">-->
-                <!--<li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a></li>-->
-            <!--</ul>-->
-        <!--</div>-->
+        <div id="gist-content">
+            <div v-html="gistRender"></div>
+            <ul class="list-inline">
+                <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a></li>
+            </ul>
+        </div>
         <!--<show-related-gists></show-related-gists>-->
     </div>
 </template>
@@ -44,47 +43,26 @@
         computed: {
             gistId() {
                 return this.$route.params.id
+            },
+            gist() {
+                let self = this
+                let gists = this.$store.state.gists
+                let result = _.filter(gists, o => {
+                    if(o.gist.id == self.gistId) {
+                        return o.gist
+                    }
+                })
+                return result[0].gist
+            },
+            gistRender () {
+                return marked(this.gist.body)
             }
-        },
-        beforeCreate() {
-            // todo fetch the gist to edit.
-            // if user_offline, get the localStorage version.
-
         }
-//        data () {
-//            return store;
-//        },
-//        watch: {
-//          'gist': function(oldVal, newVal) {
-//              let self = this;
-//              if(!_.isUndefined(newVal.id)) {
-//                self.$broadcast('clear-data');
-//              }
-//          }
-//        },
+        // todo manage sync
+        // todo autosave
 //        components: {
 //            'show-related-gists': showRelatedGists
 //        },
-//        beforeCompile () {
-//            var lastGistViewed = JSON.parse(localStorage.getItem('gistViewed'));
-//            if(lastGistViewed) {
-//                this.viewGist(lastGistViewed);
-//            }
-//        },
-//        events: {
-//            'view-gist': function(gist) {
-//                this.viewGist(gist);
-//            }
-//        },
-//        methods: {
-//            viewGist(gist) {
-//                var self = this;
-//                localStorage.setItem('gistViewed', JSON.stringify(gist));
-//                self.$set('gist', gist);
-//                if(!_.isNull(gist.body)) {
-//                    self.$set('gist.marked', marked(gist.body));
-//                }
-//            },
 //            showRelatedGists(tagId) {
 //                var self = this;
 //                var gists = self.$get('gists');
@@ -102,13 +80,6 @@
 //                });
 //                self.$broadcast('show-related-gists', relatedGist);
 //            },
-//            editGist(gistId) {
-//                let self = this;
-//                // Notifies the parent.
-//                self.$dispatch('edit-gist', gistId);
-//                // Notifies the showRelatedGistsComponent to clear it's data.
-//                this.$broadcast('edit-gist');
-//            }
 //        }
     }
 </script>

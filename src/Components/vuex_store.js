@@ -29,8 +29,7 @@ const mutations = {
 
 const getters = {
   gistCount: state => {
-    console.log(state)
-    return state.gists;
+    return state.gists.length;
   }
 }
 
