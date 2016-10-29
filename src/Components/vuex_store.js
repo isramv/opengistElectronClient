@@ -12,7 +12,7 @@ const state = {
   gists: {},
   newGist: {
     title: '',
-    body: '#here is my body',
+    body: '',
     tags: []
   }
 }
