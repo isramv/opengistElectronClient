@@ -1,9 +1,8 @@
 <template>
-    <!-- todo migrate this. -->
     <div>
-        <input class="input-sm tags-input form-control" v-model="newTag" v-on:keyup.188.13="addTag()" placeholder="Add new tags..."/>
+      <input class="input-sm tags-input form-control" placeholder="Add new tags..." v-on:keyup.188.13="addTag($event)">
         <ul class="tags-list list-inline">
-            <li class="btn btn-default btn-tag" v-for="tag in gistToEdit.tags">{{ tag.name }} <a @click="removeTag(tag.name)"><i class="fa fa-close"></i></a></li>
+            <li class="btn btn-default btn-tag" v-for="tag in tags">{{ tag.name }} <a @click="removeTag(tag.name)"><i class="fa fa-close"></i></a></li>
         </ul>
     </div>
 </template>
@@ -26,24 +25,23 @@
     }
 </style>
 <script>
-    import store from '../store';
-    export default{
-        props: ['newTag'],
-        data() {
-            return store;
-        },
-        methods: {
-            addTag() {
-                // todo trim whitespaces before and after the tag.
-                let tag = this.$get('newTag');
-                let cleanTag = tag.replace(',', '');
-                store.gistToEdit.tags.push({ id: 0, name: cleanTag.trim() });
-                this.$set('newTag', '');
-            },
-            removeTag(name) {
-                let array_index = _.findKey(store.gistToEdit.tags, { 'name': name });
-                store.gistToEdit.tags.splice(array_index,1);
-            }
-        }
+  export default{
+    computed: {
+      tags () {
+        return this.$store.state.newGist.tags
+      }
+    },
+    methods: {
+      addTag(e) {
+        let tagValue = e.target.value
+        this.$store.commit('NEWGISTTAG', tagValue.replace(',', ''))
+        e.target.value = ''
+      },
+      removeTag(name) {
+        let array_index = _.findKey(this.$store.state.newGist.tags, { 'name': name });
+        this.$store.state.newGist.tags.splice(array_index,1);
+      }
+      // todo create a @input attribute and method to add tag with double space.
     }
+  }
 </script>

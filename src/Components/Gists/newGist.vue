@@ -15,7 +15,7 @@
                 <input class="title form-control" :value="title" @input="updateTitle"></input>
             </div>
             <div class="form-group">
-                <!--<tags-input-component></tags-input-component>-->
+                <tags-input-component></tags-input-component>
             </div>
             <!--<div class="form-group editor-container" v-if="!processing">-->
             <div class="form-group editor-container">
@@ -55,8 +55,11 @@
   import ace from 'brace'
   require('brace/mode/markdown');
   require('brace/theme/github');
-  // import tagsInputComponent from './tagsInputComponent.vue';
+  import tagsInputComponent from './tagsInputComponent.vue';
   export default {
+     components: {
+      'tags-input-component': tagsInputComponent
+    },
     computed: {
       newGist () {
         return this.$store.state.newGist

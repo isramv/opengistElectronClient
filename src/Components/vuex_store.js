@@ -39,6 +39,12 @@ const mutations = {
   },
   NEWGISTBODY (state, body) {
     state.newGist.body = body
+  },
+  NEWGISTTAG (state, tag) {
+    let tagObject = {
+      name: tag.trim()
+    }
+    state.newGist.tags.push(tagObject)
   }
 }
 
