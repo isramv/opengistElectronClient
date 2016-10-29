@@ -48,113 +48,113 @@
     }
 </style>
 <script>
-    import store from '../store'
-    import 'jquery'
-    import _ from 'lodash'
-    import ace from 'brace'
-    require('brace/mode/markdown');
-    require('brace/theme/github');
-    import tagsInputComponent from './tagsInputComponent.vue';
-    export default{
-        props: ['processing', 'editor', 'saving'],
-        data() {
-            return store
-        },
-        components: {
-            'tags-input-component': tagsInputComponent
-        },
-        events: {
-            'new-gist': function() {
-                let self = this;
-                self.newGist();
-            }
-        },
-        methods: {
-            newGist() {
+  import store from '../store'
+  import 'jquery'
+  import _ from 'lodash'
+  import ace from 'brace'
+  require('brace/mode/markdown');
+  require('brace/theme/github');
+  import tagsInputComponent from './tagsInputComponent.vue';
+  export default{
+    props: ['processing', 'editor', 'saving'],
+    data() {
+      return store
+    },
+    components: {
+      'tags-input-component': tagsInputComponent
+    },
+    events: {
+      'new-gist': function () {
+        let self = this;
+        self.newGist();
+      }
+    },
+    methods: {
+      newGist() {
 
-                let self = this;
-                let newGist = {
-                    title: '',
-                    body: '',
-                    tags: []
-                };
-                self.$set('gistToEdit', newGist);
-                setTimeout(function() {
-                    let editor = ace.edit('editor');
-                    editor.setValue('',1);
-                    editor.setOption("wrap", 80);
-                    editor.getSession().setMode('ace/mode/markdown');
-                    editor.setTheme('ace/theme/github');
-                    editor.commands.addCommand({
-                        name: 'savegist',
-                        bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
-                        exec: function(editor) {
-                            self.saveWhileEditing(editor);
-                        }
-                    });
-                    editor.commands.addCommand({
-                        name: 'cancel',
-                        bindKey: {win: 'Ctrl-P',  mac: 'Command-P'},
-                        exec: function(editor) {
-                            self.cancelAction();
-                        }
-                    });
-                    self.$set('editornew', editor);
-                }, 1000);
-
-            },
-            cancelAction() {
-                this.$set('editornew', {});
-                this.$set('gistToEdit', {});
-                this.$set('state', 'view');
-            },
-            createAction() {
-                let self = this;
-                // data.
-                let editor = self.$get('editornew');
-                self.$set('gistToEdit.body', editor.getValue());
-                let gte = self.$get('gistToEdit');
-                $.ajax({
-                    url: 'http://myapp.local/app_dev.php/api/v1/gists',
-                    headers: { 'authorization': localStorage.getItem('Authorization') },
-                    type: 'POST',
-                    data: gte,
-                }).done(function(res) {
-                    self.$set('gistToEdit', res);
-                    self.$dispatch('view-gist', res);
-                    self.$set('state', 'view');
-                    self.$dispatch('update-all');
-                    self.$set('editing', false);
-                });
-            },
-            saveWhileEditing(editor) {
-                let self = this;
-                console.log('save while editing');
-                console.log(self.$get('gistToEdit.id'));
-                // if no id. create a new post.
-                // this is the create url.
-                let url = 'http://myapp.local/app_dev.php/api/v1/gists';
-                if(!_.isUndefined(self.$get('gistToEdit.id'))) {
-                    console.log('id is undefined');
-                    // this is the update URL.
-                    url = 'http://myapp.local/app_dev.php/api/v1/gists/'+ self.$get('gistToEdit.id');
-                }
-                console.log(url);
-                let body_value = editor.getValue();
-                let gte = self.$get('gistToEdit');
-                gte.body = body_value;
-                console.log(gte);
-                $.ajax({
-                    url: url,
-                    headers: { 'authorization': localStorage.getItem('Authorization') },
-                    type: 'POST',
-                    data: gte,
-                }).done(function(res) {
-                    self.$set('gistToEdit.id',res.id);
-                    console.log(res);
-                    self.$set('saving', false);
-                });
+        let self = this;
+        let newGist = {
+          title: '',
+          body: '',
+          tags: []
+        };
+        self.$set('gistToEdit', newGist);
+        setTimeout(function () {
+          let editor = ace.edit('editor');
+          editor.setValue('', 1);
+          editor.setOption("wrap", 80);
+          editor.getSession().setMode('ace/mode/markdown');
+          editor.setTheme('ace/theme/github');
+          editor.commands.addCommand({
+            name: 'savegist',
+            bindKey: {win: 'Ctrl-S', mac: 'Command-S'},
+            exec: function (editor) {
+              self.saveWhileEditing(editor);
             }
+          });
+          editor.commands.addCommand({
+            name: 'cancel',
+            bindKey: {win: 'Ctrl-P', mac: 'Command-P'},
+            exec: function (editor) {
+              self.cancelAction();
+            }
+          });
+          self.$set('editornew', editor);
+        }, 1000);
+
+      },
+      cancelAction() {
+        this.$set('editornew', {});
+        this.$set('gistToEdit', {});
+        this.$set('state', 'view');
+      },
+      createAction() {
+        let self = this;
+        // data.
+        let editor = self.$get('editornew');
+        self.$set('gistToEdit.body', editor.getValue());
+        let gte = self.$get('gistToEdit');
+        $.ajax({
+          url: 'http://myapp.local/app_dev.php/api/v1/gists',
+          headers: {'authorization': localStorage.getItem('Authorization')},
+          type: 'POST',
+          data: gte,
+        }).done(function (res) {
+          self.$set('gistToEdit', res);
+          self.$dispatch('view-gist', res);
+          self.$set('state', 'view');
+          self.$dispatch('update-all');
+          self.$set('editing', false);
+        });
+      },
+      saveWhileEditing(editor) {
+        let self = this;
+        console.log('save while editing');
+        console.log(self.$get('gistToEdit.id'));
+        // if no id. create a new post.
+        // this is the create url.
+        let url = 'http://myapp.local/app_dev.php/api/v1/gists';
+        if (!_.isUndefined(self.$get('gistToEdit.id'))) {
+          console.log('id is undefined');
+          // this is the update URL.
+          url = 'http://myapp.local/app_dev.php/api/v1/gists/' + self.$get('gistToEdit.id');
         }
+        console.log(url);
+        let body_value = editor.getValue();
+        let gte = self.$get('gistToEdit');
+        gte.body = body_value;
+        console.log(gte);
+        $.ajax({
+          url: url,
+          headers: {'authorization': localStorage.getItem('Authorization')},
+          type: 'POST',
+          data: gte,
+        }).done(function (res) {
+          self.$set('gistToEdit.id', res.id);
+          console.log(res);
+          self.$set('saving', false);
+        });
+      }
     }
+  }
 </script>

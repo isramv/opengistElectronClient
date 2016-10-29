@@ -27,7 +27,6 @@
 </style>
 <script>
     import store from '../store';
-    import keymaster from 'keymaster'
     export default{
         props: ['newTag'],
         data() {
