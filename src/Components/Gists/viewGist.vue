@@ -1,13 +1,15 @@
 <template>
     <div>
         <h1 class="gist-title">{{ gist.title }}</h1>
+        <!-- todo create edit button -->
         <!--<div class="row actions">-->
             <!--<button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>-->
         <!--</div>-->
         <div id="gist-content">
             <div v-html="gistRender"></div>
             <ul class="list-inline">
-                <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">{{ tag.name }}</a></li>
+                <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">
+                    {{ tag.name }}</a></li>
             </ul>
         </div>
         <show-related-gists></show-related-gists>

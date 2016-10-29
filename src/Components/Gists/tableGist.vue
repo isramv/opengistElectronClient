@@ -6,7 +6,6 @@
             <!--<tr v-for="gist in gists | filterBy searchTitle">-->
             <tr v-for="gist in gists">
                 <td>
-                  <!--<a class="table-component_link" v-on:click="showGist(gist.gist.id)">{{ gist.gist.title }}</a>-->
                   <router-link :to="{ name: 'viewGist', params: { id: gist.gist.id } }">{{ gist.gist.title }}</router-link>
                 </td>
             </tr>

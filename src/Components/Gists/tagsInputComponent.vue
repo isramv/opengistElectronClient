@@ -1,4 +1,5 @@
 <template>
+    <!-- todo migrate this. -->
     <div>
         <input class="input-sm tags-input form-control" v-model="newTag" v-on:keyup.188.13="addTag()" placeholder="Add new tags..."/>
         <ul class="tags-list list-inline">

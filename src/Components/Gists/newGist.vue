@@ -1,4 +1,5 @@
 <template>
+    <!-- todo migrate this. -->
     <div>
         <div class="row actions">
             <div class="col-xs-4 col-xs-offset-8">
