@@ -9,7 +9,12 @@ const state = {
   auth: '',
   loadingLogin: false,
   relatedGists: null,
-  gists: {}
+  gists: {},
+  newGist: {
+    title: '',
+    body: '#here is my body',
+    tags: []
+  }
 }
 
 const mutations = {
@@ -28,6 +33,12 @@ const mutations = {
   },
   RELATEDGISTS (state, gists) {
     state.relatedGists = gists
+  },
+  NEWGISTTITLE (state, title) {
+    state.newGist.title = title;
+  },
+  NEWGISTBODY (state, body) {
+    state.newGist.body = body
   }
 }
 
