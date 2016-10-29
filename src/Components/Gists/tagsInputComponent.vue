@@ -33,9 +33,11 @@
     },
     methods: {
       addTag(e) {
-        let tagValue = e.target.value
-        this.$store.commit('NEWGISTTAG', tagValue.replace(',', ''))
-        e.target.value = ''
+        let tagValue = e.target.value.trim()
+        if(tagValue.length > 0) {
+          this.$store.commit('NEWGISTTAG', tagValue.replace(',', ''))
+          e.target.value = ''
+        }
       },
       removeTag(name) {
         let array_index = _.findKey(this.$store.state.newGist.tags, { 'name': name });
