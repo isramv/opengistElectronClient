@@ -75,16 +75,27 @@
         return this.newGist.body
       },
       closeEdit() {
-        return this.$store.state.closeEdit
+        if(!_.isUndefined(this.$store.state.closeEdit)) {
+          return this.$store.state.closeEdit
+        } else {
+          return false
+        }
       }
     },
     watch: {
         closeEdit: function(val, oldVal) {
           if(val) {
-            let route = '/gistapp/view/' + this.$store.state.newGist.id
-            this.$router.push(route)
+            this.$router.push({ name: 'viewGist',
+                      params: {
+                        id: this.$store.state.newGist.id
+                      }
+                    })
           }
         }
+    },
+    beforeRouteLeave (to, from, next) {
+      this.$store.commit('NEWGISTRESET')
+      next()
     },
     mounted () {
       const editor = ace.edit('editor');
@@ -122,7 +133,6 @@
       saveAndCloseAction() {
         let gistToSave = this.$store.state.newGist
         gistToSave.closeAfterSave = true
-        console.log('save and close action')
         this.$store.dispatch('saveGist', gistToSave)
       }
     }

@@ -11,6 +11,12 @@ const state = {
   relatedGists: null,
   gists: {},
   closeEdit: false,
+  viewGist: {
+    id: '',
+    title: '',
+    body: '',
+    tags: []
+  },
   newGist: {
     id: '',
     title: '',
@@ -48,8 +54,20 @@ const mutations = {
     }
     state.newGist.tags.push(tagObject)
   },
+  NEWGISTRESET (state) {
+    state.newGist = {
+      id: '',
+      title: '',
+      body: '',
+      tags: []
+    }
+    state.closeEdit = false
+  },
   CLOSEEDIT (state) {
     state.closeEdit = true;
+  },
+  VIEWGIST (state, gistObject) {
+    state.viewGist = gistObject
   }
 }
 

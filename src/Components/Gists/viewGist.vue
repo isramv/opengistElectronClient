@@ -1,5 +1,6 @@
 <template>
     <div>
+        {{ gistId }}
         <h1 class="gist-title">{{ gist.title }}</h1>
         <!-- todo create edit button -->
         <!--<div class="row actions">-->
@@ -47,18 +48,19 @@
         return this.$route.params.id
       },
       gist() {
-        let self = this
-        let gists = this.$store.state.gists
-        let result = _.filter(gists, o => {
-          if (o.gist.id == self.gistId) {
-            return o.gist
-          }
-        })
-        return result[0].gist
+          return this.$store.state.viewGist
       },
       gistRender () {
-        return marked(this.gist.body)
+          if(this.$store.state.viewGist.body.length > 0) {
+              return marked(this.$store.state.viewGist.body)
+          }
       }
+    },
+    mounted () {
+        this.$store.dispatch('viewGist', this.$route.params.id)
+    },
+    beforeUpdate() {
+        this.$store.dispatch('viewGist', this.$route.params.id)
     },
     watch: {
       gistId () {

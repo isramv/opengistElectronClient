@@ -50,7 +50,10 @@ export default {
           // todo then redirect the user.
           // close the edit and go to view/:id
           // todo move the following line to the new action.
-          context.commit('CLOSEEDIT', true)
+          context.dispatch('getGists').then( () => {
+            context.commit('VIEWGIST', res)
+            context.commit('CLOSEEDIT', true)
+          })
         }
       });
     } else if(_.isNumber(context.state.newGist.id) === true) {
@@ -68,9 +71,25 @@ export default {
           // todo then redirect the user.
           // close the edit and go to view/:id
           // todo move the following line to the new action.
-          context.commit('CLOSEEDIT', true)
+          context.dispatch('getGists').then( () => {
+            context.commit('VIEWGIST', res)
+            context.commit('CLOSEEDIT', true)
+          })
         }
       });
     }
+  },
+  viewGist (context, gistId) {
+    let result = _.filter(context.state.gists, o => {
+      if (o.gist.id == gistId) {
+        return o.gist
+      }
+    })
+    if(result.length === 0) {
+      context.dispatch('getGists')
+    } else {
+      context.commit('VIEWGIST', result[0].gist)
+    }
+
   }
 }
