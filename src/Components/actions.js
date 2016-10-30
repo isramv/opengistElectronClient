@@ -31,5 +31,46 @@ export default {
     } else {
       context.commit('RELATEDGISTS', null)
     }
+  },
+  saveGist (context, params) {
+    // disable save
+    if(_.isNumber(context.state.newGist.id) === false) {
+      // if no id is present we create a new gist.
+      $.ajax({
+        url: 'http://myapp.local/app_dev.php/api/v1/gists',
+        headers: {'authorization': context.state.auth },
+        type: 'POST',
+        data: params,
+      }).done(function (res) {
+        context.state.newGist = res
+        // dispatch update list.
+        // enable save.
+        if(params.closeAfterSave) {
+          // todo dispatch action to update index
+          // todo then redirect the user.
+          // close the edit and go to view/:id
+          // todo move the following line to the new action.
+          context.commit('CLOSEEDIT', true)
+        }
+      });
+    } else if(_.isNumber(context.state.newGist.id) === true) {
+      // Update the gist.
+      $.ajax({
+        type: 'POST',
+        url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ context.state.newGist.id,
+        headers: { 'authorization': context.state.auth },
+        data: context.state.newGist,
+      }).done(function(res) {
+        context.state.newGist = res
+        // enable save
+        if(params.closeAfterSave) {
+          // todo dispatch action to update index
+          // todo then redirect the user.
+          // close the edit and go to view/:id
+          // todo move the following line to the new action.
+          context.commit('CLOSEEDIT', true)
+        }
+      });
+    }
   }
 }

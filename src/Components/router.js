@@ -34,8 +34,8 @@ var router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  // console.log(from)
-  // console.log(to)
+   // console.log(from)
+   // console.log(to)
   let goesToSecurePath = to.path === '/gistapp'
   let nouser = localStorage.getItem('username') === null
   if (to.path === '/' && !nouser) {

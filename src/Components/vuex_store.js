@@ -10,7 +10,9 @@ const state = {
   loadingLogin: false,
   relatedGists: null,
   gists: {},
+  closeEdit: false,
   newGist: {
+    id: '',
     title: '',
     body: '',
     tags: []
@@ -45,6 +47,9 @@ const mutations = {
       name: tag.trim()
     }
     state.newGist.tags.push(tagObject)
+  },
+  CLOSEEDIT (state) {
+    state.closeEdit = true;
   }
 }
 
