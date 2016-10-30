@@ -63,8 +63,15 @@ const mutations = {
     }
     state.closeEdit = false
   },
+  UPDATELOCALSTORAGE (state) {
+    let ls_gists = JSON.stringify(state.gists)
+    localStorage.setItem('GISTS', ls_gists)
+  },
   CLOSEEDIT (state) {
     state.closeEdit = true;
+  },
+  CLOSEEDITFALSE (state) {
+    state.closeEdit = false;
   },
   VIEWGIST (state, gistObject) {
     state.viewGist = gistObject

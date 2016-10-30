@@ -2,6 +2,7 @@
     <!-- todo migrate this. -->
     <div>
         <div class="row actions">
+
             <div class="col-xs-4 col-xs-offset-8">
                 <!-- todo fix the cancel button. -->
                 <!--<button class="btn-sm btn btn-default btn-sm" v-on:click="cancelAction">Cancel</button>-->
@@ -48,9 +49,6 @@
         padding-right: 40px;
         border: 1px solid #d4d4d4;
     }
-    .select2-select {
-
-    }
 </style>
 <script>
   import store from '../store'
@@ -75,11 +73,7 @@
         return this.newGist.body
       },
       closeEdit() {
-        if(!_.isUndefined(this.$store.state.closeEdit)) {
           return this.$store.state.closeEdit
-        } else {
-          return false
-        }
       }
     },
     watch: {
@@ -95,6 +89,7 @@
     },
     beforeRouteLeave (to, from, next) {
       this.$store.commit('NEWGISTRESET')
+      this.$store.commit('CLOSEEDITFALSE')
       next()
     },
     mounted () {
@@ -123,7 +118,7 @@
       updateTitle(e) {
         this.$store.commit('NEWGISTTITLE', e.target.value)
       },
-      updateBody(e) {
+      updateBody() {
         this.$store.commit('NEWGISTBODY', ace.edit("editor").getValue())
       },
       saveAction() {

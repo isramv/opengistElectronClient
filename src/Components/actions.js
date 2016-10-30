@@ -9,6 +9,7 @@ export default {
       type: 'GET'
     }).done(function(res) {
       context.commit('GISTS', res)
+      context.commit('UPDATELOCALSTORAGE')
     });
   },
   // show the gist also tagged with
@@ -44,16 +45,9 @@ export default {
       }).done(function (res) {
         context.state.newGist = res
         // dispatch update list.
-        // enable save.
+        context.dispatch('insertInLocalGistsList', res)
         if(params.closeAfterSave) {
-          // todo dispatch action to update index
-          // todo then redirect the user.
-          // close the edit and go to view/:id
-          // todo move the following line to the new action.
-          context.dispatch('getGists').then( () => {
-            context.commit('VIEWGIST', res)
-            context.commit('CLOSEEDIT', true)
-          })
+          context.commit('CLOSEEDIT', true)
         }
       });
     } else if(_.isNumber(context.state.newGist.id) === true) {
@@ -66,18 +60,25 @@ export default {
       }).done(function(res) {
         context.state.newGist = res
         // enable save
+        context.dispatch('updateInLocalGistsList', res)
         if(params.closeAfterSave) {
-          // todo dispatch action to update index
-          // todo then redirect the user.
-          // close the edit and go to view/:id
-          // todo move the following line to the new action.
-          context.dispatch('getGists').then( () => {
-            context.commit('VIEWGIST', res)
             context.commit('CLOSEEDIT', true)
-          })
         }
       });
     }
+  },
+  // update local list of gists is newly saved
+  updateInLocalGistsList (context, gistObject) {
+    let index = _.findIndex(context.state.gists, (o) => {
+      return o.gist.id === gistObject.id
+    })
+    context.state.gists[index] = { gist: gistObject }
+    context.commit('UPDATELOCALSTORAGE')
+  },
+  // insert in local list of gists if gist updated
+  insertInLocalGistsList (context, gistObject) {
+    context.state.gists.unshift({ gist: gistObject })
+    context.commit('UPDATELOCALSTORAGE')
   },
   viewGist (context, gistId) {
     let result = _.filter(context.state.gists, o => {
