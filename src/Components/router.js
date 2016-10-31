@@ -9,8 +9,13 @@ Vue.use(Router);
 
 var router = new Router({
   routes: [
-    {path: '/', component: loginComponent},
     {
+      name: 'login',
+      path: '/',
+      component: loginComponent
+    },
+    {
+      name: 'main',
       path: '/gistapp',
       component: gistMainComponent,
       children: [
@@ -35,6 +40,11 @@ var router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  // console.log('// to: //')
+  // console.log(to)
+  // console.log('// from: //')
+  // console.log(from)
+  // console.log('///////////')
   next()
   // let goesToSecurePath = to.path === '/gistapp'
   // let nouser = localStorage.getItem('username') === null

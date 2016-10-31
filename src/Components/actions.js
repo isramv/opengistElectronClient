@@ -87,11 +87,11 @@ export default {
           return o.gist
         }
       })
-      if(result === -1) {
-        reject('index not found')
-      } else {
+      if(result !== -1) {
         context.commit('VIEWGIST', context.state.gists[result])
         resolve('found')
+      } else {
+        reject('index not found')
       }
     })
   },

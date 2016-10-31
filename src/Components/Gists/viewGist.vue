@@ -11,7 +11,7 @@
                     {{ tag.name }}</a></li>
             </ul>
         </div>
-        <!--<show-related-gists></show-related-gists>-->
+        <show-related-gists></show-related-gists>
     </div>
 </template>
 <style lang="sass" xml:lang="scss">
@@ -57,11 +57,13 @@
       }
     },
     beforeRouteEnter (to, from, next) {
-        console.log(to)
-        store.dispatch('viewGist', to.params.id).then( () => {
-            console.log('waited for promise')
+        console.log('// entering viewGist //')
+        store.dispatch('viewGist', to.params.id).then(() => {
             next()
+        }).catch((e) => {
+          console.log(e)
         })
+
     },
     beforeRouteLeave (to, from, next) {
       if(to.name === 'editGist') {
@@ -74,15 +76,11 @@
         next()
       }
     },
-//    mounted () {
-//        this.$store.dispatch('viewGist', this.$route.params.id)
-//    },
-//    beforeUpdate() {
-//        this.$store.dispatch('viewGist', this.$route.params.id)
-//    },
     watch: {
-      gistId () {
-        this.$store.dispatch('showRelatedGists', { tagId: 0, gistId: 0})
+      gistId (val, oldVal) {
+        this.$store.dispatch('viewGist', val).then(() => {
+          this.$store.dispatch('showRelatedGists', { tagId: 0, gistId: 0})
+        })
       }
     },
     components: {
