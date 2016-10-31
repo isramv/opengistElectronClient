@@ -6,13 +6,12 @@
             <div class="col-xs-4 col-xs-offset-8">
                 <!-- todo fix the cancel button. -->
                 <!--<button class="btn-sm btn btn-default btn-sm" v-on:click="cancelAction">Cancel</button>-->
-                <!--<button class="btn-sm btn btn-default btn-sm" v-on:click="createAction">Save</button>-->
             </div>
         </div>
         <!--<i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="processing"></i>-->
         <div>
             <!--<i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="saving"></i>-->
-            {{ closeEdit }}
+            <!--{{ closeEdit }}-->
             <div class="form-group">
                 <input class="title form-control" :value="title" @input="updateTitle"></input>
             </div>
@@ -27,9 +26,10 @@
             <div class="form-group">
                 <button class="btn btn-default" @click="saveAction()">Save</button>
             </div>
-          <div class="form-group">
+            <div class="form-group">
                 <button class="btn btn-default" @click="saveAndCloseAction()">Save And Close</button>
             </div>
+
         </div>
     </div>
 </template>
@@ -51,7 +51,7 @@
     }
 </style>
 <script>
-  import store from '../store'
+  import store from '../vuex_store'
   import 'jquery'
   import _ from 'lodash'
   import ace from 'brace'
@@ -77,19 +77,28 @@
       }
     },
     watch: {
-        closeEdit: function(val, oldVal) {
+        closeEdit: function(val) {
           if(val) {
-            this.$router.push({ name: 'viewGist',
-                      params: {
-                        id: this.$store.state.newGist.id
-                      }
-                    })
+            this.$router.push({ name: 'viewGist', params: {id: this.$store.state.newGist.id}})
           }
         }
     },
+    beforeRouteEnter (to, from, next) {
+        // if entering from new
+        // clear the newGist
+      console.log(store.state)
+      console.log('// enter to //')
+      console.log(to)
+      console.log('// enter from //')
+      console.log(from)
+      next()
+    },
     beforeRouteLeave (to, from, next) {
-      this.$store.commit('NEWGISTRESET')
-      this.$store.commit('CLOSEEDITFALSE')
+        // update the viewGist action.
+      console.log('// leaving to //')
+      console.log(to)
+      console.log('// entering from //')
+      console.log(from)
       next()
     },
     mounted () {

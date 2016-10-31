@@ -81,16 +81,32 @@ export default {
     context.commit('UPDATELOCALSTORAGE')
   },
   viewGist (context, gistId) {
-    let result = _.filter(context.state.gists, o => {
-      if (o.gist.id == gistId) {
-        return o.gist
+    return new Promise((resolve, reject) => {
+      let result = _.filter(context.state.gists, o => {
+        if (o.gist.id == gistId) {
+          return o.gist
+        }
+      })
+      if(result.length === 0) {
+        reject('error')
+        context.dispatch('getGists')
+      } else {
+        resolve('success')
+        context.commit('VIEWGIST', result[0].gist)
       }
     })
-    if(result.length === 0) {
-      context.dispatch('getGists')
-    } else {
-      context.commit('VIEWGIST', result[0].gist)
-    }
-
+  },
+  getOneGistToEdit (context, gistId) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'http://myapp.local/app_dev.php/api/v1/gists/' + gistId,
+        headers: {'authorization': context.state.auth},
+        type: 'GET',
+        dataType: 'json'
+      }).done(function (res) {
+        context.commit('SETNEWGIST', res)
+        resolve('success')
+      })
+    })
   }
 }

@@ -1,11 +1,9 @@
 <template>
     <div>
-        {{ gistId }}
+        <div class="row actions">
+          <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
+        </div>
         <h1 class="gist-title">{{ gist.title }}</h1>
-        <!-- todo create edit button -->
-        <!--<div class="row actions">-->
-            <!--<button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>-->
-        <!--</div>-->
         <div id="gist-content">
             <div v-html="gistRender"></div>
             <ul class="list-inline">
@@ -40,7 +38,7 @@
 <script>
   import _ from 'lodash'
   import marked from 'marked'
-  import store from '../store'
+  import store from '../vuex_store'
   import showRelatedGists from './showRelatedGists.vue'
   export default{
     computed: {
@@ -54,6 +52,19 @@
           if(this.$store.state.viewGist.body.length > 0) {
               return marked(this.$store.state.viewGist.body)
           }
+      }
+    },
+    beforeRouteLeave (to, from, next) {
+      console.log(to)
+      console.log(from.name)
+      if(to.name === 'editGist') {
+        // if next page is editGist route.
+        // fetch the gistToEdit and attach it to newGist state in the store.
+        this.$store.dispatch('getOneGistToEdit', to.params.id).then(() => {
+          next()
+        })
+      } else {
+        next()
       }
     },
     mounted () {
@@ -74,6 +85,9 @@
       showRelatedGists (tid) {
         let gid = _.toInteger(this.gistId)
         this.$store.dispatch('showRelatedGists', { tagId: tid, gistId: gid})
+      },
+      editGist(id) {
+        this.$router.push({ name: 'editGist', params: {id: id }})
       }
     }
   }

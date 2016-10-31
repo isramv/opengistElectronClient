@@ -54,6 +54,9 @@ const mutations = {
     }
     state.newGist.tags.push(tagObject)
   },
+  SETNEWGIST (state, gistObject) {
+    state.newGist = gistObject
+  },
   NEWGISTRESET (state) {
     state.newGist = {
       id: '',
