@@ -82,17 +82,16 @@ export default {
   },
   viewGist (context, gistId) {
     return new Promise((resolve, reject) => {
-      let result = _.filter(context.state.gists, o => {
+      let result = _.findIndex(context.state.gists, o => {
         if (o.gist.id == gistId) {
           return o.gist
         }
       })
-      if(result.length === 0) {
-        reject('error')
-        context.dispatch('getGists')
+      if(result === -1) {
+        reject('index not found')
       } else {
-        resolve('success')
-        context.commit('VIEWGIST', result[0].gist)
+        context.commit('VIEWGIST', context.state.gists[result])
+        resolve('found')
       }
     })
   },

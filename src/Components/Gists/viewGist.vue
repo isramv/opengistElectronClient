@@ -11,7 +11,7 @@
                     {{ tag.name }}</a></li>
             </ul>
         </div>
-        <show-related-gists></show-related-gists>
+        <!--<show-related-gists></show-related-gists>-->
     </div>
 </template>
 <style lang="sass" xml:lang="scss">
@@ -46,17 +46,24 @@
         return this.$route.params.id
       },
       gist() {
-          return this.$store.state.viewGist
+          return this.$store.state.viewGist.gist
       },
       gistRender () {
-          if(this.$store.state.viewGist.body.length > 0) {
-              return marked(this.$store.state.viewGist.body)
+          if(this.$store.state.viewGist.gist.body.length > 0) {
+              return marked(this.$store.state.viewGist.gist.body)
+          } else {
+              return ''
           }
       }
     },
+    beforeRouteEnter (to, from, next) {
+        console.log(to)
+        store.dispatch('viewGist', to.params.id).then( () => {
+            console.log('waited for promise')
+            next()
+        })
+    },
     beforeRouteLeave (to, from, next) {
-      console.log(to)
-      console.log(from.name)
       if(to.name === 'editGist') {
         // if next page is editGist route.
         // fetch the gistToEdit and attach it to newGist state in the store.
@@ -67,12 +74,12 @@
         next()
       }
     },
-    mounted () {
-        this.$store.dispatch('viewGist', this.$route.params.id)
-    },
-    beforeUpdate() {
-        this.$store.dispatch('viewGist', this.$route.params.id)
-    },
+//    mounted () {
+//        this.$store.dispatch('viewGist', this.$route.params.id)
+//    },
+//    beforeUpdate() {
+//        this.$store.dispatch('viewGist', this.$route.params.id)
+//    },
     watch: {
       gistId () {
         this.$store.dispatch('showRelatedGists', { tagId: 0, gistId: 0})
