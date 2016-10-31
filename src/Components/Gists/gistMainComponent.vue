@@ -77,64 +77,20 @@
             let self = this
             // @todo if computed gist is empty trigger fetchGists
             keymaster('command+n', function() {
-//                self.changeState('new')
+
             });
             keymaster('command+escape', function() {
-//                self.changeState('view')
+
             });
             keymaster('command+e', function() {
-                let gid = store.gist.id;
-//                console.log(gid);
-//                self.editGist(gid);
+
             });
         },
-//        events: {
-//            'logout-all': function() {
-//                var self = this;
-//                self.$set('gists', null);
-//                self.$set('state', '');
-//                self.$broadcast('logout-global');
-//                router.go('login');
-//            },
-//            'view-gist': function(gist) {
-//                this.showGist(gist);
-//            },
-//            'edit-gist': function(gistId) {
-//                this.editGist(gistId);
-//            },
-//            'update-all': function() {
-//                this.fetchGists();
-//            },
-//            'update-gist-on-index': function(gist) {
-//                let gid = gist.id;
-//                console.log(store.gists);
-//                // todo is going to search the gist by id and update with the new one.
-//                _.find(store.gists, function(g) {
-//                    if(g.gist.id == gid) {
-//                        g.gist = gist;
-//                    }
-//                });
-//            }
-//        },
         methods: {
             fetchGists() {
                 let self = this;
                 self.$store.dispatch('getGists')
-            },
-//            changeState(state) {
-//                let self = this;
-//                self.$set('state', state);
-//                if(state === 'new') {
-//                    self.$broadcast('new-gist');
-//                }
-//            },
-//            showGist(gist) {
-//                this.$set('state', 'view');
-//                this.$broadcast('view-gist', gist);
-//            },
-//            editGist(gistId) {
-//                this.$broadcast('edit-gist', gistId);
-//            }
+            }
         }
     }
 </script>

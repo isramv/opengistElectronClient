@@ -1,29 +1,22 @@
 <template>
-    <!-- todo migrate this. -->
     <div>
         <div class="row actions">
-
             <div class="col-xs-4 col-xs-offset-8">
-                <!--<router-link :to="{ name: 'viewGist', params : { id: newGist.id } }">Cancel</router-link>-->
             </div>
         </div>
-        <!--<i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="processing"></i>-->
         <div>
-            <!--<i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="saving"></i>-->
-            <!--{{ closeEdit }}-->
             <div class="form-group">
                 <input class="title form-control" :value="title" @input="updateTitle"></input>
             </div>
             <div class="form-group">
                 <tags-input-component></tags-input-component>
             </div>
-            <!--<div class="form-group editor-container" v-if="!processing">-->
             <div class="form-group editor-container">
                 <div id="editor" @input="updateBody"></div>
             </div>
             <br/>
             <div class="form-group">
-                <!--<router-link class="btn btn-default" :to="{ name: 'viewGist', params : { id: newGist.id } }">Cancel</router-link>-->
+                <button class="btn btn-default" @click="cancelAction">Cancel</button>
             </div>
             <div class="form-group">
                 <button class="btn btn-default" @click="saveAction()">Save</button>
@@ -86,21 +79,25 @@
         }
     },
     beforeRouteEnter (to, from, next) {
-        // if entering from new
-        // clear the newGist
-//      console.log(store.state)
-//      console.log('// enter to //')
-//      console.log(to)
-//      console.log('// enter from //')
-//      console.log(from)
+      if(to.name === 'newGist') {
+        store.commit('NEWGISTRESET')
+        next()
+      } else {
+        next()
+      }
+      // console.log(store.state)
+      // console.log('// enter to //')
+      // console.log(to)
+      // console.log('// enter from //')
+      // console.log(from)
       next()
     },
     beforeRouteLeave (to, from, next) {
-        // update the viewGist action.
-//      console.log('// leaving to //')
-//      console.log(to)
-//      console.log('// entering from //')
-//      console.log(from)
+      // update the viewGist action.
+      // console.log('// leaving to //')
+      // console.log(to)
+      // console.log('// entering from //')
+      // console.log(from)
       next()
     },
     mounted () {
@@ -141,6 +138,11 @@
         let gistToSave = this.$store.state.newGist
         gistToSave.closeAfterSave = true
         this.$store.dispatch('saveGist', gistToSave)
+      },
+      cancelAction() {
+        if(this.$store.state.newGist.id !== '') {
+          this.$router.push({ name: 'viewGist', params : { id: this.$store.state.newGist.id } });
+        }
       }
     }
   }
