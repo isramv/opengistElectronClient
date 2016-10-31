@@ -4,8 +4,7 @@
         <div class="row actions">
 
             <div class="col-xs-4 col-xs-offset-8">
-                <!-- todo fix the cancel button. -->
-                <!--<button class="btn-sm btn btn-default btn-sm" v-on:click="cancelAction">Cancel</button>-->
+                <!--<router-link :to="{ name: 'viewGist', params : { id: newGist.id } }">Cancel</router-link>-->
             </div>
         </div>
         <!--<i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="processing"></i>-->
@@ -23,6 +22,9 @@
                 <div id="editor" @input="updateBody"></div>
             </div>
             <br/>
+            <div class="form-group">
+                <!--<router-link class="btn btn-default" :to="{ name: 'viewGist', params : { id: newGist.id } }">Cancel</router-link>-->
+            </div>
             <div class="form-group">
                 <button class="btn btn-default" @click="saveAction()">Save</button>
             </div>
@@ -86,19 +88,19 @@
     beforeRouteEnter (to, from, next) {
         // if entering from new
         // clear the newGist
-      console.log(store.state)
-      console.log('// enter to //')
-      console.log(to)
-      console.log('// enter from //')
-      console.log(from)
+//      console.log(store.state)
+//      console.log('// enter to //')
+//      console.log(to)
+//      console.log('// enter from //')
+//      console.log(from)
       next()
     },
     beforeRouteLeave (to, from, next) {
         // update the viewGist action.
-      console.log('// leaving to //')
-      console.log(to)
-      console.log('// entering from //')
-      console.log(from)
+//      console.log('// leaving to //')
+//      console.log(to)
+//      console.log('// entering from //')
+//      console.log(from)
       next()
     },
     mounted () {
@@ -131,6 +133,7 @@
         this.$store.commit('NEWGISTBODY', ace.edit("editor").getValue())
       },
       saveAction() {
+        this.updateBody()
         let gistToSave = this.$store.state.newGist
         this.$store.dispatch('saveGist', gistToSave)
       },

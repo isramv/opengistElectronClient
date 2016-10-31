@@ -57,7 +57,7 @@
       }
     },
     beforeRouteEnter (to, from, next) {
-        console.log('// entering viewGist //')
+//        console.log('// entering viewGist //')
         store.dispatch('viewGist', to.params.id).then(() => {
             next()
         }).catch((e) => {
@@ -78,6 +78,7 @@
     },
     watch: {
       gistId (val, oldVal) {
+        console.log(val, oldVal)
         this.$store.dispatch('viewGist', val).then(() => {
           this.$store.dispatch('showRelatedGists', { tagId: 0, gistId: 0})
         })
