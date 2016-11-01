@@ -1,30 +1,23 @@
 <template>
     <div>
         <div class="row actions">
-            <div class="col-xs-4 col-xs-offset-8">
-            </div>
+
         </div>
         <div>
             <div class="form-group">
                 <input class="title form-control" :value="title" @input="updateTitle"></input>
             </div>
+          <div class="form-group">
+            <button class="btn btn-default btn-sm" @click="cancelAction">Cancel</button>
+            <button class="btn btn-default btn-sm" @click="saveAction()">Save</button>
+            <button class="btn btn-default btn-sm" @click="saveAndCloseAction()">Save And Close</button>
+          </div>
             <div class="form-group">
                 <tags-input-component></tags-input-component>
             </div>
             <div class="form-group editor-container">
                 <div id="editor" @input="updateBody"></div>
             </div>
-            <br/>
-            <div class="form-group">
-                <button class="btn btn-default" @click="cancelAction">Cancel</button>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-default" @click="saveAction()">Save</button>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-default" @click="saveAndCloseAction()">Save And Close</button>
-            </div>
-
         </div>
     </div>
 </template>

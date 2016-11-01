@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="row actions">
-          <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
-        </div>
         <h1 class="gist-title">{{ gist.title }}</h1>
+        <div class="row actions">
+            <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
+        </div>
         <div id="gist-content">
             <div v-html="gistRender"></div>
             <ul class="list-inline">
