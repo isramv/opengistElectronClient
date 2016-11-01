@@ -18,5 +18,5 @@
 <script>
   import bootstrap from 'bootstrap-webpack'
   import fontawesome from 'font-awesome-webpack'
-  require('!css!sass!../scss/style.scss')
+  require('!style!css!sass!../scss/style.scss')
 </script>
