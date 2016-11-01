@@ -34,8 +34,10 @@ export default {
     }
   },
   saveGist (context, params) {
+    console.log(params.closeAfterSave)
     // disable save
     if(_.isNumber(context.state.newGist.id) === false) {
+      context.commit('LOADING', { status: true, message: 'saving gist'})
       // if no id is present we create a new gist.
       $.ajax({
         url: 'http://myapp.local/app_dev.php/api/v1/gists',
@@ -43,6 +45,7 @@ export default {
         type: 'POST',
         data: params,
       }).done(function (res) {
+        context.commit('LOADING', { status: false, message: ''})
         context.state.newGist = res
         // dispatch update list.
         context.dispatch('insertInLocalGistsList', res)
@@ -51,6 +54,7 @@ export default {
         }
       });
     } else if(_.isNumber(context.state.newGist.id) === true) {
+      context.commit('LOADING', { status: true, message: 'updating gist'})
       // Update the gist.
       $.ajax({
         type: 'POST',
@@ -61,6 +65,7 @@ export default {
         context.state.newGist = res
         // enable save
         context.dispatch('updateInLocalGistsList', res)
+        context.commit('LOADING', { status: false, message: ''})
         if(params.closeAfterSave) {
             context.commit('CLOSEEDIT', true)
         }
@@ -82,6 +87,7 @@ export default {
   },
   viewGist (context, gistId) {
     return new Promise((resolve, reject) => {
+      context.commit('LOADING', { status: true, message: 'loading gist'})
       let result = _.findIndex(context.state.gists, o => {
         if (o.gist.id == gistId) {
           return o.gist
@@ -89,14 +95,17 @@ export default {
       })
       if(result !== -1) {
         context.commit('VIEWGIST', context.state.gists[result])
+        context.commit('LOADING', { status: false, message: ''})
         resolve('found')
       } else {
+        context.commit('LOADING', { status: false, message: ''})
         reject('index not found')
       }
     })
   },
   getOneGistToEdit (context, gistId) {
     return new Promise((resolve, reject) => {
+      context.commit('LOADING', { status: true, message: 'loading gist'})
       $.ajax({
         url: 'http://myapp.local/app_dev.php/api/v1/gists/' + gistId,
         headers: {'authorization': context.state.auth},
@@ -104,6 +113,7 @@ export default {
         dataType: 'json'
       }).done(function (res) {
         context.commit('SETNEWGIST', res)
+        context.commit('LOADING', { status: false, message: ''})
         resolve('success')
       })
     })

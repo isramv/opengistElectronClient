@@ -42,6 +42,7 @@
         </div>
         <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
             <div class="rc-container">
+                <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="loading"></i>{{ loadingMessage }}
                 <router-view></router-view>
             </div>
         </div>
@@ -63,6 +64,12 @@
             },
             auth() {
                 return this.$store.state.auth
+            },
+            loading() {
+                return this.$store.state.loading.status
+            },
+            loadingMessage() {
+                return this.$store.state.loading.message
             }
         },
         beforeCreate() {

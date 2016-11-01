@@ -74,6 +74,7 @@
     watch: {
         closeEdit: function(val) {
           if(val) {
+            this.$store.commit('CLOSEEDITFALSE')
             this.$router.push({ name: 'viewGist', params: {id: this.$store.state.newGist.id}})
           }
         }
@@ -135,6 +136,7 @@
         this.$store.dispatch('saveGist', gistToSave)
       },
       saveAndCloseAction() {
+        this.$store.commit('NEWGISTBODY', ace.edit("editor").getValue())
         let gistToSave = this.$store.state.newGist
         gistToSave.closeAfterSave = true
         this.$store.dispatch('saveGist', gistToSave)

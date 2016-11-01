@@ -5,6 +5,10 @@ import actions from './actions'
 Vue.use(Vuex)
 
 const state = {
+  loading: {
+      status: false,
+      message: ''
+  },
   username: '',
   auth: '',
   loadingLogin: false,
@@ -78,6 +82,9 @@ const mutations = {
   },
   VIEWGIST (state, gistObject) {
     state.viewGist = gistObject
+  },
+  LOADING (state, params) {
+    state.loading = params
   }
 }
 
