@@ -2,7 +2,7 @@ import $ from 'jquery'
 export default {
   // fetches all the gists.
   getGists (context) {
-    // @todo create a message system for ajax operations.
+    context.commit('LOADING', { status: true, message: 'updating all the gists'})
     $.ajax({
       url: 'http://myapp.local/app_dev.php/api/v1/gists',
       headers: { 'authorization': context.state.auth },
@@ -10,6 +10,7 @@ export default {
     }).done(function(res) {
       context.commit('GISTS', res)
       context.commit('UPDATELOCALSTORAGE')
+      context.commit('LOADING', { status: false, message: ''})
     });
   },
   // show the gist also tagged with

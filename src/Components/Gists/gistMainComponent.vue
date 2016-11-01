@@ -35,7 +35,7 @@
     <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-3 table-container">
             <div class="rc-container">
-                <a href="#" @click="fetchGists()">Update index</a>
+                <a @click="fetchGists()">Update index</a>
                 <router-link to="/gistapp/new" class="btn">New</router-link>
             </div>
             <table-gist></table-gist>
@@ -95,8 +95,7 @@
         },
         methods: {
             fetchGists() {
-                let self = this;
-                self.$store.dispatch('getGists')
+                this.$store.dispatch('getGists')
             }
         }
     }

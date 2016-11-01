@@ -102,6 +102,7 @@
       next()
     },
     mounted () {
+      let self = this
       const editor = ace.edit('editor');
       editor.setOption("wrap", 80);
       editor.getSession().setMode('ace/mode/markdown');
@@ -112,6 +113,7 @@
         bindKey: {win: 'Ctrl-S', mac: 'Command-S'},
         exec: function (editor) {
           console.log('save while editing')
+          self.saveAction()
         }
       });
       editor.commands.addCommand({
