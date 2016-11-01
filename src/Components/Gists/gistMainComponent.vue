@@ -35,8 +35,8 @@
     <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-3 table-container">
             <div class="rc-container">
-                <a @click="fetchGists()">Update index</a>
-                <router-link to="/gistapp/new" class="btn">New</router-link>
+                <a class="btn btn-default btn-sm" @click="fetchGists()">Update index</a>
+                <router-link to="/gistapp/new" class="btn btn-default btn-sm">New</router-link>
             </div>
             <table-gist></table-gist>
         </div>

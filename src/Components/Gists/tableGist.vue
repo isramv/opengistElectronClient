@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input class="form-control table-filter" type="text" v-model="searchTitle" placeholder="Filter table">
+        <input class="form-control table-filter" type="text" @input="searchTitle($event)" placeholder="Filter table">
         <table class="table table-condensed">
             <!-- @todo fix this filter. -->
             <!--<tr v-for="gist in gists | filterBy searchTitle">-->
@@ -16,7 +16,6 @@
 </style>
 <script>
   export default{
-    props: ['searchTitle'],
     computed: {
       gists() {
         return this.$store.state.gists;
@@ -28,6 +27,11 @@
       } else {
         this.$store.commit('GISTS', JSON.parse(localStorage.getItem('GISTS')))
       }
+    },
+    methods: {
+        searchTitle(e) {
+            console.log(e.target.value)
+        }
     }
   }
 </script>
