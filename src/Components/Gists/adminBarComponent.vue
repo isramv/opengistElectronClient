@@ -1,12 +1,14 @@
 <template>
+  <div>
     <div class="row admin-bar" v-if="username">
-        <div class="col-xs-8">
-            <p class="salute">Welcome: {{ username }}</p>
-        </div>
-        <div class="col-xs-4">
-            <a href="#" v-on:click="logoutAction">Logout</a>
-        </div>
+      <div class="col-xs-8">
+        <p class="salute">Welcome: {{ username }}</p>
+      </div>
+      <div class="col-xs-4">
+        <a href="#" v-on:click="logoutAction">Logout</a>
+      </div>
     </div>
+  </div>
 </template>
 <style lang="sass" xml:lang="scss">
     .admin-bar {
@@ -28,24 +30,16 @@
     }
 </style>
 <script>
-    import store from './store'
-    import router from './router'
-    export default {
-        data: function () {
-            return store
-        },
-        beforeCompile: function() {
-            var self = this;
-            self.$set('username', localStorage.getItem('username'));
-        },
-        methods: {
-            logoutAction: function() {
-                var self = this;
-                self.$set('username', null);
-                localStorage.clear();
-                router.go('login');
-                self.$dispatch('logout');
-            }
-        }
+  export default {
+    computed: {
+      username() {
+        return this.$store.state.username
+      }
+    },
+    methods: {
+      logoutAction: function () {
+        console.log('logout action')
+      }
     }
+  }
 </script>

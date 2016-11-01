@@ -41,6 +41,7 @@
             <table-gist></table-gist>
         </div>
         <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
+            <admin-bar></admin-bar>
             <div class="rc-container">
                 <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="loading"></i>{{ loadingMessage }}
                 <router-view></router-view>
@@ -49,54 +50,56 @@
     </div>
 </template>
 <script>
-    import _ from 'lodash'
-    import store from '../vuex_store'
-    import tableGistComponent from './tableGist.vue'
-    import keymaster from 'keymaster'
-    export default{
-        components: {
-             'table-gist': tableGistComponent
-        },
-        store: store,
-        computed: {
-            username() {
-                return this.$store.state.username
-            },
-            auth() {
-                return this.$store.state.auth
-            },
-            loading() {
-                return this.$store.state.loading.status
-            },
-            loadingMessage() {
-                return this.$store.state.loading.message
-            }
-        },
-        beforeCreate() {
-            if(localStorage.username !== null) {
-                this.$store.commit('USERNAME', localStorage.username)
-            }
-            if(localStorage.auth !== null) {
-                this.$store.commit('AUTH', localStorage.auth)
-            }
-        },
-        created() {
-            let self = this
-            // @todo if computed gist is empty trigger fetchGists
-            keymaster('command+n', function() {
+  import _ from 'lodash'
+  import store from '../vuex_store'
+  import tableGistComponent from './tableGist.vue'
+  import adminBarComponent from './adminBarComponent.vue'
+  import keymaster from 'keymaster'
+  export default{
+    components: {
+      'table-gist': tableGistComponent,
+      'admin-bar': adminBarComponent
+    },
+    store: store,
+    computed: {
+      username() {
+        return this.$store.state.username
+      },
+      auth() {
+        return this.$store.state.auth
+      },
+      loading() {
+        return this.$store.state.loading.status
+      },
+      loadingMessage() {
+        return this.$store.state.loading.message
+      }
+    },
+    beforeCreate() {
+      if (localStorage.username !== null) {
+        this.$store.commit('USERNAME', localStorage.username)
+      }
+      if (localStorage.auth !== null) {
+        this.$store.commit('AUTH', localStorage.auth)
+      }
+    },
+    created() {
+      let self = this
+      // @todo if computed gist is empty trigger fetchGists
+      keymaster('command+n', function () {
 
-            });
-            keymaster('command+escape', function() {
+      });
+      keymaster('command+escape', function () {
 
-            });
-            keymaster('command+e', function() {
+      });
+      keymaster('command+e', function () {
 
-            });
-        },
-        methods: {
-            fetchGists() {
-                this.$store.dispatch('getGists')
-            }
-        }
+      });
+    },
+    methods: {
+      fetchGists() {
+        this.$store.dispatch('getGists')
+      }
     }
+  }
 </script>
