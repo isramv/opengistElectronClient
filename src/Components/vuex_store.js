@@ -14,7 +14,7 @@ const state = {
   auth: '',
   loadingLogin: false,
   relatedGists: null,
-  gists: {},
+  gists: JSON.parse(localStorage.getItem('GISTS')),
   closeEdit: false,
   viewGist: {
     id: '',

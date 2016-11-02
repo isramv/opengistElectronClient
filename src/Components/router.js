@@ -29,16 +29,25 @@ var router = new Router({
         {
           name: 'newGist',
           path: 'new',
+          meta: {
+            requireAuth: true
+          },
           component: newGist
         },
         {
           name: 'editGist',
           path: 'edit/:id',
+          meta: {
+            requireAuth: true
+          },
           component: newGist
         },
         {
           name: 'viewGist',
           path: 'view/:id',
+          meta: {
+            requireAuth: true
+          },
           component: viewGist
         }
       ]
@@ -48,35 +57,29 @@ var router = new Router({
 
 router.beforeEach((to, from, next) => {
 
-  console.log('// from: //')
-  console.log(from.name)
-  console.log('// to: //')
-  console.log(to.name)
-  console.log(to)
+  // console.log('// from: //')
+  // console.log(from.name)
+  // console.log('// to: //')
+  // console.log(to.name)
+  // console.log(to.meta.requireAuth)
 
   if(store.state.auth.length > 0) {
+    store.commit('ISAUTH', true)
+  } else if(localStorage.getItem('auth') !== null) {
     store.commit('ISAUTH', true)
   } else {
     store.commit('ISAUTH', false)
   }
 
-  let isAuth = store.state.isAuth
-
-  // let goesToSecurePath = to.path === '/gistapp'
-  // let nouser = localStorage.getItem('username') === null
-  // if (to.path === '/' && !nouser) {
-  //   console.log(1)
-  //   next(false)
-  // } else if (goesToSecurePath && nouser) {
-  //   console.log(2)
-  //   next({path: '/'})
-  // } else if (goesToSecurePath && !nouser) {
-  //   console.log(3)
-  //   next()
-  // } else {
-  //   console.log(4)
-  //   next()
-  // }
+  if (to.meta.requireAuth && !store.state.isAuth) {
+    next({ name: 'login'})
+  } else if (to.meta.requireAuth && !store.state.isAuth) {
+    next(false)
+  } else if (to.meta.requireAuth && store.state.isAuth) {
+    next()
+  } else {
+    next()
+  }
 
 });
 
