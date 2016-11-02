@@ -2,6 +2,9 @@ import $ from 'jquery'
 export default {
   // fetches all the gists.
   getGists (context) {
+    if(localStorage.getItem('auth') !== null) {
+      context.commit('AUTH', localStorage.getItem('auth'))
+    }
     context.commit('LOADING', { status: true, message: 'updating all the gists'})
     $.ajax({
       url: 'http://myapp.local/app_dev.php/api/v1/gists',
@@ -35,7 +38,9 @@ export default {
     }
   },
   saveGist (context, params) {
-    console.log(params.closeAfterSave)
+    if(localStorage.getItem('auth') !== null) {
+      context.commit('AUTH', localStorage.getItem('auth'))
+    }
     // disable save
     if(_.isNumber(context.state.newGist.id) === false) {
       context.commit('LOADING', { status: true, message: 'saving gist'})
@@ -106,6 +111,9 @@ export default {
   },
   getOneGistToEdit (context, gistId) {
     return new Promise((resolve, reject) => {
+      if(localStorage.getItem('auth') !== null) {
+        context.commit('AUTH', localStorage.getItem('auth'))
+      }
       context.commit('LOADING', { status: true, message: 'loading gist'})
       $.ajax({
         url: 'http://myapp.local/app_dev.php/api/v1/gists/' + gistId,
@@ -118,5 +126,8 @@ export default {
         resolve('success')
       })
     })
+  },
+  logoutAction() {
+    // todo create a new promise.
   }
 }

@@ -37,9 +37,19 @@
         return this.$store.state.username
       }
     },
+    beforeCreate() {
+      if(localStorage.getItem('username') !== null) {
+        this.$store.commit('USERNAME', localStorage.getItem('username'))
+      }
+    },
     methods: {
       logoutAction: function () {
-        console.log('logout action')
+        console.log('login out...')
+        this.$store.commit('USERNAME', '')
+        this.$store.commit('AUTH', '')
+        this.$store.commit('GISTS', {})
+        localStorage.clear()
+        this.$router.push({ name: 'login'})
       }
     }
   }
