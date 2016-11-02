@@ -1,10 +1,17 @@
 import $ from 'jquery'
 export default {
   // fetches all the gists.
+  initializeStore (context) {
+      console.log('initializing store')
+      return new Promise((resolve, reject) => {
+        if(localStorage.getItem('auth') !== null) {
+          context.commit('AUTH', localStorage.getItem('auth'))
+          context.commit('ISAUTH', true)
+        }
+        resolve('Initialize completed...')
+      })
+  },
   getGists (context) {
-    if(localStorage.getItem('auth') !== null) {
-      context.commit('AUTH', localStorage.getItem('auth'))
-    }
     context.commit('LOADING', { status: true, message: 'updating all the gists'})
     $.ajax({
       url: 'http://myapp.local/app_dev.php/api/v1/gists',
@@ -38,9 +45,6 @@ export default {
     }
   },
   saveGist (context, params) {
-    if(localStorage.getItem('auth') !== null) {
-      context.commit('AUTH', localStorage.getItem('auth'))
-    }
     // disable save
     if(_.isNumber(context.state.newGist.id) === false) {
       context.commit('LOADING', { status: true, message: 'saving gist'})

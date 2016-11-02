@@ -61,15 +61,21 @@ router.beforeEach((to, from, next) => {
   // console.log(from.name)
   // console.log('// to: //')
   // console.log(to.name)
-  // console.log(to.meta.requireAuth)
 
-  if(store.state.auth.length > 0) {
-    store.commit('ISAUTH', true)
-  } else if(localStorage.getItem('auth') !== null) {
-    store.commit('ISAUTH', true)
-  } else {
-    store.commit('ISAUTH', false)
+  // initialize store if from is null
+  if(from.name === null) {
+    store.dispatch('initializeStore').then((e)=> {
+      console.log(e)
+    })
   }
+
+  // if(store.state.auth.length > 0) {
+  //   store.commit('ISAUTH', true)
+  // } else if(localStorage.getItem('auth') !== null) {
+  //   store.commit('ISAUTH', true)
+  // } else {
+  //   store.commit('ISAUTH', false)
+  // }
 
   if (to.meta.requireAuth && !store.state.isAuth) {
     next({ name: 'login'})
