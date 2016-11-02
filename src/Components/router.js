@@ -69,14 +69,6 @@ router.beforeEach((to, from, next) => {
     })
   }
 
-  // if(store.state.auth.length > 0) {
-  //   store.commit('ISAUTH', true)
-  // } else if(localStorage.getItem('auth') !== null) {
-  //   store.commit('ISAUTH', true)
-  // } else {
-  //   store.commit('ISAUTH', false)
-  // }
-
   if (to.meta.requireAuth && !store.state.isAuth) {
     next({ name: 'login'})
   } else if (to.meta.requireAuth && !store.state.isAuth) {

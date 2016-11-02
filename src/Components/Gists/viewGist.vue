@@ -76,7 +76,7 @@
       }
     },
     watch: {
-      gistId (val, oldVal) {
+      gistId (val) {
         this.$store.dispatch('viewGist', val).then(() => {
           this.$store.dispatch('showRelatedGists', { tagId: 0, gistId: 0})
         })

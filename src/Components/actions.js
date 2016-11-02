@@ -7,6 +7,9 @@ export default {
         if(localStorage.getItem('auth') !== null) {
           context.commit('AUTH', localStorage.getItem('auth'))
           context.commit('ISAUTH', true)
+        } else if(localStorage.getItem('auth') === null) {
+          context.commit('AUTH', '')
+          context.commit('ISAUTH', false)
         }
         resolve('Initialize completed...')
       })
