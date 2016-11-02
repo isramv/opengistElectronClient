@@ -5,6 +5,7 @@ import actions from './actions'
 Vue.use(Vuex)
 
 const state = {
+  isAuth: false,
   loading: {
       status: false,
       message: ''
@@ -37,6 +38,9 @@ const mutations = {
   AUTH (state, value) {
     state.auth = value;
     localStorage.setItem('auth', value)
+  },
+  ISAUTH (state, value) {
+    state.isAuth = value
   },
   GISTS (state, gists) {
     state.gists = gists;

@@ -4,6 +4,7 @@ import loginComponent from './Gists/loginComponent.vue'
 import gistMainComponent from './Gists/gistMainComponent.vue'
 import newGist from './Gists/newGist.vue'
 import viewGist from './Gists/viewGist.vue'
+import store from './vuex_store'
 
 Vue.use(Router);
 
@@ -12,11 +13,17 @@ var router = new Router({
     {
       name: 'login',
       path: '/',
+      meta: {
+        requireAuth: false
+      },
       component: loginComponent
     },
     {
       name: 'main',
       path: '/gistapp',
+      meta: {
+        requireAuth: true
+      },
       component: gistMainComponent,
       children: [
         {
@@ -40,12 +47,21 @@ var router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  // console.log('// to: //')
-  // console.log(to)
-  // console.log('// from: //')
-  // console.log(from)
-  // console.log('///////////')
-  next()
+
+  console.log('// from: //')
+  console.log(from.name)
+  console.log('// to: //')
+  console.log(to.name)
+  console.log(to)
+
+  if(store.state.auth.length > 0) {
+    store.commit('ISAUTH', true)
+  } else {
+    store.commit('ISAUTH', false)
+  }
+
+  let isAuth = store.state.isAuth
+
   // let goesToSecurePath = to.path === '/gistapp'
   // let nouser = localStorage.getItem('username') === null
   // if (to.path === '/' && !nouser) {

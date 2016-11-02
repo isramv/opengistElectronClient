@@ -18,5 +18,18 @@
 <script>
   import bootstrap from 'bootstrap-webpack'
   import fontawesome from 'font-awesome-webpack'
+  import store from './vuex_store'
+  import _ from 'lodash'
   require('!style!css!sass!../scss/style.scss')
+  export default {
+    computed: {
+
+    },
+    beforeCreate() {
+
+    },
+    mounted() {
+
+    }
+  }
 </script>

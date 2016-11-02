@@ -95,6 +95,7 @@
                 }).done(function (res) {
                     store.commit('USERNAME', res.username)
                     store.commit('AUTH', res.token)
+                    store.commit('ISAUTH', true)
                     self.loading = false
                     self.clearForm()
                     self.$router.push('/gistapp')

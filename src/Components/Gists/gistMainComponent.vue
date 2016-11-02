@@ -75,14 +75,6 @@
         return this.$store.state.loading.message
       }
     },
-    beforeCreate() {
-      if (localStorage.username !== null) {
-        this.$store.commit('USERNAME', localStorage.username)
-      }
-      if (localStorage.auth !== null) {
-        this.$store.commit('AUTH', localStorage.auth)
-      }
-    },
     created() {
       let self = this
       // @todo if computed gist is empty trigger fetchGists
