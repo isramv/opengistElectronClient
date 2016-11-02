@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import actions from './actions'
-import ace from 'brace'
 
 Vue.use(Vuex)
 
@@ -73,7 +72,6 @@ const mutations = {
       body: '',
       tags: []
     }
-    ace.edit("editor").setValue('', 1);
     state.closeEdit = false
   },
   UPDATELOCALSTORAGE (state) {

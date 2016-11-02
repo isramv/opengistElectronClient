@@ -48,6 +48,9 @@
       'tags-input-component': tagsInputComponent
     },
     computed: {
+      gistId() {
+        return this.$store.state.newGist.id
+      },
       newGist () {
         return this.$store.state.newGist
       },
@@ -62,6 +65,12 @@
       }
     },
     watch: {
+        gistId: function(val) {
+            if(val === '') {
+              ace.edit("editor").setValue('', 1);
+              this.$store.commit('NEWGISTBODY', '')
+            }
+        },
         closeEdit: function(val) {
           if(val) {
             this.$store.commit('CLOSEEDITFALSE')
