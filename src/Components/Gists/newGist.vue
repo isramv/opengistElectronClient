@@ -1,25 +1,22 @@
 <template>
+  <div>
     <div>
-        <div class="row actions">
-
-        </div>
-        <div>
-            <div class="form-group">
-                <input class="title form-control" :value="title" @input="updateTitle"></input>
-            </div>
-          <div class="form-group">
-            <button class="btn btn-default btn-sm" @click="cancelAction">Cancel</button>
-            <button class="btn btn-default btn-sm" @click="saveAction()">Save</button>
-            <button class="btn btn-default btn-sm" @click="saveAndCloseAction()">Save And Close</button>
-          </div>
-            <div class="form-group">
-                <tags-input-component></tags-input-component>
-            </div>
-            <div class="form-group editor-container">
-                <div id="editor" @input="updateBody"></div>
-            </div>
-        </div>
+      <div class="form-group">
+        <input class="title form-control" :value="title" @input="updateTitle"></input>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-default btn-sm" @click="cancelAction">Cancel</button>
+        <button class="btn btn-default btn-sm" @click="saveAction()">Save</button>
+        <button class="btn btn-default btn-sm" @click="saveAndCloseAction()">Save And Close</button>
+      </div>
+      <div class="form-group">
+        <tags-input-component></tags-input-component>
+      </div>
+      <div class="form-group editor-container">
+        <div id="editor" @input="updateBody"></div>
+      </div>
     </div>
+  </div>
 </template>
 <style lang="sass" xml:lang="scss">
     input {
@@ -79,19 +76,9 @@
       } else {
         next()
       }
-      // console.log(store.state)
-      // console.log('// enter to //')
-      // console.log(to)
-      // console.log('// enter from //')
-      // console.log(from)
       next()
     },
     beforeRouteLeave (to, from, next) {
-      // update the viewGist action.
-      // console.log('// leaving to //')
-      // console.log(to)
-      // console.log('// entering from //')
-      // console.log(from)
       next()
     },
     mounted () {

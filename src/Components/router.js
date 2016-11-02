@@ -70,7 +70,9 @@ router.beforeEach((to, from, next) => {
   }
 
   if (to.meta.requireAuth && !store.state.isAuth) {
-    next({ name: 'login'})
+    next({name: 'login'})
+  } else if (from.name === null && to.name === 'login' && store.state.isAuth) {
+    next({name: 'main'})
   } else if (to.meta.requireAuth && !store.state.isAuth) {
     next(false)
   } else if (to.meta.requireAuth && store.state.isAuth) {
