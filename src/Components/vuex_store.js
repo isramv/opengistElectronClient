@@ -95,6 +95,13 @@ const mutations = {
 const getters = {
   gistCount: state => {
     return state.gists.length;
+  },
+  isNewGist: state => {
+    if(state.newGist.id.length === 0) {
+      return true
+    } else {
+      return false
+    }
   }
 }
 

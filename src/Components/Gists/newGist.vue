@@ -2,6 +2,7 @@
   <div>
     <div>
       <div class="form-group">
+        {{ isNewGist }}
         <input class="title form-control" :value="title" @input="updateTitle"></input>
       </div>
       <div class="form-group">
@@ -48,6 +49,9 @@
       'tags-input-component': tagsInputComponent
     },
     computed: {
+      isNewGist() {
+        return this.$store.getters.isNewGist
+      },
       gistId() {
         return this.$store.state.newGist.id
       },
