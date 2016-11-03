@@ -8,6 +8,9 @@
         <a v-on:click="logoutAction" class="logout-sm">Logout  <i class="fa fa-sign-out"></i></a>
       </div>
     </div>
+    <div class="row">
+      <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" v-if="loading"></i>{{ loadingMessage }}
+    </div>
   </div>
 </template>
 <style lang="sass" xml:lang="scss">
@@ -35,6 +38,12 @@
     computed: {
       username() {
         return this.$store.state.username
+      },
+      loading() {
+        return this.$store.state.loading.status
+      },
+      loadingMessage() {
+        return this.$store.state.loading.message
       }
     },
     beforeCreate() {
