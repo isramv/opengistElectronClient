@@ -150,8 +150,5 @@ export default {
         reject({ message: 'gist not deleted'})
       })
     })
-  },
-  logoutAction() {
-    // todo create a new promise.
   }
 }

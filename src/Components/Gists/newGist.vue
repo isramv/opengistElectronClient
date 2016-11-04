@@ -34,6 +34,20 @@
         padding-right: 40px;
         border: 1px solid #d4d4d4;
     }
+    input {
+      &.title.form-control {
+        max-width: 300px;
+      }
+    }
+    .editor-container {
+      min-height: 600px;
+    }
+    #editor {
+      width: 650px;
+      height: 600px;
+      padding-right: 40px;
+      border: 1px solid #d4d4d4;
+    }
 </style>
 <script>
   import store from '../vuex_store'
