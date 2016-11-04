@@ -152,13 +152,12 @@ export default {
     })
   },
   loginAction(context, formInfo) {
-    console.log('called from loginAction')
     return new Promise((resolve, reject) => {
       $.ajax({
         url: 'http://myapp.local/app_dev.php/api/login',
         type: 'POST',
         data: formInfo,
-        timeout: 25000,
+        timeout: 5000,
         statusCode: {
           401: function (data) {
             reject('error 401')
