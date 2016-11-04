@@ -4,7 +4,7 @@ export default {
   initializeStore (context) {
       console.log('initializing store')
       return new Promise((resolve, reject) => {
-        if(localStorage.getItem('auth') !== null) {
+        if(localStorage.getItem('auth') !== null && localStorage.getItem('auth').length > 0) {
           context.commit('AUTH', localStorage.getItem('auth'))
           context.commit('ISAUTH', true)
         } else if(localStorage.getItem('auth') === null) {

@@ -102,6 +102,7 @@
                 }).fail(function (res) {
                      self.error = res.statusText;
                      self.loading = false;
+                    console.log(this.$store.state)
                 });
             }
         }
