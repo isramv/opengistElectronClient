@@ -17,12 +17,14 @@
         }
         .table-container {
             width: 300px;
+            overflow: scroll;
         }
         .show-gist-container {
             width: 1;
             flex-grow: 1;
             flex-shrink: 0;
             flex-basis: 200px;
+            overflow: scroll;
         }
     }
 </style>
