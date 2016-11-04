@@ -54,10 +54,11 @@
     methods: {
       logoutAction: function () {
         console.log('login out...')
+        localStorage.clear()
         this.$store.commit('USERNAME', '')
         this.$store.commit('AUTH', '')
+        this.$store.commit('ISAUTH', false)
         this.$store.commit('GISTS', {})
-        localStorage.clear()
         this.$router.push({ name: 'login'})
       }
     }

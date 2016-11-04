@@ -55,12 +55,14 @@
         if(this.$store.state.gists.filter) {
           return this.$store.state.gists.filter((e) => {
             let searchRegex = new RegExp(this.$data.searchString, 'i')
+
             if(searchRegex.test(e.gist.title)) {
               return true
             }
           })
+        } else {
+            return null
         }
-
       },
       gists() {
         return this.$store.state.gists;

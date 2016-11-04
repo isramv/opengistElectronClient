@@ -55,56 +55,38 @@
 </style>
 
 <script>
-    import $ from 'jquery';
-    import store from '../vuex_store'
-    import fontAwesome from 'font-awesome-webpack'
-    export default {
-        data() {
-            return {
-                username: '',
-                password: '',
-                logged: false,
-                error: '',
-                loading: false
-            }
-        },
-        store: store,
-        methods: {
-            clearForm() {
-              this.username = ''
-              this.password = ''
-            },
-            login () {
-                let self = this
-                self.loading = true
-                $.ajax({
-                    url: 'http://myapp.local/app_dev.php/api/login',
-                    type: 'POST',
-                    data: $('.login-form').serialize(),
-                    timeout: 25000,
-                    statusCode: {
-                        401: function (data) {
-                            self.error = data.responseText;
-                            self.loading = false;
-                        },
-                        404: function (data) {
-                            self.error = 'Service not found, check your internet connection.';
-                            self.loading = false;
-                        }
-                    }
-                }).done(function (res) {
-                    store.commit('USERNAME', res.username)
-                    store.commit('AUTH', res.token)
-                    store.commit('ISAUTH', true)
-                    self.loading = false
-                    self.clearForm()
-                    self.$router.push('/gistapp')
-                }).fail(function (res) {
-                     self.error = res.statusText;
-                     self.loading = false;
-                    console.log(this.$store.state)
-                });
-            }
-        }
+  import $ from 'jquery';
+  import store from '../vuex_store'
+  import fontAwesome from 'font-awesome-webpack'
+  export default {
+    data() {
+      return {
+        username: '',
+        password: '',
+        logged: false,
+        error: '',
+        loading: false
+      }
+    },
+    store: store,
+    methods: {
+      clearForm() {
+        this.username = ''
+        this.password = ''
+      },
+      login () {
+        let self = this
+        self.loading = true
+        this.$store.dispatch('loginAction', $('.login-form').serialize()).then((e) => {
+          console.log(e)
+          self.clearForm()
+          self.loading = false
+          self.$router.push({ name: 'main'})
+        }).catch((e) => {
+          console.log(e)
+          self.loading = false
+        })
+      }
     }
+  }
 </script>

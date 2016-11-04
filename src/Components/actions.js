@@ -150,5 +150,31 @@ export default {
         reject({ message: 'gist not deleted'})
       })
     })
+  },
+  loginAction(context, formInfo) {
+    console.log('called from loginAction')
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'http://myapp.local/app_dev.php/api/login',
+        type: 'POST',
+        data: formInfo,
+        timeout: 25000,
+        statusCode: {
+          401: function (data) {
+            reject('error 401')
+          },
+          404: function () {
+            reject('error 404')
+          }
+        }
+      }).done(function (res) {
+        resolve('loggin successful')
+        context.commit('USERNAME', res.username)
+        context.commit('AUTH', res.token)
+        context.commit('ISAUTH', true)
+      }).fail(function (res) {
+        reject(res)
+      })
+    })
   }
 }
