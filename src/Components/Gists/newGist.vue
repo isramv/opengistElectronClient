@@ -2,7 +2,6 @@
   <div>
     <div>
       <div class="form-group">
-        {{ isNewGist }}
         <input class="title form-control" :value="title" @input="updateTitle"></input>
       </div>
       <div class="form-group">

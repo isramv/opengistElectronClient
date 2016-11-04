@@ -134,6 +134,23 @@ export default {
       })
     })
   },
+  deleteGist (context, gistId) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        type: 'DELETE',
+        url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ gistId,
+        headers: { 'authorization': context.state.auth }
+      }).done((res) => {
+        if(gistId == res.id) {
+          resolve({ message: 'gist deleted', gistId: res.id })
+          // todo remove the gist from the index.
+          context.dispatch('getGists')
+        }
+      }).fail((res) => {
+        reject({ message: 'gist not deleted'})
+      })
+    })
+  },
   logoutAction() {
     // todo create a new promise.
   }
