@@ -1,47 +1,40 @@
 <template>
-    <div>
-        <input class="form-control table-filter" type="text" @input="searchTitle($event)" placeholder="Filter table">
-        <table class="table table-condensed">
-            <!--{{ filteredGists }}-->
-            <!-- @todo fix this filter. -->
-            <!--<tr v-for="gist in gists | filterBy searchTitle">-->
-            <tr v-for="gist in filteredGists">
-                <td>
-                  <router-link :to="{ name: 'viewGist', params: { id: gist.gist.id } }">{{ gist.gist.title }}</router-link>
-                </td>
-            </tr>
-        </table>
-    </div>
+  <div>
+    <input class="form-control table-filter" type="text" @input="searchTitle($event)" placeholder="Filter table">
+    <table class="table table-condensed">
+      <!--{{ filteredGists }}-->
+      <!-- @todo fix this filter. -->
+      <!--<tr v-for="gist in gists | filterBy searchTitle">-->
+      <tr v-for="gist in filteredGists">
+        <td>
+          <router-link :to="{ name: 'viewGist', params: { id: gist.gist.id } }">{{ gist.gist.title }}</router-link>
+        </td>
+      </tr>
+    </table>
+  </div>
 </template>
 <style lang="sass" xml:lang="scss">
-    table {
-        border: 0;
-
-        tr:nth-child(odd) {
-            background: #f1f1f1;
-        }
-
-        tr:nth-child(even) {
-            background: #fafafa;
-        }
-
-        tbody {
-
-            >
-            tr {
-
-                >
-                td {
-                    border-top: 0 !important;
-
-                    a {
-                        color: #464646;
-                    }
-
-                }
-            }
-        }
+  table {
+    border: 0;
+    tr:nth-child(odd) {
+      background: #f1f1f1;
     }
+    tr:nth-child(even) {
+      background: #fafafa;
+    }
+    tbody {
+      >
+      tr {
+        >
+        td {
+          border-top: 0 !important;
+          a {
+            color: #464646;
+          }
+        }
+      }
+    }
+  }
 </style>
 <script>
   export default{
