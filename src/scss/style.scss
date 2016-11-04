@@ -11,6 +11,9 @@ html, body {
   background: #ffffff;
   height: 100%;
   overflow: scroll;
+  > div {
+    background: #f8f6f6;
+  }
   .login-component {
     width: 100%;
   }

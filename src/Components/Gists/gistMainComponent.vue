@@ -1,43 +1,58 @@
 <style lang="sass" xml:lang="scss">
     .gist-main-container {
-        display:flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-content: stretch;
-        align-items: stretch;
-        height: 100%;
-        overflow: scroll;
-        .flex-item {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-content: stretch;
+      align-items: stretch;
+      height: 100%;
+      overflow: scroll;
+      .flex-item {
 
+      }
+      .side-menu {
+        background: #27456F;
+        width: 59px;
+        .side-menu_item {
+          &:first-child {
+            margin-top: 15px;
+          }
+          margin-left: 15px;
+          margin-bottom: 15px;
+          i {
+            color: #70A2E7;
+            &:hover {
+              color: #fff;
+            }
+          }
         }
-        .side-menu {
-            background: #27456F;
-            width: 59px;
-        }
-        .table-container {
-            width: 300px;
-            overflow: scroll;
-        }
-        .show-gist-container {
-            width: 1;
-            flex-grow: 1;
-            flex-shrink: 0;
-            flex-basis: 200px;
-            overflow: scroll;
-        }
+      }
+      .table-container {
+        background: #E6E6E6;
+        padding: 10px;
+        width: 300px;
+        overflow: scroll;
+      }
+      .show-gist-container {
+        background: #f8f6f6;
+        width: 1;
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: 200px;
+        overflow: scroll;
+      }
     }
 </style>
 <template>
     <div class="gist-main-container">
         <div class="flex-item side-menu">
-            here
+            <ul class="list-unstyled">
+                <li class="side-menu_item"><a @click="fetchGists()"><i class="fa fa-refresh fa-2x" aria-hidden="true"></i></a></li>
+                <li class="side-menu_item"><router-link to="/gistapp/new"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></router-link></li>
+            </ul>
         </div>
         <div class="flex-item table-container">
-            <div class="rc-container">
-                <a class="btn btn-default btn-sm" @click="fetchGists()">Update index</a>
-                <router-link to="/gistapp/new" class="btn btn-default btn-sm">New</router-link>
-            </div>
             <table-gist></table-gist>
         </div>
         <div class="flex-item show-gist-container">
