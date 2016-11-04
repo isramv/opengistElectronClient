@@ -1,46 +1,44 @@
 <style lang="sass" xml:lang="scss">
-    .table-container {
-        background-color: #eaeaea;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        border-right: 1px solid #d2d2d2;
-        border-bottom: 1px solid #d2d2d2;
-    }
-    .table-filter {
-        margin-bottom: 12px;
-    }
-    .rc-container {
-        margin: 15px 0;
-    }
-    table {
-        border: 0;
-        tr:nth-child(odd) {
-            background: #f1f1f1;
-        }tr:nth-child(even) {
-             background: #fafafa;
-         }
-        tbody {
-            > tr {
-                > td {
-                    border-top: 0!important;
-                    a {
-                        color: #464646;
-                    }
-                }
-            }
+    .gist-main-container {
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: stretch;
+        align-items: stretch;
+        height: 100%;
+        overflow: scroll;
+        .flex-item {
+
+        }
+        .side-menu {
+            background: #27456F;
+            width: 59px;
+        }
+        .table-container {
+            width: 300px;
+        }
+        .show-gist-container {
+            width: 1;
+            flex-grow: 1;
+            flex-shrink: 0;
+            flex-basis: 200px;
         }
     }
 </style>
 <template>
-    <div class="row">
-        <div class="col-xs-4 col-sm-4 col-md-3 table-container">
+    <div class="gist-main-container">
+        <div class="flex-item side-menu">
+            here
+        </div>
+        <div class="flex-item table-container">
             <div class="rc-container">
                 <a class="btn btn-default btn-sm" @click="fetchGists()">Update index</a>
                 <router-link to="/gistapp/new" class="btn btn-default btn-sm">New</router-link>
             </div>
             <table-gist></table-gist>
         </div>
-        <div class="col-xs-8 col-sm-8 col-md-9 show-gist-container">
+        <div class="flex-item show-gist-container">
             <admin-bar></admin-bar>
             <div class="rc-container">
                 <router-view></router-view>

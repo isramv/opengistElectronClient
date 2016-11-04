@@ -13,7 +13,35 @@
         </table>
     </div>
 </template>
-<style>
+<style lang="sass" xml:lang="scss">
+    table {
+        border: 0;
+
+        tr:nth-child(odd) {
+            background: #f1f1f1;
+        }
+
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        tbody {
+
+            >
+            tr {
+
+                >
+                td {
+                    border-top: 0 !important;
+
+                    a {
+                        color: #464646;
+                    }
+
+                }
+            }
+        }
+    }
 </style>
 <script>
   export default{
