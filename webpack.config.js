@@ -24,14 +24,12 @@ module.exports = {
             {
                 test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"
             },
-            // { test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+            { test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+            // if this test is available webpack atempts to load the file.
+            // therefore the fonts are not loaded.
             // { test: /\.ttf$/,    loader: "file-loader" },
-            // { test: /\.eot$/,    loader: "file-loader" },
-            // { test: /\.svg$/,    loader: "file-loader" },
-            {
-                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "file-loader?mimetype=application/octet-stream"
-            },
+            { test: /\.eot$/,    loader: "file-loader" },
+            { test: /\.svg$/,    loader: "file-loader" },
             // Font-Awesome.
             { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
             { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
