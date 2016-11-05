@@ -45,6 +45,7 @@
     background: #fff;
     padding: 15px 27px;
     -webkit-box-shadow: 0px 3px 10px 0px rgba(87,87,87,.3);
+    overflow: scroll;
   }
   .show-gist-container {
     background-color: #ffffff;
@@ -93,8 +94,6 @@
 
               let body = this.$store.state.viewGist.gist.body;
 
-              let filtered = body.replace(/<a/, '<a target="_blank"');
-
               let renderer = new marked.Renderer();
               renderer.link = function(href, title, text) {
                 if (this.options.sanitize) {
@@ -117,7 +116,12 @@
                 return out;
               }
 
-              return marked(filtered, { renderer: renderer})
+              renderer.paragraph = function(text) {
+                  let textFiltered = text.replace(/<a/, '<a target="_blank"');
+                  return '<p>' + textFiltered + '</p>\n';
+              }
+
+              return marked(body, { renderer: renderer})
 
 
           } else {
