@@ -21,6 +21,9 @@ html, body {
   background: #ffffff;
   height: 100%;
   overflow: scroll;
+  a {
+    text-decoration: none;
+  }
   > div {
     background: #f8f6f6;
   }

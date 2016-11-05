@@ -1,37 +1,39 @@
 <template>
-  <div class="gs-viewgist-container">
-    <h1 class="gist-title">{{ gist.title }}</h1>
-    <div class="row actions">
-      <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
-      <button class="btn-sm btn btn-sm" data-toggle="modal" data-target="#deleteGist">Delete</button>
-    </div>
-    <div id="gist-content">
-      <div v-html="gistRender"></div>
-      <ul class="list-inline">
-        <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">
-          {{ tag.name }}</a></li>
-      </ul>
-    </div>
-    <show-related-gists></show-related-gists>
-    <!-- Modal -->
-    <div class="modal fade" id="deleteGist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Delete Gist: {{ gist.title }}
-              <i v-show="deleteLoading" class="fa fa-cog fa-spin fa-2x fa-fw"></i>
-            </h4>
-          </div>
-          <div class="modal-body">
-            <p>This Gist is about to get deleted, this means that there is not step back.
-              Are you sure you want to continue?
-              If so press `Delete`.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-sm btn-danger btn-sm" v-on:click="deleteGist(gist.id)">Delete</button>
+  <div class="contaier">
+    <div class="gs-viewgist-container">
+      <h1 class="gist-title">{{ gist.title }}</h1>
+      <div class="row actions">
+        <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
+        <button class="btn-sm btn btn-sm" data-toggle="modal" data-target="#deleteGist">Delete</button>
+      </div>
+      <div id="gist-content">
+        <div v-html="gistRender"></div>
+        <ul class="list-inline">
+          <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">
+            {{ tag.name }}</a></li>
+        </ul>
+      </div>
+      <show-related-gists></show-related-gists>
+      <!-- Modal -->
+      <div class="modal fade" id="deleteGist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Delete Gist: {{ gist.title }}
+                <i v-show="deleteLoading" class="fa fa-cog fa-spin fa-2x fa-fw"></i>
+              </h4>
+            </div>
+            <div class="modal-body">
+              <p>This Gist is about to get deleted, this means that there is not step back.
+                Are you sure you want to continue?
+                If so press `Delete`.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-sm btn-danger btn-sm" v-on:click="deleteGist(gist.id)">Delete</button>
+            </div>
           </div>
         </div>
       </div>
@@ -69,6 +71,7 @@
 </style>
 <script>
   import _ from 'lodash'
+  import $ from 'jquery'
   import marked from 'marked'
   import store from '../vuex_store'
   import showRelatedGists from './showRelatedGists.vue'
