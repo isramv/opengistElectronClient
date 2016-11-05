@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="gs-viewgist-container">
     <h1 class="gist-title">{{ gist.title }}</h1>
     <div class="row actions">
       <button class="btn btn-default btn-sm" @click="editGist(gist.id)">Edit</button>
@@ -39,6 +39,11 @@
   </div>
 </template>
 <style lang="sass" xml:lang="scss">
+  .gs-viewgist-container {
+    background: #fff;
+    padding: 15px 27px;
+    -webkit-box-shadow: 0px 3px 10px 0px rgba(87,87,87,.3);
+  }
   .show-gist-container {
     background-color: #ffffff;
     padding: 34px;
@@ -57,6 +62,9 @@
   }
   .actions {
     margin: 5px 0;
+  }
+  .actions {
+    margin-bottom: 30px;
   }
 </style>
 <script>

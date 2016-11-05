@@ -1,7 +1,7 @@
 <template>
   <div>
     <input class="form-control table-filter" type="text" @input="searchTitle($event)" placeholder="Filter table">
-    <table class="table table-condensed">
+    <table class="table table-condensed bg-table-base">
       <!--{{ filteredGists }}-->
       <!-- @todo fix this filter. -->
       <!--<tr v-for="gist in gists | filterBy searchTitle">-->
@@ -14,7 +14,18 @@
   </div>
 </template>
 <style lang="sass" xml:lang="scss">
-  table {
+  table.bg-table-base {
+    margin-top: 15px;
+    tr {
+      td {
+        padding: 3px 5px;
+        .router-link-active {
+          text-decorarion: none;
+          font-weight: bold;
+          color: #2e2e2e;
+        }
+      }
+    }
     border: 0;
     tr:nth-child(odd) {
       background: #f1f1f1;
@@ -23,10 +34,9 @@
       background: #fafafa;
     }
     tbody {
-      >
-      tr {
-        >
-        td {
+      > tr {
+        > td {
+          padding: 5px;
           border-top: 0 !important;
           a {
             color: #464646;
