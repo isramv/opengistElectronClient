@@ -63,10 +63,6 @@ export default {
           // dispatch update list.
           context.dispatch('insertInLocalGistsList', res)
           resolve('success')
-          if(params.closeAfterSave) {
-            context.commit('CLOSEEDIT', true)
-            resolve('success')
-          }
         }).fail(() => {
           reject({ message: 'gist not deleted'})
         });
@@ -84,10 +80,6 @@ export default {
           context.dispatch('updateInLocalGistsList', res)
           context.commit('LOADING', { status: false, message: ''})
           resolve('success')
-          if(params.closeAfterSave) {
-            context.commit('CLOSEEDIT', true)
-            resolve('success')
-          }
         }).fail(() => {
           reject({ message: 'gist not saved'})
         });

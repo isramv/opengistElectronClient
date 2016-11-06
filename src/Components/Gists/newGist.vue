@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      {{ gistIsSaving }}
       <div class="form-group">
         <input class="title form-control" :value="title" @input="updateTitle"></input>
       </div>
@@ -82,9 +81,6 @@
       },
       body () {
         return this.newGist.body
-      },
-      closeEdit() {
-          return this.$store.state.closeEdit
       }
     },
     watch: {
@@ -93,12 +89,6 @@
               ace.edit("editor").setValue('', 1);
               this.$store.commit('NEWGISTBODY', '')
             }
-        },
-        closeEdit: function(val) {
-          if(val) {
-            this.$store.commit('CLOSEEDITFALSE')
-            this.$router.push({ name: 'viewGist', params: {id: this.$store.state.newGist.id}})
-          }
         }
     },
     beforeRouteEnter (to, from, next) {
@@ -152,8 +142,8 @@
       },
       saveAction() {
         let self = this
-        this.updateBody()
         if(this.title !== '' && self.gistIsSaving === false) {
+          this.updateBody()
           let gistToSave = this.$store.state.newGist
           this.gistIsSaving = true
           this.$store.dispatch('saveGist', gistToSave).then(()=> {
@@ -165,13 +155,13 @@
       },
       saveAndCloseAction() {
         let self = this
-        this.$store.commit('NEWGISTBODY', ace.edit("editor").getValue())
-        let gistToSave = this.$store.state.newGist
-        gistToSave.closeAfterSave = true
-        if(self.gistIsSaving === false) {
+        if(this.title !== '' && self.gistIsSaving === false) {
+          this.$store.commit('NEWGISTBODY', ace.edit("editor").getValue())
+          let gistToSave = this.$store.state.newGist
           this.gistIsSaving = true
           this.$store.dispatch('saveGist', gistToSave).then(()=> {
             self.gistIsSaving = false
+            this.$router.push({ name: 'viewGist', params: {id: this.$store.state.newGist.id}})
           }).catch(() => {
             self.gistIsSaving = false
           })

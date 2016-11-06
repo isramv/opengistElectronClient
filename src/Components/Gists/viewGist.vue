@@ -17,7 +17,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                       aria-hidden="true">&times;</span></button>
               <h4 class="modal-title" id="myModalLabel">Delete Gist: {{ gist.title }}
-                <i v-show="deleteLoading" class="fa fa-cog fa-spin fa-2x fa-fw"></i>
+                <i v-show="deleteLoading" class="fa fa-cog fa-spin fa-fw"></i>
               </h4>
             </div>
             <div class="modal-body">
