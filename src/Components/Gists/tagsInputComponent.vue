@@ -3,7 +3,7 @@
       <ul class="tags-list list-inline">
         <li class="btn btn-default btn-tag btn-sm"
             v-bind:class="[ indexSelected === index ? 'selected' : '' ]"
-            v-for="(tag, index) in tags">{{ tag.name }}<a @click="removeTag(tag.name)">
+            v-for="(tag, index) in tags">{{ tag.name }} <a @click="removeTag(tag.name)">
           <i class="fa fa-close"></i></a></li>
         <li>
           <input class="input-add-tag"
@@ -72,6 +72,7 @@
       removeTag(name) {
         let array_index = _.findKey(this.$store.state.newGist.tags, { 'name': name });
         this.$store.state.newGist.tags.splice(array_index,1);
+        this.indexSelected = null
       },
       highlightPreviousTag(e) {
         if(this.tags.length > 0) {
@@ -87,10 +88,13 @@
       highlightNextTag(e) {
         let tagsIndex = this.tags.length - 1
         if(this.tags.length > 0) {
-          if(tagsIndex <= this.indexSelected) {
+          if(this.indexSelected  === null) {
+            return this.indexSelected = 0
+          }
+          if(this.indexSelected === tagsIndex) {
             return this.indexSelected = null
           }
-          ++this.indexSelected
+          return ++this.indexSelected
         }
       },
       deleteSelectedTag() {
