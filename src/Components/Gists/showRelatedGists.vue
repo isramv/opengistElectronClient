@@ -14,7 +14,7 @@
 </template>
 <style lang="sass" xml:lang="scss">
     .list-unstyled-rc {
-        padding-left: 16px;
+        padding-left: 0;
         li {
             margin-bottom: 5px;
             list-style: none;

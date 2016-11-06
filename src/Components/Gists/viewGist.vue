@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="view-gist-right">
-      <ul class="list-inline">
+      <ul class="list-related list-unstyled">
         <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">
           {{ tag.name }}</a></li>
       </ul>
@@ -58,15 +58,18 @@
       -webkit-box-shadow: 0px 3px 10px 0px rgba(87,87,87,.3);
       overflow: scroll;
     }
-    .show-gist-container {
+    .view-gist-right {
+      padding: 0 10px;
       flex-grow: 1;
       flex-shrink: 0;
-      background-color: #ffffff;
-      padding: 34px;
-      padding-top: 12px;
-      h1 {
-        margin-top: 0;
-      }
+    }
+  }
+  .show-gist-container {
+    background-color: #ffffff;
+    padding: 34px;
+    padding-top: 12px;
+    h1 {
+      margin-top: 0;
     }
   }
   .gist-title {
@@ -82,6 +85,11 @@
   }
   .actions {
     margin-bottom: 30px;
+  }
+  ul.list-related {
+    li {
+      margin-bottom: 5px;
+    }
   }
 </style>
 <script>
