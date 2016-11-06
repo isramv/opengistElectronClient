@@ -164,10 +164,18 @@
         }
       },
       saveAndCloseAction() {
+        let self = this
         this.$store.commit('NEWGISTBODY', ace.edit("editor").getValue())
         let gistToSave = this.$store.state.newGist
         gistToSave.closeAfterSave = true
-        this.$store.dispatch('saveGist', gistToSave)
+        if(self.gistIsSaving === false) {
+          this.gistIsSaving = true
+          this.$store.dispatch('saveGist', gistToSave).then(()=> {
+            self.gistIsSaving = false
+          }).catch(() => {
+            self.gistIsSaving = false
+          })
+        }
       },
       cancelAction() {
         if(this.$store.state.newGist.id !== '') {
