@@ -48,41 +48,52 @@ export default {
   },
   saveGist (context, params) {
     // disable save
-    if(_.isNumber(context.state.newGist.id) === false) {
-      context.commit('LOADING', { status: true, message: 'saving gist'})
-      // if no id is present we create a new gist.
-      $.ajax({
-        url: 'http://myapp.local/app_dev.php/api/v1/gists',
-        headers: {'authorization': context.state.auth },
-        type: 'POST',
-        data: params,
-      }).done(function (res) {
-        context.commit('LOADING', { status: false, message: ''})
-        context.state.newGist = res
-        // dispatch update list.
-        context.dispatch('insertInLocalGistsList', res)
-        if(params.closeAfterSave) {
-          context.commit('CLOSEEDIT', true)
-        }
-      });
-    } else if(_.isNumber(context.state.newGist.id) === true) {
-      context.commit('LOADING', { status: true, message: 'updating gist'})
-      // Update the gist.
-      $.ajax({
-        type: 'POST',
-        url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ context.state.newGist.id,
-        headers: { 'authorization': context.state.auth },
-        data: context.state.newGist,
-      }).done(function(res) {
-        context.state.newGist = res
-        // enable save
-        context.dispatch('updateInLocalGistsList', res)
-        context.commit('LOADING', { status: false, message: ''})
-        if(params.closeAfterSave) {
+    return new Promise((resolve, reject) => {
+      if(_.isNumber(context.state.newGist.id) === false) {
+        context.commit('LOADING', { status: true, message: 'saving gist'})
+        // if no id is present we create a new gist.
+        $.ajax({
+          url: 'http://myapp.local/app_dev.php/api/v1/gists',
+          headers: {'authorization': context.state.auth },
+          type: 'POST',
+          data: params,
+        }).done(function (res) {
+          context.commit('LOADING', { status: false, message: ''})
+          context.state.newGist = res
+          // dispatch update list.
+          context.dispatch('insertInLocalGistsList', res)
+          resolve('success')
+          if(params.closeAfterSave) {
             context.commit('CLOSEEDIT', true)
-        }
-      });
-    }
+            resolve('success')
+          }
+        }).fail(() => {
+          reject({ message: 'gist not deleted'})
+        });
+      } else if(_.isNumber(context.state.newGist.id) === true) {
+        context.commit('LOADING', { status: true, message: 'updating gist'})
+        // Update the gist.
+        $.ajax({
+          type: 'POST',
+          url: 'http://myapp.local/app_dev.php/api/v1/gists/'+ context.state.newGist.id,
+          headers: { 'authorization': context.state.auth },
+          data: context.state.newGist,
+        }).done(function(res) {
+          context.state.newGist = res
+          // enable save
+          context.dispatch('updateInLocalGistsList', res)
+          context.commit('LOADING', { status: false, message: ''})
+          resolve('success')
+          if(params.closeAfterSave) {
+            context.commit('CLOSEEDIT', true)
+            resolve('success')
+          }
+        }).fail(() => {
+          reject({ message: 'gist not saved'})
+        });
+      }
+    })
+
   },
   // update local list of gists is newly saved
   updateInLocalGistsList (context, gistObject) {

@@ -1,6 +1,7 @@
 <template>
   <div>
     <div>
+      {{ gistIsSaving }}
       <div class="form-group">
         <input class="title form-control" :value="title" @input="updateTitle"></input>
       </div>
@@ -58,8 +59,13 @@
   import tagsInputComponent from './tagsInputComponent.vue';
   import keymaster from 'keymaster'
   export default {
-     components: {
+    components: {
       'tags-input-component': tagsInputComponent
+    },
+    data() {
+      return {
+        gistIsSaving: false
+      }
     },
     computed: {
       isNewGist() {
@@ -145,10 +151,16 @@
         this.$store.commit('NEWGISTBODY', ace.edit("editor").getValue())
       },
       saveAction() {
+        let self = this
         this.updateBody()
-        if(this.title !== '') {
+        if(this.title !== '' && self.gistIsSaving === false) {
           let gistToSave = this.$store.state.newGist
-          this.$store.dispatch('saveGist', gistToSave)
+          this.gistIsSaving = true
+          this.$store.dispatch('saveGist', gistToSave).then(()=> {
+            self.gistIsSaving = false
+          }).catch(() => {
+            self.gistIsSaving = false
+          })
         }
       },
       saveAndCloseAction() {
