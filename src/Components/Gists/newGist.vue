@@ -104,9 +104,6 @@
       }
       next()
     },
-    beforeRouteLeave (to, from, next) {
-      next()
-    },
     mounted () {
       let self = this
       const editor = ace.edit('editor');
