@@ -82,16 +82,13 @@
     },
     created() {
       let self = this
-      // @todo if computed gist is empty trigger fetchGists
       keymaster('command+n', function () {
-
+          self.$router.push({ name: 'newGist' })
       });
       keymaster('command+escape', function () {
-
+          self.$router.go(-1)
       });
-      keymaster('command+e', function () {
-
-      });
+      //keymaster('command+e', function () { });
     },
     methods: {
       fetchGists() {
