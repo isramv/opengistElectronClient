@@ -1,9 +1,9 @@
 <template>
     <div>
+      <ul class="tags-list list-inline">
+        <li class="btn btn-default btn-tag" v-for="tag in tags">{{ tag.name }} <a @click="removeTag(tag.name)"><i class="fa fa-close"></i></a></li>
+      </ul>
       <input class="input-sm tags-input form-control" placeholder="Add new tags..." v-on:keyup.188.13="addTag($event)">
-        <ul class="tags-list list-inline">
-            <li class="btn btn-default btn-tag" v-for="tag in tags">{{ tag.name }} <a @click="removeTag(tag.name)"><i class="fa fa-close"></i></a></li>
-        </ul>
     </div>
 </template>
 <style lang="sass" xml:lang="scss" scoped>

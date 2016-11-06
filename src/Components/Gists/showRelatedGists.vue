@@ -12,7 +12,11 @@
         </div>
     </div>
 </template>
-<style lang="sass" xml:lang="scss">
+<style lang="sass" xml:lang="scss" scoped>
+    h3 {
+      font-weight: lighter;
+      margin: 15px 0 5px 0;
+    }
     .list-unstyled-rc {
         padding-left: 0;
         li {

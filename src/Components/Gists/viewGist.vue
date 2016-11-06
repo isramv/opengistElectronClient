@@ -57,6 +57,7 @@
       padding: 15px 27px;
       -webkit-box-shadow: 0px 3px 10px 0px rgba(87,87,87,.3);
       overflow: scroll;
+      margin-bottom: 15px;
     }
     .view-gist-right {
       padding: 0 10px;

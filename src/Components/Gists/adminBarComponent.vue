@@ -48,6 +48,7 @@
       color: #3c6e34;
       position: absolute;
       left: 25%;
+      -webkit-box-shadow: 0px 3px 10px 0px rgba(87,87,87,.3);
       i {
         font-size: 15px;
       }

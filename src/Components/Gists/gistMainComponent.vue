@@ -8,9 +8,6 @@
       align-items: stretch;
       height: 100%;
       overflow: scroll;
-      .flex-item {
-
-      }
       .side-menu {
         background: #27456F;
         width: 59px;
@@ -31,7 +28,7 @@
       .table-container {
         background: #E6E6E6;
         padding: 10px;
-        width: 300px;
+        width: 290px;
         overflow: scroll;
       }
       .show-gist-container {
