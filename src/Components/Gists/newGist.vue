@@ -56,6 +56,7 @@
   require('brace/mode/markdown');
   require('brace/theme/github');
   import tagsInputComponent from './tagsInputComponent.vue';
+  import keymaster from 'keymaster'
   export default {
      components: {
       'tags-input-component': tagsInputComponent
@@ -103,6 +104,15 @@
       }
       next()
     },
+    created() {
+      let self = this
+      keymaster('command+s', function() {
+        this.saveAction()
+      })
+      keymaster('command+f', function() {
+        this.saveAndCloseAction()
+      })
+    },
     mounted () {
       let self = this
       const editor = ace.edit('editor');
@@ -136,8 +146,10 @@
       },
       saveAction() {
         this.updateBody()
-        let gistToSave = this.$store.state.newGist
-        this.$store.dispatch('saveGist', gistToSave)
+        if(this.title !== '') {
+          let gistToSave = this.$store.state.newGist
+          this.$store.dispatch('saveGist', gistToSave)
+        }
       },
       saveAndCloseAction() {
         this.$store.commit('NEWGISTBODY', ace.edit("editor").getValue())

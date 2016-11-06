@@ -82,13 +82,12 @@
     },
     created() {
       let self = this
-      keymaster('command+n', function () {
+      keymaster('command+n', function() {
           self.$router.push({ name: 'newGist' })
-      });
-      keymaster('command+escape', function () {
+      })
+      keymaster('command+escape', function() {
           self.$router.go(-1)
-      });
-      //keymaster('command+e', function () { });
+      })
     },
     methods: {
       fetchGists() {

@@ -99,6 +99,7 @@
   import marked from 'marked'
   import store from '../vuex_store'
   import showRelatedGists from './showRelatedGists.vue'
+  import keymaster from 'keymaster'
   export default{
     data() {
         return {
