@@ -101,7 +101,6 @@
       resetIndex() {
         this.indexSelected = null
       }
-      // todo create a @input attribute and method to add tag with double space.
     }
   }
 </script>
