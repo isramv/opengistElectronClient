@@ -15,6 +15,7 @@
 </template>
 <style lang="sass" xml:lang="scss">
     .bg-adminbar-container {
+      padding: 10px 20px;
       position: relative;
     }
     .admin-bar {
@@ -75,7 +76,6 @@
     },
     methods: {
       logoutAction: function () {
-        console.log('login out...')
         localStorage.clear()
         this.$store.commit('USERNAME', '')
         this.$store.commit('AUTH', '')

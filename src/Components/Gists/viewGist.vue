@@ -1,5 +1,5 @@
 <template>
-  <div class="contaier">
+  <div class="gs-viewgist-wrapper">
     <div class="gs-viewgist-container">
       <h1 class="gist-title">{{ gist.title }}</h1>
       <div class="row actions">
@@ -8,12 +8,7 @@
       </div>
       <div id="gist-content">
         <div v-html="gistRender"></div>
-        <ul class="list-inline">
-          <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">
-            {{ tag.name }}</a></li>
-        </ul>
       </div>
-      <show-related-gists></show-related-gists>
       <!-- Modal -->
       <div class="modal fade" id="deleteGist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -38,21 +33,40 @@
         </div>
       </div>
     </div>
+    <div class="view-gist-right">
+      <ul class="list-inline">
+        <li v-for="tag in gist.tags"><a class="btn btn-default btn-xs btn-info" v-on:click="showRelatedGists(tag.id)">
+          {{ tag.name }}</a></li>
+      </ul>
+      <show-related-gists></show-related-gists>
+    </div>
   </div>
 </template>
 <style lang="sass" xml:lang="scss">
-  .gs-viewgist-container {
-    background: #fff;
-    padding: 15px 27px;
-    -webkit-box-shadow: 0px 3px 10px 0px rgba(87,87,87,.3);
-    overflow: scroll;
-  }
-  .show-gist-container {
-    background-color: #ffffff;
-    padding: 34px;
-    padding-top: 12px;
-    h1 {
-      margin-top: 0;
+  .gs-viewgist-wrapper {
+     display:flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     justify-content: flex-start;
+     align-content: flex-start;
+     align-items: flex-start;
+    .gs-viewgist-container {
+      background: #fff;
+      width: 690px;
+      height: 1;
+      padding: 15px 27px;
+      -webkit-box-shadow: 0px 3px 10px 0px rgba(87,87,87,.3);
+      overflow: scroll;
+    }
+    .show-gist-container {
+      flex-grow: 1;
+      flex-shrink: 0;
+      background-color: #ffffff;
+      padding: 34px;
+      padding-top: 12px;
+      h1 {
+        margin-top: 0;
+      }
     }
   }
   .gist-title {
@@ -133,9 +147,8 @@
         store.dispatch('viewGist', to.params.id).then(() => {
             next()
         }).catch((e) => {
-          console.log(e)
-        })
 
+        })
     },
     beforeRouteLeave (to, from, next) {
       if(to.name === 'editGist') {
@@ -169,12 +182,10 @@
       deleteGist(id) {
         this.$data.deleteLoading = true
         this.$store.dispatch('deleteGist', id).then((e) => {
-          console.log(e)
           this.$data.deleteLoading = false
           $('#deleteGist').modal('hide')
           this.$router.push({ name: 'main' })
         }).catch((e) => {
-          console.log(e)
           this.$data.deleteLoading = false
           $('#deleteGist').modal('hide')
         })

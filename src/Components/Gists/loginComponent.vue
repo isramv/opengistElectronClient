@@ -77,7 +77,6 @@
           self.loading = false
           self.$router.push({ name: 'main'})
         }).catch((e) => {
-          console.log(e)
           self.error = e.statusText
           self.loading = false
         })

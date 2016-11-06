@@ -57,15 +57,10 @@ var router = new Router({
 
 router.beforeEach((to, from, next) => {
 
-  // console.log('// from: //')
-  // console.log(from.name)
-  // console.log('// to: //')
-  // console.log(to.name)
-
   // initialize store if from is null
   if(from.name === null) {
     store.dispatch('initializeStore').then((e)=> {
-      console.log(e)
+
     })
   }
 

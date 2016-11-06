@@ -72,7 +72,6 @@
       }
     },
     created() {
-      console.log('created')
       if(_.isEmpty(JSON.parse(localStorage.getItem('GISTS'))) || localStorage.getItem('GISTS') === null) {
         this.$store.dispatch('getGists')
       } else {

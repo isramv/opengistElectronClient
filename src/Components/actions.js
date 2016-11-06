@@ -2,7 +2,6 @@ import $ from 'jquery'
 export default {
   // fetches all the gists.
   initializeStore (context) {
-      console.log('initializing store')
       return new Promise((resolve, reject) => {
         if(localStorage.getItem('auth') !== null && localStorage.getItem('auth').length > 0) {
           context.commit('AUTH', localStorage.getItem('auth'))
