@@ -7,6 +7,7 @@
       align-content: stretch;
       align-items: stretch;
       height: 100%;
+      min-width: 635px;
       overflow: scroll;
       .side-menu {
         background: #27456F;
