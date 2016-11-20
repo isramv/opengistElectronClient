@@ -59,6 +59,7 @@
 </style>
 <script>
   export default {
+    name: 'adminBarComponent',
     computed: {
       username() {
         return this.$store.state.username

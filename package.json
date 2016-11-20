@@ -24,6 +24,7 @@
   "homepage": "https://bitbucket.org:isramv/bettergistclientwebpack.git#readme",
   "devDependencies": {
     "axios": "^0.15.2",
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-runtime": "^6.15.0",

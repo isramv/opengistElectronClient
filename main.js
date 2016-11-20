@@ -1,9 +1,15 @@
 const electron = require('electron')
 const {Menu, MenuItem} = electron
 
+let installExtension = require('electron-devtools-installer')
+
+installExtension.default(installExtension.VUEJS_DEVTOOLS)
+  .then((name) => mainWindow.webContents.openDevTools())
+  .catch((err) => console.log('An error occurred: ', err))
 
 // Module to control application life.
 const app = electron.app
+
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 

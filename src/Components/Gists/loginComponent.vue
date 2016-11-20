@@ -54,6 +54,7 @@
   import store from '../vuex_store'
   import fontAwesome from 'font-awesome-webpack'
   export default {
+    name: 'loginComponent',
     data() {
       return {
         username: '',

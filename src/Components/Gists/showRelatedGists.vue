@@ -31,6 +31,7 @@
 <script>
     import _ from 'lodash'
     export default{
+        name: 'showRelatedGists',
         computed: {
             relatedGists () {
                 return this.$store.state.relatedGists

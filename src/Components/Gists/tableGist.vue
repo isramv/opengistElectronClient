@@ -48,6 +48,7 @@
 </style>
 <script>
   export default{
+    name: 'tableGist',
     data() {
       return {
         searchString: ''

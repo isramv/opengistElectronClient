@@ -1,12 +1,6 @@
 <template>
     <div class="layout" id="app" v-cloak>
         <div style="height: 100%;">
-            <!--<div class="row rc-container">-->
-                <!--<div class="col-md-12">-->
-                  <!--<router-link class="btn btn-default btn-sm" to="/">login</router-link>-->
-                  <!--<router-link class="btn btn-default btn-sm" to="/gistapp">main</router-link>-->
-                <!--</div>-->
-            <!--</div>-->
             <router-view></router-view>
         </div>
     </div>
@@ -17,5 +11,7 @@
   import store from './vuex_store'
   import _ from 'lodash'
   require('!style!css!sass!../scss/style.scss')
-  export default {}
+  export default {
+    name: 'App'
+  }
 </script>

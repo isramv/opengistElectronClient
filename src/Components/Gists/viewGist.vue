@@ -101,6 +101,7 @@
   import showRelatedGists from './showRelatedGists.vue'
   import keymaster from 'keymaster'
   export default{
+    name: 'viewGist',
     data() {
         return {
           deleteLoading: false

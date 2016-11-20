@@ -51,6 +51,7 @@
 <script>
   import $ from 'jquery'
   export default{
+    name: 'tagsInputComponent',
     data() {
       return {
         indexSelected: null

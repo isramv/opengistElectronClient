@@ -68,6 +68,7 @@
   import adminBarComponent from './adminBarComponent.vue'
   import keymaster from 'keymaster'
   export default{
+    name: 'gistMainComponent',
     components: {
       'table-gist': tableGistComponent,
       'admin-bar': adminBarComponent

@@ -58,6 +58,7 @@
   import tagsInputComponent from './tagsInputComponent.vue';
   import keymaster from 'keymaster'
   export default {
+    name: 'newGist',
     components: {
       'tags-input-component': tagsInputComponent
     },
