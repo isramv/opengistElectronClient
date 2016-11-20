@@ -34,6 +34,7 @@
     "bootstrap-webpack": "0.0.5",
     "brace": "^0.8.0",
     "css-loader": "^0.23.1",
+    "electron": "^1.4.7",
     "electron-devtools-installer": "^2.0.0",
     "electron-prebuilt": "^1.2.0",
     "exports-loader": "^0.6.3",
@@ -60,7 +61,12 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
+    "electron-devtools-installer": "^2.0.1",
+    "electron-prebuilt": "^1.4.7",
     "lodash": "^4.13.1",
-    "marked": "^0.3.5"
+    "marked": "^0.3.5",
+    "vue": "^2.0.8",
+    "vue-loader": "^9.9.5",
+    "vue-router": "^2.0.3"
   }
 }
