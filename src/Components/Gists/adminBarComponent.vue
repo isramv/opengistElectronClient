@@ -13,7 +13,7 @@
     </div>
   </div>
 </template>
-<style lang="sass" xml:lang="scss">
+<style lang="sass">
     .bg-adminbar-container {
       padding: 10px 20px;
       position: relative;

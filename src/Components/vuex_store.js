@@ -5,6 +5,10 @@ import actions from './actions'
 Vue.use(Vuex)
 
 const state = {
+  // api: 'http://bettergist.io/api/v1/',
+  // apiLogin: 'http://bettergist.io/api/login'
+  api: 'http://myapp.local/app_dev.php/api/v1/',
+  apiLogin: 'http://myapp.local/app_dev.php/api/login',
   isAuth: false,
   loading: {
       status: false,

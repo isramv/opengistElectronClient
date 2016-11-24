@@ -16,7 +16,7 @@ export default {
   getGists (context) {
     context.commit('LOADING', { status: true, message: 'updating all the gists'})
     $.ajax({
-      url: 'http://bettergist.io/api/v1/gists',
+      url: context.state.api + 'gists',
       headers: { 'authorization': context.state.auth },
       type: 'GET'
     }).done(function(res) {
@@ -53,7 +53,7 @@ export default {
         context.commit('LOADING', { status: true, message: 'saving gist'})
         // if no id is present we create a new gist.
         $.ajax({
-          url: 'http://bettergist.io/api/v1/gists',
+          url: context.state.api + 'gists',
           headers: {'authorization': context.state.auth },
           type: 'POST',
           data: params,
@@ -71,7 +71,7 @@ export default {
         // Update the gist.
         $.ajax({
           type: 'POST',
-          url: 'http://bettergist.io/api/v1/gists/'+ context.state.newGist.id,
+          url: context.state.api + 'gists/' + context.state.newGist.id,
           headers: { 'authorization': context.state.auth },
           data: context.state.newGist,
         }).done(function(res) {
@@ -125,7 +125,7 @@ export default {
       }
       context.commit('LOADING', { status: true, message: 'loading gist'})
       $.ajax({
-        url: 'http://bettergist.io/api/v1/gists/' + gistId,
+        url: context.state.api + 'gists/' + gistId,
         headers: {'authorization': context.state.auth},
         type: 'GET',
         dataType: 'json'
@@ -140,7 +140,7 @@ export default {
     return new Promise((resolve, reject) => {
       $.ajax({
         type: 'DELETE',
-        url: 'http://bettergist.io/api/v1/gists/'+ gistId,
+        url: context.state.api + 'gists/'+ gistId,
         headers: { 'authorization': context.state.auth }
       }).done((res) => {
         if(gistId == res.id) {
@@ -154,9 +154,10 @@ export default {
     })
   },
   loginAction(context, formInfo) {
+    console.log(context)
     return new Promise((resolve, reject) => {
       $.ajax({
-        url: 'http://bettergist.io/api/login',
+        url: context.state.apiLogin,
         type: 'POST',
         data: formInfo,
         timeout: 5000,

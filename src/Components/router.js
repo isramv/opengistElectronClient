@@ -59,9 +59,7 @@ router.beforeEach((to, from, next) => {
 
   // initialize store if from is null
   if(from.name === null) {
-    store.dispatch('initializeStore').then((e)=> {
-
-    })
+    store.dispatch('initializeStore').then((e)=> {})
   }
 
   if (to.meta.requireAuth && !store.state.isAuth) {
